@@ -1,0 +1,10 @@
+:root{
+  --generalBackgroundcolor: #000000;
+  --textcolor: #ffffff;
+  --accentcolor1: #000000;
+  --accentcolor2: #000000;
+}
+body{
+  background-color: var(--generalBackgroundcolor);
+  color: var(--textcolor);
+}
