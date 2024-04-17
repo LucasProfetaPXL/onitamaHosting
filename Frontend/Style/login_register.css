@@ -1,4 +1,4 @@
-.modal-backdrop {
+.modal_backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +12,7 @@
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-backdrop.modal-open {
+.modal_backdrop.modal_open {
     pointer-events: all;
     opacity: 1;
     visibility: visible;
