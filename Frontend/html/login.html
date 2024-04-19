@@ -2,18 +2,24 @@
 <script src="../js/login.js"></script>
 <div class="modal_backdrop">
     <div class="modal">
-        <button class="close_button">X</button>
-        <form action="" method="post" id="loginForm">
-            <label for="emailInput">
-                E-mail
-                <input type="email" name="email" id="emailInput">
-            </label>
-            <label for="passwordInput">
-                Password
-                <input type="password" name="password" id="passwordInput">
-            </label>
-
-            <button id="submitButton" type="submit">Log In</button>
-        </form>
+        <button class="close_button"><a href="index.html">X</a></button>
     </div>
+    <form action="" method="post" id="loginForm">
+        <div>
+            <h1>Login</h1>
+            <p>Please fill in this form to log into your account.</p>
+            <hr>
+
+            <label for="emailInput">E-mail</label>
+            <input type="email" name="email" id="emailInput">
+
+            <label for="passwordInput">Password</label>
+            <input type="password" name="password" id="passwordInput">
+
+            <button class="loginbtn" id="submitButton" type="submit">Login</button>
+        </div>
+        <div>
+            <p>Don't have an account? <a href="register.html">Register</a></p>
+        </div>
+    </form>
 </div>
