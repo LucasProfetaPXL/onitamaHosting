@@ -1,17 +1,19 @@
+<!--<link rel="stylesheet" href="../Style/stylesheet.css">-->
+<script src="../js/login.js"></script>
 <div class="modal_backdrop">
     <div class="modal">
         <button class="close_button">X</button>
-        <form action="" method="post">
-            <label for="">
+        <form action="" method="post" id="loginForm">
+            <label for="emailInput">
                 E-mail
-                <input type="email" name="" id="">
+                <input type="email" name="email" id="emailInput">
             </label>
-            <label for="">
+            <label for="passwordInput">
                 Password
-                <input type="text">
+                <input type="password" name="password" id="passwordInput">
             </label>
 
-            <button type="submit">Log In</button>
+            <button id="submitButton" type="submit">Log In</button>
         </form>
     </div>
 </div>
