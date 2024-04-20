@@ -1,52 +1,46 @@
 window.addEventListener("load", loaded);
 
-//We import the isEmail because this can validate if it's a real email
-import isEmail from "validator/es/lib/isEmail";
 function loaded(){
     let buttonRegister = document.getElementById('button-register');
-    buttonRegister.addEventListener("click", handleAllInputs);
+    buttonRegister.addEventListener("click", validateRegister);
 }
 
-function handleAllInputs(){
-    // Putting all inputs in a variable
-    let inputMailAdres = document.getElementById('inputMailAdres');
-    let inputUsername = document.getElementById('inputUsername');
-    let inputPassword = document.getElementById('inputPassword');
-    let inputPasswordVerif = document.getElementById('inputPasswordVerif');
+function validateRegister(){
 
-    //Making an array to put al the inputs are filled in.
-    const notFilled = [];
+    //Putting all the inputs of the html in variables
+    let form = document.getElementById("form");
+    let userName = document.getElementById("username");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    let repeat_Password = document.getElementById("repeat_Password");
 
-    // If True it means that it's filled in, if there is a false it means that it's not filled in
-    if (inputMailAdres.trim() !== ''){
-        notFilled[0] = "True";
-    }
-    else{
-        notFilled[0] = "False";
-    }
-    if (inputUsername.trim() !== ''){
-        notFilled[1] = "True";
-    }
-    else{
-        notFilled[1] = "False";
-    }
-    if (inputPassword.trim() !== ''){
-        notFilled[2] = "True";
-    }
-    else{
-        notFilled[2] = "False";
-    }
-    if (inputPasswordVerif.trim() !== ''){
-        notFilled[3] = "True";
-    }
-    else{
-        notFilled[3] = "False";
-    }
+    //Making a preventDefault(), this is because some methods have default inputs. This prevents that we get default inputs.
+    form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            validateEmailInput(email.value);
+            validatePassword(password, repeat_Password);
+        }
+    )
+    email.addEventListener("change", (e) => {
+        setTimeout(() => validator.isEmail(), 2000);
+    });
 
-    //looking if the email input is a valid email input, we have used an extension called "validator"
-    if (notFilled[0] === "True"){
-        const isValidMail = validator.isEmail(inputMailAdres)
-    }
 
+
+}
+function validatePassword(password, repeat_Password){
+    //Here we are first going to look if the passwords are equal to eachother
+    if (password.value.trim() !== repeat_Password.value.trim()) {
+        alert("Passwords do not match.");
+    }
+    //Now we're going to
+}
+function validateEmailInput(email) {
+    if (!validator.isEmail(email)) {
+        alert("Invalid email address.");
+    }
+}
+
+function validateUsername(username){
 
 }
