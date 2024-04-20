@@ -1,3 +1,6 @@
+@import './team.css';
+@import './login.css';
+
 :root{
   --generalBackgroundcolor: #000000;
   --textcolor: #ffffff;
@@ -8,6 +11,3 @@ body{
   background-color: var(--generalBackgroundcolor);
   color: var(--textcolor);
 }
-
-@import './team.css';
-@import './login_register.css';
