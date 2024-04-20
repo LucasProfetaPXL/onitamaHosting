@@ -25,6 +25,26 @@ function validateRegister(){
         setTimeout(() => validator.isEmail(), 2000);
     });
 
+    //Making fetch request for the reqister page
+    fetch('https://localhost:8080/api/Authentication/register',{
+        method: "POST",
+        mode: "cors",
+        headers: {
+            'content-type': 'application/json'
+        },
+        //here we are going to make a json file, because we do the fetch with a json file
+        body: JSON.stringify(
+            {
+                username: userName.value,
+                email: email.value,
+                password: password.value
+            }
+        )
+        }
+
+
+        )
+
 
 
 }

@@ -31,6 +31,7 @@ fetch('https://localhost:5051/api/Authentication/token', {
 		document.getElementById('password').innerHTML == Error.message; // TODO password vervangen door id van passwordfield
 	}
 }
+
 =======
         const formData = new FormData(this);
 >>>>>>> 716d16ab1843a92c7708b58ef233c1ca0c042145
