@@ -7,7 +7,7 @@ fetch('https://localhost:5051/api/Authentication/token', {
 	headers: {
 		//?
 	},
-	body: JSON, stringify({ document.getElementById('email'), document.getElementById('password')}) // TODO email & password moeten veranderd worden in de variabelen van index.html
+	body: JSON, stringify({ document.getElementById('email'), document.getElementById('password')} // TODO email & password moeten veranderd worden in de variabelen van index.html
 	.then(response => response.json())
 	.then(response => {
 		if (response.readyState == XMLHttpRequest.DONE && response.status == 200){

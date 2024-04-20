@@ -1,4 +1,5 @@
 window.addEventListener("load", loaded);
+
 //We import the isEmail because this can validate if it's a real email
 import isEmail from "validator/es/lib/isEmail";
 function loaded(){
@@ -46,6 +47,6 @@ function handleAllInputs(){
     if (notFilled[0] === "True"){
         const isValidMail = validator.isEmail(inputMailAdres)
     }
-    t
+
 
 }
