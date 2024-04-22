@@ -1,15 +1,30 @@
-const loginOpenBtn = document.getElementById('login_modal_btn');
-const loginModal = document.getElementById('modal_login');
-const loginCloseBtn = document.getElementById('login_close_button');
+const modalOpenBtns = document.querySelectorAll('.modal_btn');
+const loginBackdrop = document.querySelector('#login_backdrop');
+const registerBackdrop = document.querySelector('#register_backdrop');
+const modalCloseBtns = document.querySelectorAll('.close_button');
 
-const OpenModal = () => {
-    console.log("here")
-    loginModal.classList.add('modal_open');
-}
+modalOpenBtns.forEach(button => {
+    button.addEventListener('click', function(e) {
+        const clickedButton = e.target;
+        const buttonText = clickedButton.textContent;
+        console.log('Clicked button text:', buttonText);        
+        if (buttonText === 'Register'){
+            registerBackdrop.classList.add('modal_open');
+        }
+        else{
+            loginBackdrop.classList.add('modal_open');
+        }
+    });
+});
 
-const CloseModal = () => {
-    loginModal.classList.remove('modal_open');
-}
-
-loginOpenBtn.addEventListener('click', OpenModal);
-loginCloseBtn.addEventListener('click', CloseModal);
+modalCloseBtns.forEach(button => {
+    button.addEventListener('click', function(e) {
+        const clickedButton = e.target;
+        if (clickedButton.id === 'login_close'){
+            loginBackdrop.classList.remove('modal_open');
+        }
+        else{
+            registerBackdrop.classList.remove('modal_open');
+        }
+    });
+});

@@ -7,64 +7,60 @@
   </head>
   <body>
     <a href="team.html">Team</a>
-    <button id="login_modal_btn" class="login_modal_btn" type="button">Login</button>
-    <div class="modal_backdrop" id="modal_login">
-      <div class="modal">
-          <button class="close_button" id="login_close_button">X</button>
+    <button class="modal_btn" type="button">Login</button>
+    <div class="modal_backdrop" id="login_backdrop">
+      <div class="modal" id="login_modal">
+          <button id="login_close" class="close_button">X</button>
           <form action="" method="post" id="loginForm">
               <h2 class="login_title">Login</h2>
-              <p class="login_decription">Please fill in this form to log into your account.</p>
+              <p class="login_description">Please fill in this form to log into your account.</p>
               <hr>
   
               <div class="flex_container">
                   <label class="label_mail" for="emailInput">E-mail</label>
-                  <input class="input_mail" type="email" name="email" id="emailInput">
+                  <input placeholder="Enter e-mail" class="input_mail" type="email" name="email" id="emailInput" required>
   
                   <label class="label_password" for="passwordInput">Password</label>
-                  <input class="input_password" type="password" name="password" id="passwordInput">
+                  <input placeholder="Enter password" class="input_password" type="password" name="password" id="passwordInput" required>
               </div>
   
-              <button class="loginbtn" id="submitButton" type="submit">Login</button>
+              <button class="submit_btn" id="submitButton" type="submit">Login</button>
   
               <p class="new_account_title">Don't have an account?</p>
-              <a class="register_link" href="register.html">Register</a>
+              <button class="register_button_login">Register</button>
           </form>
       </div>
-  </div>
-    <button id="register_modal_btn" class="register_modal_btn" type="button">Register</button>
-    <div class="modal_backdrop">
-        <div class="modal">
-            <button class="close_button" id="register_close_button">X</button>
-            <form id="form" action="" method="post">
-                <div class="container">
-                    <h2>Register</h2>
-                    <p>Please fill in this form to create an account.</p>
-                    <hr>
+    </div>
 
-                    <label for="Username"><b>Username</b>
-                        <input type="text" placeholder="Enter Username" name="email" id="username" required>
-                    </label>
+    <button class="modal_btn" type="button">Register</button>
+    <div class="modal_backdrop" id="register_backdrop">
+      <div class="modal" id="register_modal">
+          <button id="register_close" class="close_button">X</button>
+          <form id="form" action="" method="post">
+            <h2 class="register_title">Register</h2>
+            <p class="registeR_description">Please fill in this form to create an account.</p>
+            <hr>
 
-                    <label for="email"><b>Email</b>
-                        <input type="email" placeholder="Enter Email" name="email" id="email" required>
-                    </label>
+            <div class="flex_container">
+              <label for="username">Username</label>
+              <input type="text" placeholder="Enter Username" name="email" id="username" required>
 
-                    <label for="password"><b>Password</b>
-                        <input type="password" placeholder="Enter Password" name="password" id="password" required>
-                    </label>
+              <label for="email">Email</label>
+              <input type="email" placeholder="Enter Email" name="email" id="email" required>
 
-                    <label for="Repeat_Password"><b>Repeat Password</b>
-                        <input type="password" placeholder="Repeat Password" name="Repeat_Password" id="repeat_Password" required>
-                    </label>
+              <label for="password">Password</label>
+              <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
-                    <button id="button-register" type="submit" class="registerbtn">Register</button>
-                </div>
-                <div class="loginbtn">
-                    <p>Already have an account? <a href="index.html">Login</a></p>
-                </div>
-            </form>
+              <label for="Repeat_Password">Repeat Password</label>
+              <input type="password" placeholder="Repeat Password" name="Repeat_Password" id="repeat_Password" required>
+            </div>
+
+              <button id="button-register" type="submit" class="submit_btn">Register</button>
+              <p class="account_title">Already have an account?</p>
+              <button class="login_button_register" type="button">Login</button>
+          </form>
         </div>
-        <</div>
+    </div>
 
 	<script src="../js/includes.js" type="module"></script>
   <script src="../js/modal.js" type="module"></script>

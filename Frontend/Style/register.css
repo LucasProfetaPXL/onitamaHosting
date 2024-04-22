@@ -1,27 +1,13 @@
-* {
-    box-sizing: border-box;
+#register_modal{
+    height: 555px;
 }
 
-/*Total width of form and border*/
-.modal_backdrop{
-    width: 1000px;
-    border: 2px solid #f1f1f1;
-    margin: auto;
+.register_title{
+    margin-bottom: 5px;
 }
 
-.close_button{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-
-    border-radius: 50%;
-    border: 1px solid black;
-
-    text-align: center;
-    width: 20px;
-    height: 20px;
-
-    padding: 2px 5px;
+.register_description{
+    margin-bottom: 5px;
 }
 
 .close_button:hover{
@@ -29,57 +15,21 @@
     color: white;
 }
 
-/*Padding containers*/
-.container{
-    padding: 16px;
-}
+/* Set a grey background color and center the text of the "login" section */
+.login_button_register{
+    padding: 10px;
+    margin: auto;
 
-/* Full-widt input fields */
-input[type=text], input[type=password], input[type=email]{
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-}
+    width: 100px;
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-}
+    border: 1px solid black;
+    border-radius: 5px;
 
-/* Overwrite default styles of hr */
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
+    background-color: coral;
 
-}
-
-/* Style submit/register button */
-.registerbtn{
-    background-color: deepskyblue;
-    color: white;
-    width: 100%;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
     opacity: 0.9;
 }
 
-.registerbtn:hover{
+.login_button_register:hover{
     opacity: 1;
-}
-
-/* Add a blue text color to links */
-a{
-    color: dodgerblue;
-}
-
-/* Set a grey background color and center the text of the "login" section */
-.loginbtn {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 1px;
 }
