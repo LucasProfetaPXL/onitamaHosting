@@ -26,32 +26,30 @@ function validateRegister(){
     });
     if (validatePassword(password, repeat_Password)) {
         //Making fetch request for the reqister page
-        fetch('https://localhost:8080/api/Authentication/register', {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                //here we are going to make a json file, because we do the fetch with a json file
-                body: JSON.stringify(
-                    {
-                        username: userName.value,
-                        email: email.value,
-                        password: password.value
-                    }
-                )
-            }
-        )
-            .then(response =>{
-            if (!response.ok){
-                alert("het bestaat al")
-            }
+        fetch('https://localhost:5051/api/Authentication/register', {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                "email": email.value,
+                "password": password.value,
+                "wariorName": userName.value
             })
+        })
+            .then((response) => {
+                console.log("response.status =", response.status);
+                return response.blob();
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
     }
 }
 function validatePassword(password, repeat_Password){
     //Here we are first going to look if the passwords are equal to eachother
-    if (password.trim() !== repeat_Password.trim()) {
+    if (password.value !== repeat_Password.value) {
         alert("Passwords do not match.");
         return false;
     }
