@@ -31,7 +31,40 @@
           </form>
       </div>
   </div>
-    <a href="register.html">Register</a>
+    <button id="register_modal_btn" class="register_modal_btn" type="button">Register</button>
+    <div class="modal_backdrop">
+        <div class="modal">
+            <button class="close_button" id="register_close_button">X</button>
+            <form id="form" action="" method="post">
+                <div class="container">
+                    <h2>Register</h2>
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+
+                    <label for="Username"><b>Username</b>
+                        <input type="text" placeholder="Enter Username" name="email" id="username" required>
+                    </label>
+
+                    <label for="email"><b>Email</b>
+                        <input type="email" placeholder="Enter Email" name="email" id="email" required>
+                    </label>
+
+                    <label for="password"><b>Password</b>
+                        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                    </label>
+
+                    <label for="Repeat_Password"><b>Repeat Password</b>
+                        <input type="password" placeholder="Repeat Password" name="Repeat_Password" id="repeat_Password" required>
+                    </label>
+
+                    <button id="button-register" type="submit" class="registerbtn">Register</button>
+                </div>
+                <div class="loginbtn">
+                    <p>Already have an account? <a href="index.html">Login</a></p>
+                </div>
+            </form>
+        </div>
+        <</div>
 
 	<script src="../js/includes.js" type="module"></script>
   <script src="../js/modal.js" type="module"></script>

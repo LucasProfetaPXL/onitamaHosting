@@ -7,3 +7,23 @@
 
     cursor: pointer;
 }
+
+.register_modal_btn{
+    width: 100px;
+    padding: 5px 10px;
+
+    border-radius: 5px;
+    border: none;
+
+    cursor: pointer;
+}
+
+.team_modal_btn{
+    width: 100px;
+    padding: 5px 10px;
+
+    border-radius: 5px;
+    border: none;
+
+    cursor: pointer;
+}
