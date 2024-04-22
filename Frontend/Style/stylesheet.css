@@ -1,6 +1,7 @@
 @import './team.css';
 @import './login.css';
 @import './main_page.css';
+@import "./lobby.css";
 
 :root{
   --generalBackgroundcolor: #000000;
