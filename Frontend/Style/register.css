@@ -6,13 +6,22 @@
 .modal_backdrop{
     width: 1000px;
     border: 2px solid #f1f1f1;
+    margin: auto;
 }
 
 .close_button{
-    border: none;
-    padding: 14px;
-    margin: 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 
+    border-radius: 50%;
+    border: 1px solid black;
+
+    text-align: center;
+    width: 20px;
+    height: 20px;
+
+    padding: 2px 5px;
 }
 
 .close_button:hover{
