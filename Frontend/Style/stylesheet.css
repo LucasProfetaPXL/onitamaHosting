@@ -1,5 +1,6 @@
 @import './team.css';
 @import './login.css';
+@import './main_page.css';
 
 :root{
   --generalBackgroundcolor: #000000;
@@ -10,4 +11,8 @@
 body{
   background-color: var(--generalBackgroundcolor);
   color: var(--textcolor);
+}
+
+iframe[iframetag]{
+  border: none;
 }
