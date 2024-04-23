@@ -21,16 +21,14 @@ function validateRegister(){
             validatePassword(password.value, repeat_Password.value);
         }
     )
-    email.addEventListener("change", (e) => {
-        setTimeout(() => validator.isEmail(), 2000);
-    });
+
     if (validatePassword(password, repeat_Password)) {
         //Making fetch request for the reqister page
         fetch('https://localhost:5051/api/Authentication/register', {
             method: "POST",
             mode: "cors",
             headers: {
-                'content-type': 'application/json'
+                'Content-type': 'application/json'
             },
             body: JSON.stringify({
                 "email": email.value,
@@ -56,10 +54,6 @@ function validatePassword(password, repeat_Password){
     else{
         return  true;
     }
-    //Now we're going to
 }
 
 
-function validateUsername(username){
-
-}
