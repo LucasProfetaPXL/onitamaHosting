@@ -38,6 +38,7 @@ function validateRegister(){
         })
             .then((response) => {
                 console.log("response.status =", response.status);
+                console.log("data = ", response)
                 return response.blob();
             })
             .catch((error) => {

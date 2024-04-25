@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("loginForm").addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -11,59 +11,64 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     })
 
-    const email =  document.getElementById('email');
+    const email = document.getElementById('email');
     const password = document.getElementById('password');
 
     fetch('https://localhost:5051/api/Authentication/token', {
         method: 'POST',
         headers: {
-        //?
+            'Content-type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({
+            "email": email.value,
+            "password": password.value
         }) // TODO email & password moeten veranderd worden in de variabelen van index.html
-        .then(response => response.json())
-        .then(response => {
-            if (response.readyState == XMLHttpRequest.DONE && response.status == 200){
-                window.Location = '../lobby.html';
-            }
-            else{
-                throw new Error('Foute logingegevens')
-            }
-        })
-        .catch(Error => {
-            document.getElementById('password').innerHTML == Error.message; // TODO password vervangen door id van passwordfield
-        });
+         .then(response => response.json())
+         .then(response => {
+             if (response.readyState == XMLHttpRequest.DONE && response.status == 200){
+                 window.Location = '../lobby.html';
+             }
+             else{
+                 throw new Error('Foute logingegevens')
+             }
+         })
+         .catch(Error => {
+             document.getElementById('password').innerHTML == Error.message; // TODO password vervangen door id van passwordfield
+         })
 
 
-        const formData = new FormData(this);
+         const formData = new FormData(this);
 
-        // Convert form data to JSON object
-        const data = {};
-        formData.forEach(function (value, key) {
-            data[key] = value;
-        });
+         // Convert form data to JSON object
+         const data = {};
+         formData.forEach(function (value, key) {
+             data[key] = value;
+         });
 
-        // fetch naar backand
-        fetch('https://{host}:{port}/api/Authentication/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => {
-            if (!response.ok) {
-                window.alert("Error, network fault");
-                throw new Error("Login incorrect; network fault"); //exit function
-            }
-            return response.json();
-        })
-        .then(data => {
-            window.alert('succesfull login' + data);
-            //TODO what to do when succesfull login?
-        })
-        .catch(error => {
-            //TODO errorhandling
-            window.alert('Your account is not registered yet, please make an account first.' + error);
-        });
+         // fetch naar backand
+         /*fetch('https://{host}:{port}/api/Authentication/register', {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(data),
+         })
+         .then(response => {
+             if (!response.ok) {
+                 window.alert("Error, network fault");
+                 throw new Error("Login incorrect; network fault"); //exit function
+             }
+             return response.json();
+         })
+         .then(data => {
+             window.alert('succesfull login' + data);
+             //TODO what to do when succesfull login?
+         })
+         .catch(error => {
+             //TODO errorhandling
+             window.alert('Your account is not registered yet, please make an account first.' + error);
+         });
+           */
+
+    })
 })
