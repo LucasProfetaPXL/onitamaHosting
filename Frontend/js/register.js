@@ -38,12 +38,26 @@ function validateRegister(){
         })
             .then((response) => {
                 console.log("response.status =", response.status);
+                if(response.status === 200){
+                    console.log("succesfull register")
+                    window.location= "../html/index.html"
+                }
+                else{
+
+                    response.json().then()
+                    alert(response.json())
+                    alert()
+                }
                 console.log("data = ", response)
                 return response.blob();
             })
+            .then(data=>{
+                console.log(data.text())
+            })
             .catch((error) => {
-                console.error("Fetch error:", error);
-            });
+                console.error("Fetch error:", error.message);
+            })
+
     }
 }
 function validatePassword(password, repeat_Password){

@@ -1,7 +1,7 @@
+window.addEventListener("load", loaded)
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("loginForm").addEventListener('submit', function (event) {
         event.preventDefault();
-
         var emailInput = document.getElementById('emailInput');
         var passwordInput = document.getElementById('passwordInput');
         //validate input
@@ -22,11 +22,27 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({
             "email": email.value,
             "password": password.value
-        }) // TODO email & password moeten veranderd worden in de variabelen van index.html
-         .then(response => response.json())
+        })
+    }).then((response) =>{
+        console.log(response.status)
+        console.log(response.text())
+    })
+
+            /*console.log(response.status)
+            if(response.status === 200){
+                console.log("")
+            }
+            else{
+
+            }*/
+
+            // TODO email & password moeten veranderd worden in de variabelen van index.html
+        /*
+         //.then(response => response.json())
          .then(response => {
-             if (response.readyState == XMLHttpRequest.DONE && response.status == 200){
+             if (response.readyState === XMLHttpRequest.DONE && response.status === 200){
                  window.Location = '../lobby.html';
+                 console.log(response.text())
              }
              else{
                  throw new Error('Foute logingegevens')
@@ -43,32 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
          const data = {};
          formData.forEach(function (value, key) {
              data[key] = value;
-         });
+         });*/
 
-         // fetch naar backand
-         /*fetch('https://{host}:{port}/api/Authentication/register', {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/json',
-             },
-             body: JSON.stringify(data),
-         })
-         .then(response => {
-             if (!response.ok) {
-                 window.alert("Error, network fault");
-                 throw new Error("Login incorrect; network fault"); //exit function
-             }
-             return response.json();
-         })
-         .then(data => {
-             window.alert('succesfull login' + data);
-             //TODO what to do when succesfull login?
-         })
-         .catch(error => {
-             //TODO errorhandling
-             window.alert('Your account is not registered yet, please make an account first.' + error);
-         });
-           */
-
-    })
 })
