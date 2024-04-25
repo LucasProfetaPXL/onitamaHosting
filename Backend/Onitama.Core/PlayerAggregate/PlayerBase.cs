@@ -8,11 +8,31 @@ using Onitama.Core.Util;
 namespace Onitama.Core.PlayerAggregate;
 
 /// <inheritdoc cref="IPlayer"/>
-internal class PlayerBase
+internal class PlayerBase : IPlayer
 {
+    private Guid _id;
+    private string _name;
+    private Color _color;
+    private Direction _direction;
+
+    public Guid Id => throw new NotImplementedException();
+
+    public string Name => throw new NotImplementedException();
+
+    public Color Color => throw new NotImplementedException();
+
+    public Direction Direction => throw new NotImplementedException();
+
+    public ISchool School => throw new NotImplementedException();
+
+    public IList<IMoveCard> MoveCards => throw new NotImplementedException();
+
     protected PlayerBase(Guid id, string name, Color color, Direction direction)
     {
-        
+        _id = id;
+        _name = name;
+        _color = color;
+        _direction = direction;
     }
 
     /// <summary>
