@@ -4,16 +4,16 @@ function loaded(){
     let buttonlogin = document.getElementById('submitButton');
     buttonlogin.addEventListener("click", login )
 }
-/*document.getElementById("submitButton").addEventListener('submit', function (event) {
-    event.preventDefault();
-    var emailInput = document.getElementById('emailInput');
-    var passwordInput = document.getElementById('passwordInput');
-    //validate input
-    if (!emailInput.value || !passwordInput.value) { //TODO temporary check -> @lucasProfeta
-        window.alert("Fill in email and password before logging in");
-        throw new Error("Login fault"); //exit function
-    }
-})*/
+    /*document.getElementById("submitButton").addEventListener('submit', function (event) {
+        event.preventDefault();
+        var emailInput = document.getElementById('emailInput');
+        var passwordInput = document.getElementById('passwordInput');
+        //validate input
+        if (!emailInput.value || !passwordInput.value) { //TODO temporary check -> @lucasProfeta
+            window.alert("Fill in email and password before logging in");
+            throw new Error("Login fault"); //exit function
+        }
+    })*/
 function login(){
     let email = document.getElementById('email');
     let password = document.getElementById('password');
@@ -50,11 +50,11 @@ function login(){
         throwCode(error.message)
     })
 }
-function throwCode(text){
-    //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
-    //that it doesn't add it and makes a mess. After clearing it we will add the error message
-    let place = document.getElementById("error-code-handler-login");
-    place.innerHTML = '';
-    place.insertAdjacentHTML("afterend", text);
-}
+    function throwCode(text){
+        //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
+        //that it doesn't add it and makes a mess. After clearing it we will add the error message
+        let place = document.getElementById("error-code-handler-login");
+        place.innerHTML = '';
+        place.insertAdjacentHTML("afterend", text);
+    }
 //})

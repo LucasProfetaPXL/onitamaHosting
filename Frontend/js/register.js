@@ -21,16 +21,14 @@ function validateRegister(){
             validatePassword(password.value, repeat_Password.value);
         }
     )
-    email.addEventListener("change", (e) => {
-        setTimeout(() => validator.isEmail(), 2000);
-    });
+
     if (validatePassword(password, repeat_Password)) {
         //Making fetch request for the reqister page
         fetch('https://localhost:5051/api/Authentication/register', {
             method: "POST",
             mode: "cors",
             headers: {
-                'content-type': 'application/json'
+                'Content-type': 'application/json'
             },
             body: JSON.stringify({
                 "email": email.value,
@@ -40,26 +38,46 @@ function validateRegister(){
         })
             .then((response) => {
                 console.log("response.status =", response.status);
-                return response.blob();
+                if(response.status === 200) {
+                    console.log("successful register");
+
+                }
+                else{
+                    //If there is a different response then the 200 status code, it will give the message from the error
+                    response.json().then(data => {
+
+                        console.log("Error message:", data.message);
+                        //alert("Error: " + data.message);
+                        //we are doing this because we can't use alerts
+                        throwCode(data.message)
+                    });
+                }
             })
             .catch((error) => {
-                console.error("Fetch error:", error);
-            });
+                console.error("Fetch error:", error.message);
+                throwCode(error.message)
+            })
+
     }
+}
+function throwCode(text){
+    //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
+    //that it doesn't add it and makes a mess. After clearing it we will add the error message
+    let place = document.getElementById('error-code-handler-register');
+    place.innerHTML = '';
+    place.insertAdjacentHTML("afterend", text)
+
 }
 function validatePassword(password, repeat_Password){
     //Here we are first going to look if the passwords are equal to eachother
     if (password.value !== repeat_Password.value) {
-        alert("Passwords do not match.");
+
+        throwCode("Passwords do not match.")
         return false;
     }
     else{
         return  true;
     }
-    //Now we're going to
 }
 
 
-function validateUsername(username){
-
-}

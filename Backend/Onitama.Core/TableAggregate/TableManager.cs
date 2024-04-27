@@ -8,18 +8,30 @@ namespace Onitama.Core.TableAggregate;
 /// <inheritdoc cref="ITableManager"/>
 internal class TableManager : ITableManager
 {
+    private ITableFactory _tableFactory;
+    private ITableRepository _tableRepository;
+    private IGameRepository _gameRepository;
+    private IGameFactory _gameFactory;
+    private IGamePlayStrategy _gamePlayStrategy;
+
     public TableManager(
-        ITableRepository tableRepository, 
-        ITableFactory tableFactory, 
+        ITableRepository tableRepository,
+        ITableFactory tableFactory,
         IGameRepository gameRepository,
         IGameFactory gameFactory,
         IGamePlayStrategy gamePlayStrategy)
     {
-       
+        _tableRepository = tableRepository;
+        _tableFactory = tableFactory;
+        _gameRepository = gameRepository;
+        _gameFactory = gameFactory;
+        _gamePlayStrategy = gamePlayStrategy;
     }
 
     public ITable AddNewTableForUser(User user, TablePreferences preferences)
     {
+        Table table = null;
+        return table;
         throw new NotImplementedException();
     }
 

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Onitama</title>
     <link rel="stylesheet" href="../Style/stylesheet.css">
+      <script src="../js/register.js"></script>
+      <script src="../js/login.js"></script>
   </head>
   <body id="centerMainPage">
   <h1 class="title">Onitama</h1>
@@ -27,7 +29,9 @@
   
               <button class="submit_btn" id="submitButton" type="submit">Login</button>
             </form>
+            <div id="error-code-handler-login">
 
+            </div>
             <p class="account_title">Don't have an account?</p>
             <button class="register_button_login" type="button">Register</button>
       </div>
@@ -54,6 +58,9 @@
 
               <label for="Repeat_Password">Repeat Password</label>
               <input type="password" placeholder="Repeat Password" name="Repeat_Password" id="repeat_Password" required>
+            </div>
+            <div id="error-code-handler-register">
+
             </div>
 
               <button id="button-register" type="submit" class="submit_btn">Register</button>
