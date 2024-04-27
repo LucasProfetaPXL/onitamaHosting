@@ -5,9 +5,10 @@
     <title>Onitama</title>
     <link rel="stylesheet" href="../Style/stylesheet.css">
   </head>
-  <body>
-    <a href="team.html">Team</a>
-    <button class="modal_btn" type="button">Login</button>
+  <body id="centerMainPage">
+  <h1 class="title">Onitama</h1>
+    <button class="homePageButtons" type="button"><a href="team.html">Team</a></button>
+    <button class="modal_btn homePageButtons" type="button">Login</button>
     <div class="modal_backdrop" id="login_backdrop">
       <div class="modal" id="login_modal">
           <button id="login_close" class="close_button">X</button>
@@ -28,11 +29,11 @@
             </form>
 
             <p class="account_title">Don't have an account?</p>
-            <button class="register_button_login">Register</button>
+            <button class="register_button_login" type="button">Register</button>
       </div>
     </div>
 
-    <button class="modal_btn" type="button">Register</button>
+    <button class="modal_btn homePageButtons" type="button">Register</button>
     <div class="modal_backdrop" id="register_backdrop">
       <div class="modal" id="register_modal">
           <button id="register_close" class="close_button">X</button>

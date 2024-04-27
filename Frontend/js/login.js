@@ -1,69 +1,60 @@
-document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById("loginForm").addEventListener('submit', function (event) {
-        event.preventDefault();
+window.addEventListener("load", loaded)
 
-        var emailInput = document.getElementById('emailInput');
-        var passwordInput = document.getElementById('passwordInput');
-        //validate input
-        if (!emailInput.value || !passwordInput.value) { //TODO temporary check -> @lucasProfeta
-            window.alert("Fill in email and password before logging in");
-            throw new Error("Login fault"); //exit function
-        }
+function loaded(){
+    let buttonlogin = document.getElementById('submitButton');
+    buttonlogin.addEventListener("click", login )
+}
+/*document.getElementById("submitButton").addEventListener('submit', function (event) {
+    event.preventDefault();
+    var emailInput = document.getElementById('emailInput');
+    var passwordInput = document.getElementById('passwordInput');
+    //validate input
+    if (!emailInput.value || !passwordInput.value) { //TODO temporary check -> @lucasProfeta
+        window.alert("Fill in email and password before logging in");
+        throw new Error("Login fault"); //exit function
+    }
+})*/
+function login(){
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    let form = document.getElementById("form");
+
+    form.addEventListener("submit", (e)=>{
+        //This will prevent that there will be default inputs
+        e.preventDefault()
     })
-
-    const email =  document.getElementById('email');
-    const password = document.getElementById('password');
-
     fetch('https://localhost:5051/api/Authentication/token', {
         method: 'POST',
         headers: {
-        //?
+            'Content-type': 'application/json'
         },
-        body: JSON.stringify({email, password})
-        }) // TODO email & password moeten veranderd worden in de variabelen van index.html
-        .then(response => response.json())
-        .then(response => {
-            if (response.readyState == XMLHttpRequest.DONE && response.status == 200){
-                window.Location = '../lobby.html';
-            }
-            else{
-                throw new Error('Foute logingegevens')
-            }
+        body: JSON.stringify({
+            "email": email.value,
+            "password": password.value
         })
-        .catch(Error => {
-            document.getElementById('password').innerHTML == Error.message; // TODO password vervangen door id van passwordfield
-        });
-
-
-        const formData = new FormData(this);
-
-        // Convert form data to JSON object
-        const data = {};
-        formData.forEach(function (value, key) {
-            data[key] = value;
-        });
-
-        // fetch naar backand
-        fetch('https://{host}:{port}/api/Authentication/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => {
-            if (!response.ok) {
-                window.alert("Error, network fault");
-                throw new Error("Login incorrect; network fault"); //exit function
-            }
-            return response.json();
-        })
-        .then(data => {
-            window.alert('succesfull login' + data);
-            //TODO what to do when succesfull login?
-        })
-        .catch(error => {
-            //TODO errorhandling
-            window.alert('Your account is not registered yet, please make an account first.' + error);
-        });
-})
+    }).then((response) =>{
+        console.log("response status =",response.status)
+        //looking if the status is a good response or a bad response
+        if (response.status === 200){
+            console.log("succesful login")
+        }
+        else {
+            //If there is a different code that the 200 it will put out an error code
+            response.json().then(data => {
+                console.log("Error message:", data.message)
+                throwCode(data.message)
+            })
+        }
+    }).catch((error) => {
+        console.error("Fetch error:", error.message);
+        throwCode(error.message)
+    })
+}
+function throwCode(text){
+    //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
+    //that it doesn't add it and makes a mess. After clearing it we will add the error message
+    let place = document.getElementById("error-code-handler-login");
+    place.innerHTML = '';
+    place.insertAdjacentHTML("afterend", text);
+}
+//})

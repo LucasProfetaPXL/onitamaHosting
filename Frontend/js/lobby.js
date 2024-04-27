@@ -1,22 +1,38 @@
-fetch("https://{host}:{port}/api/Tables",
-    { method: "POST",
-        body: JSON.stringify("input"), //TODO change input
-        headers: {
-        'Accept': 'Application/json',
-            'Content-Type': 'Application/json'
-        }
+let numberOfPlayers = 2;
+let playerMatSize = 5;
+let moveCardSet = 0;
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("makeTableButton").addEventListener('click', function (event) {
+        event.preventDefault();
+
+        fetch('https://localhost:5051/api/Tables', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "numberOfPlayers": numberOfPlayers,
+                "playerMatSize": playerMatSize,
+                "moveCardSet": moveCardSet
+            })
+            })
+            .then(response => {
+                window.alert(response.status)
+                if (response.status === 200){
+                    window.Location = '../game.html';
+                    window.alert("success");
+                }
+                else {
+                    window.alert("error");
+                    throw new Error('Error');
+                }
+            })
+            .catch(error => {
+                console.error("Fetch error:", error.message);
+                throwCode(error.message)
+            });
+
     })
-    .then(response => response.json())
-    .then(response => {
-        if (response.status === 201){
-            return response.json();
-        }
-        else {
-            window.alert("Error, system fault");
-            throw new Error("Error, system fault"); //exit function
-        }
-    })
-    .catch(error => {
-        //TODO errorhandling
-        window.alert('Your account is not registered yet, please make an account first.' + error);
-    });
+})

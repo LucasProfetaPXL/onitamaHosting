@@ -11,7 +11,6 @@ namespace Onitama.Core.TableAggregate;
 /// <inheritdoc cref="ITable"/>
 internal class Table : ITable
 {
-
     public Table _table;
 
     private static readonly Color[] PossibleColors =
@@ -19,8 +18,6 @@ internal class Table : ITable
 
     public Table(Guid id, TablePreferences preferences)
     {
-
-      
         Random randColor = new Random();
         Color tableColor = PossibleColors[randColor.Next(PossibleColors.Length)];
     }

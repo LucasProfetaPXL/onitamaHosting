@@ -3,13 +3,14 @@
 @import './login.css';
 @import './register.css';
 @import './main_page.css';
-@import "./lobby.css";
+@import './lobby.css';
 
 :root{
   --generalBackgroundcolor: #000000;
   --textcolor: #ffffff;
-  --accentcolor1: #000000;
-  --accentcolor2: #000000;
+  --accentcolor1: #a0d9ef;
+  --accentcolor2: #C7CFA2;
+  --accentcolor3: #F47983;
 }
 body{
   background-color: var(--generalBackgroundcolor);
