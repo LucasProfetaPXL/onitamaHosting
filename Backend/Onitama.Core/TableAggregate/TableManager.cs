@@ -30,8 +30,11 @@ internal class TableManager : ITableManager
 
     public ITable AddNewTableForUser(User user, TablePreferences preferences)
     {
-        Table table = null;
-        return table;
+        ITableFactory table = _tableFactory;
+        ITableRepository repository = _tableRepository;
+        ITable createdTable = table.CreateNewForUser(user, preferences);
+        repository.Add(createdTable);
+        return createdTable;
         throw new NotImplementedException();
     }
 
