@@ -7,9 +7,10 @@
       <script src="../js/register.js"></script>
       <script src="../js/login.js"></script>
   </head>
-  <body>
-    <a href="team.html">Team</a>
-    <button class="modal_btn" type="button">Login</button>
+  <body id="centerMainPage">
+  <h1 class="title">Onitama</h1>
+    <button class="homePageButtons" type="button"><a href="team.html">Team</a></button>
+    <button class="modal_btn homePageButtons" type="button">Login</button>
     <div class="modal_backdrop" id="login_backdrop">
       <div class="modal" id="login_modal">
           <button id="login_close" class="close_button">X</button>
@@ -28,17 +29,19 @@
   
               <button class="submit_btn" id="submitButton" type="submit">Login</button>
             </form>
+            <div id="error-code-handler-login">
 
+            </div>
             <p class="account_title">Don't have an account?</p>
-            <button class="register_button_login">Register</button>
+            <button class="register_button_login" type="button">Register</button>
       </div>
     </div>
 
-    <button class="modal_btn" type="button">Register</button>
+    <button class="modal_btn homePageButtons" type="button">Register</button>
     <div class="modal_backdrop" id="register_backdrop">
       <div class="modal" id="register_modal">
           <button id="register_close" class="close_button">X</button>
-          <form id="form" action="" method="post">
+          <form id="form-register" action="" method="post">
             <h2 class="register_title">Register</h2>
             <p class="registeR_description">Please fill in this form to create an account.</p>
             <hr>
@@ -55,6 +58,9 @@
 
               <label for="Repeat_Password">Repeat Password</label>
               <input type="password" placeholder="Repeat Password" name="Repeat_Password" id="repeat_Password" required>
+            </div>
+            <div id="error-code-handler-register">
+
             </div>
 
               <button id="button-register" type="submit" class="submit_btn">Register</button>

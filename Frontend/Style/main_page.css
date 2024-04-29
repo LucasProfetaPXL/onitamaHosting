@@ -1,3 +1,9 @@
+body{
+    background-image: url("../Images/Achtergrond_homepage.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
 .login_modal_btn{
     width: 100px;
     padding: 5px 10px;
@@ -26,4 +32,30 @@
     border: none;
 
     cursor: pointer;
+}
+.title{
+    font-size: 47pt;
+    margin-top: 17%;
+}
+#centerMainPage{
+    display: grid;
+    place-items: center;
+}
+.homePageButtons{
+    & a {
+        display: block;
+        margin: auto;
+    }
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20pt;
+    padding: 5px;
+    margin-top: 25px;
+    display: block;
+    background-color: var(--accentcolor2);
+    width: 15%;
+    min-width: 120px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
 }

@@ -8,7 +8,7 @@ function loaded(){
 function validateRegister(){
 
     //Putting all the inputs of the html in variables
-    let form = document.getElementById("form");
+    let form = document.getElementById("form-register");
     let userName = document.getElementById("username");
     let email = document.getElementById("email");
     let password = document.getElementById("password");
@@ -38,32 +38,41 @@ function validateRegister(){
         })
             .then((response) => {
                 console.log("response.status =", response.status);
-                if(response.status === 200){
-                    console.log("succesfull register")
-                    window.location= "../html/index.html"
+                if(response.status === 200) {
+                    console.log("successful register");
+
                 }
                 else{
+                    //If there is a different response then the 200 status code, it will give the message from the error
+                    response.json().then(data => {
 
-                    response.json().then()
-                    alert(response.json())
-                    alert()
+                        console.log("Error message:", data.message);
+                        //alert("Error: " + data.message);
+                        //we are doing this because we can't use alerts
+                        throwCode(data.message)
+                    });
                 }
-                console.log("data = ", response)
-                return response.blob();
-            })
-            .then(data=>{
-                console.log(data.text())
             })
             .catch((error) => {
                 console.error("Fetch error:", error.message);
+                throwCode(error.message)
             })
 
     }
 }
+function throwCode(text){
+    //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
+    //that it doesn't add it and makes a mess. After clearing it we will add the error message
+    let place = document.getElementById('error-code-handler-register');
+    place.innerHTML = '';
+    place.insertAdjacentHTML("afterend", text)
+
+}
 function validatePassword(password, repeat_Password){
     //Here we are first going to look if the passwords are equal to eachother
     if (password.value !== repeat_Password.value) {
-        alert("Passwords do not match.");
+
+        throwCode("Passwords do not match.")
         return false;
     }
     else{
