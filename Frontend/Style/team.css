@@ -6,6 +6,7 @@
 }
 body{
     text-align: center;
+    color: var(--generalBackgroundcolor);
 }
 .team-member{
     display: flex;
@@ -19,6 +20,7 @@ body{
     margin-right: auto;
     text-align: center;
     margin-top: -5%;
+    color: black;
 }
 #goBack{
     background-color: var(--accentcolor3);
