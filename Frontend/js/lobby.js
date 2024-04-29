@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 window.alert(response.status)
-                if (response.status === 200){
+                if (response.status === 201){
                     window.Location = '../game.html';
                     window.alert("success");
                 }
