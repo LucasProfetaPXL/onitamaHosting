@@ -56,6 +56,7 @@ function login(){
         //that it doesn't add it and makes a mess. After clearing it we will add the error message
         let place = document.getElementById("error-code-handler-login");
         place.innerHTML = '';
-        place.insertAdjacentHTML("afterend", text);
+        // place.insertAdjacentHTML("afterend", text);
+        place.insertAdjacentHTML("afterbegin", text); //This fixes the multiple error messages
     }
 //})
