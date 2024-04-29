@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8c96869-9ce6-4d55-aba7-40d9d059b8d9" name="Changes" comment="frontend cleanup">
-      <change beforePath="$PROJECT_DIR$/Style/main_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/Style/main_page.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lobby.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/lobby.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +73,8 @@
       <workItem from="1713351749560" duration="468000" />
       <workItem from="1713524230599" duration="8671000" />
       <workItem from="1713784895845" duration="5776000" />
-      <workItem from="1713796997488" duration="24958000" />
+      <workItem from="1713796997488" duration="25961000" />
+      <workItem from="1714398003452" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="login.js">
       <option name="closed" value="true" />
