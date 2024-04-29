@@ -18,6 +18,7 @@ internal class InMemoryTableRepository : ITableRepository
     public void Add(ITable table)
     {
         _tableDictionary.AddOrReplace(table.Id, table);
+
     }
 
     public ITable Get(Guid tableId)
@@ -36,10 +37,18 @@ internal class InMemoryTableRepository : ITableRepository
 
     public IList<ITable> FindTablesWithAvailableSeats()
     {
+        List<ITable> openTables = new List<ITable>();
         //TODO: loop over all tables (user the Values property of _tableDictionary)
         //and check if those tables have seats available.
         //Put the tables that have available seats in a list and return that list.
-       
-        throw new NotImplementedException();
+        foreach(ITable  table in _tableDictionary.Values)
+        {
+            if (table.HasAvailableSeat)
+            {
+                openTables.Add(table);
+            }
+        }
+        return openTables;
+        //throw new NotImplementedException();
     }
 }
