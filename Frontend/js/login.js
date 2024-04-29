@@ -19,10 +19,10 @@ function login(){
     let password = document.getElementById('password');
     let form = document.getElementById("form");
 
-    form.addEventListener("submit", (e)=>{
+    /*form.addEventListener("submit", (e)=>{
         //This will prevent that there will be default inputs
         e.preventDefault()
-    })
+    })*/
     fetch('https://localhost:5051/api/Authentication/token', {
         method: 'POST',
         headers: {
@@ -36,13 +36,14 @@ function login(){
         console.log("response status =",response.status)
         //looking if the status is a good response or a bad response
         if (response.status === 200){
-            console.log("succesful login")
+            console.log("succesful login");
+            window.location = '../html/lobby.html';
         }
         else {
             //If there is a different code that the 200 it will put out an error code
             response.json().then(data => {
-                console.log("Error message:", data.message)
-                throwCode(data.message)
+                console.log("Error message:", data.message);
+                throwCode(data.message);
             })
         }
     }).catch((error) => {

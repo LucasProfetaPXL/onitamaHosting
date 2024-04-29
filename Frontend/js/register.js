@@ -8,7 +8,7 @@ function loaded(){
 function validateRegister(){
 
     //Putting all the inputs of the html in variables
-    let form = document.getElementById("form");
+    let form = document.getElementById("form-register");
     let userName = document.getElementById("username");
     let email = document.getElementById("email");
     let password = document.getElementById("password");
