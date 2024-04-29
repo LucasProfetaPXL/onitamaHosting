@@ -52,6 +52,9 @@ public class TablesController : ApiControllerBase
         return Ok(models);
     }
 
+    
+
+
     /// <summary>
     /// Adds a new table to the system. The user that creates the table is automatically seated.
     /// </summary>

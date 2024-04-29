@@ -1,7 +1,18 @@
+@font-face {
+    font-family: 'Skyscapers';
+    src: url('//2ttf.com/webfont/6IF8GLA3aiM/webfont.ttf') format('truetype');
+}
+
+*{
+    font-family: "manrope", serif;
+    font-weight: normal;
+}
+
 body{
     background-image: url("../Images/Achtergrond_homepage.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
+    font-family: "manrope", serif;
 }
 
 .login_modal_btn{
@@ -34,8 +45,9 @@ body{
     cursor: pointer;
 }
 .title{
-    font-size: 47pt;
+    font-size: 50pt;
     margin-top: 17%;
+    font-family: "Skyscapers", "sans-serif";
 }
 #centerMainPage{
     display: grid;
