@@ -59,7 +59,7 @@ internal class Table : ITable
         Random randNumber = new Random();
         Direction direction;
         Color color = PossibleColors[randNumber.Next(PossibleColors.Length)];
-        if (_ownerPlayerId == null)
+        if (_playerList.Count == 0)
         {
             direction = Direction.North;
             _ownerPlayerId = user.Id;
@@ -67,10 +67,11 @@ internal class Table : ITable
         else
         {
            direction= Direction.South;
+           _hasAvailableSeat = false;
         }
         HumanPlayer humanPlayer = new HumanPlayer(user.Id, user.WarriorName, color, direction);
         _playerList.Add(humanPlayer);
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public void Leave(Guid userId)
