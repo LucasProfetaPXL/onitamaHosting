@@ -15,13 +15,13 @@ internal class PlayerBase : IPlayer
     private Color _color;
     private Direction _direction;
 
-    public Guid Id => throw new NotImplementedException();
+    public Guid Id =>  _id;
 
-    public string Name => throw new NotImplementedException();
+    public string Name => _name;
 
-    public Color Color => throw new NotImplementedException();
+    public Color Color => _color;
 
-    public Direction Direction => throw new NotImplementedException();
+    public Direction Direction => _direction;
 
     public ISchool School => throw new NotImplementedException();
 
@@ -44,6 +44,10 @@ internal class PlayerBase : IPlayer
     /// </remarks>
     public PlayerBase(IPlayer otherPlayer)
     {
+        _id = otherPlayer.Id;
+        _name = otherPlayer.Name;
+        _color = otherPlayer.Color;
+        _direction = otherPlayer.Direction;
         throw new NotImplementedException("TODO: copy properties of other player");
     }
 }

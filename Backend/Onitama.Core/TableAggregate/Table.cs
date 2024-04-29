@@ -12,17 +12,24 @@ namespace Onitama.Core.TableAggregate;
 internal class Table : ITable
 {
 
+    private List<PlayerBase> _playerList;
+    private Guid _id;
+    private TablePreferences _preferences;
+    private Guid _ownerPlayerId;
+    private bool _hasAvailableSeat;
     public Table _table;
 
-    private static readonly Color[] PossibleColors =
+    private static readonly Color[] PossibleColors = 
         new[] { Color.Red, Color.Blue, Color.Green, Color.Yellow, Color.Orange };
 
     public Table(Guid id, TablePreferences preferences)
     {
-
-      
+        _id = id;
+        _preferences = preferences;
+        _hasAvailableSeat = true;
         Random randColor = new Random();
         Color tableColor = PossibleColors[randColor.Next(PossibleColors.Length)];
+        _playerList = new List<PlayerBase>();
     }
 
 
@@ -30,15 +37,15 @@ internal class Table : ITable
 
 
     //public Guid Id => throw new NotImplementedException();
-    public Guid Id => Id;
+    public Guid Id => _id;
 
-    public TablePreferences Preferences => _table.Preferences;
+    public TablePreferences Preferences => _preferences;
 
-    public Guid OwnerPlayerId => _table.OwnerPlayerId;
+    public Guid OwnerPlayerId => _ownerPlayerId;
 
-    public IReadOnlyList<IPlayer> SeatedPlayers => SeatedPlayers;
+    public IReadOnlyList<IPlayer> SeatedPlayers => _playerList;
 
-    public bool HasAvailableSeat => throw new NotImplementedException();
+    public bool HasAvailableSeat => _hasAvailableSeat;
 
     public Guid GameId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -49,6 +56,20 @@ internal class Table : ITable
 
     public void Join(User user)
     {
+        Random randNumber = new Random();
+        Direction direction;
+        Color color = PossibleColors[randNumber.Next(PossibleColors.Length)];
+        if (_ownerPlayerId == null)
+        {
+            direction = Direction.North;
+            _ownerPlayerId = user.Id;
+        }
+        else
+        {
+           direction= Direction.South;
+        }
+        HumanPlayer humanPlayer = new HumanPlayer(user.Id, user.WarriorName, color, direction);
+        _playerList.Add(humanPlayer);
         throw new NotImplementedException();
     }
 

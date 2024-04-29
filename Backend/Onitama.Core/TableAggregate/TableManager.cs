@@ -30,7 +30,7 @@ internal class TableManager : ITableManager
 
     public ITable AddNewTableForUser(User user, TablePreferences preferences)
     {
-        Table table = null;
+        Table table = new Table(user.Id, preferences);
         return table;
         throw new NotImplementedException();
     }

@@ -6,12 +6,14 @@ namespace Onitama.Core.TableAggregate;
 /// <inheritdoc cref="ITableFactory"/>
 internal class TableFactory : ITableFactory
 {
-    private ITableFactory _tableFactory = null!;
-    private ITable _table = null!;
+
+    private Guid _idTable;
     public ITable CreateNewForUser(User user, TablePreferences preferences)
     {
-        _table.Join(user);
-        _tableFactory.CreateNewForUser(user, preferences);
+        _idTable = Guid.NewGuid();
+        Table table = new Table(_idTable, preferences);
+        table.Join(user);
+        return table;
         throw new NotImplementedException();
     }
 }
