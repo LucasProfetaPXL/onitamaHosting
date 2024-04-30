@@ -45,7 +45,15 @@ internal class TableManager : ITableManager
 
     public void LeaveTable(Guid tableId, User user)
     {
-        throw new NotImplementedException();
+        ITable thisTable = _tableRepository.Get(tableId);
+
+        thisTable.Leave(user.Id);
+
+        if (thisTable.SeatedPlayers.Count == 0)
+        {
+            _tableRepository.Remove(tableId);           
+        }
+        //throw new NotImplementedException();
     }
 
     public void FillWithArtificialPlayers(Guid tableId, User user)

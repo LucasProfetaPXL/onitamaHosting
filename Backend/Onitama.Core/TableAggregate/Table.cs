@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq;
 using System.Numerics;
 using Onitama.Core.PlayerAggregate;
 using Onitama.Core.PlayerAggregate.Contracts;
@@ -76,6 +77,34 @@ internal class Table : ITable
 
     public void Leave(Guid userId)
     {
-        throw new NotImplementedException();
+        //_table.SeatedPlayers 
+        //_table._playerList.Contains(userId);
+
+        try
+        {
+            for (int i = 0; i < _playerList.Count; i++)
+            {
+                if (_playerList[i].Id == userId)
+                {
+                    _playerList.Remove(_playerList[i]);
+                    _ownerPlayerId = _playerList[0].Id;
+                    break;
+                }
+                else if (i == _playerList.Count-1)
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+        }
+        catch (InvalidOperationException)
+        {
+            throw;
+        }
+
+        //InvalidOperationException(_table.Leave(userId));
+
+
+        //throw new NotImplementedException();
     }
+    
 }

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 window.alert(response.status)
-                if (response.status === 200){
+                if (response.status === 201){
                     window.Location = '../game.html';
                     window.alert("success");
                 }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error("Fetch error:", error.message);
-                throwCode(error.message)
+                //throwCode(error.message)
             });
 
     })
