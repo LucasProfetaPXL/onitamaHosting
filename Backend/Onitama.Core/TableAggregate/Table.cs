@@ -57,6 +57,7 @@ internal class Table : ITable
     public void Join(User user)
     {
         Random randNumber = new Random();
+        bool erin = false;
         Direction direction;
         Color color = PossibleColors[randNumber.Next(PossibleColors.Length)];
         if (_playerList.Count == 0)
@@ -69,8 +70,10 @@ internal class Table : ITable
            direction= Direction.South;
            _hasAvailableSeat = false;
         }
+        
         HumanPlayer humanPlayer = new HumanPlayer(user.Id, user.WarriorName, color, direction);
         _playerList.Add(humanPlayer);
+        
         //throw new NotImplementedException();
     }
 
