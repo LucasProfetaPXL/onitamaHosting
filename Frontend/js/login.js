@@ -41,8 +41,11 @@ function login(){
                 localStorage.setItem('sessionID', sessionID);
                 console.log(sessionID)
                 console.log("succesful login");
-                window.location.replace('../html/lobby.html');
+               // window.location.replace('../html/lobby.html');
             })
+            setTimeout(function() {
+                window.location.href = '../html/lobby.html';
+            }, 100);
 
         }
         else {
