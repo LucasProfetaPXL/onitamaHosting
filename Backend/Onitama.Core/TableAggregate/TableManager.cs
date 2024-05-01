@@ -46,25 +46,13 @@ internal class TableManager : ITableManager
 
     public void LeaveTable(Guid tableId, User user)
     {
-<<<<<<< HEAD
         var table = _tableRepository.Get(tableId);
         table.Leave(user.Id);
-        
-        if(table.SeatedPlayers.Count == 0)
+        if (table.SeatedPlayers.Count == 0)
         {
             _tableRepository.Remove(tableId);
         }
-        
-=======
-        ITable thisTable = _tableRepository.Get(tableId);
 
-        thisTable.Leave(user.Id);
-
-        if (thisTable.SeatedPlayers.Count == 0)
-        {
-            _tableRepository.Remove(tableId);           
-        }
->>>>>>> 09d32fb030b3657233226f91f029e774a86adbb6
         //throw new NotImplementedException();
     }
 
