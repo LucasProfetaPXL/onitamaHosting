@@ -46,6 +46,7 @@ internal class TableManager : ITableManager
 
     public void LeaveTable(Guid tableId, User user)
     {
+
         var table = _tableRepository.Get(tableId);
         table.Leave(user.Id);
         if (table.SeatedPlayers.Count == 0)
