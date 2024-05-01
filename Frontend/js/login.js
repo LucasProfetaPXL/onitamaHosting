@@ -15,8 +15,8 @@ function loaded(){
         }
     })*/
 function login(){
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
+    let email = document.getElementById('emailInput');
+    let password = document.getElementById('passwordInput');
     let form = document.getElementById("form");
 
     /*form.addEventListener("submit", (e)=>{
