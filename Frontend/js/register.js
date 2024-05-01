@@ -49,35 +49,35 @@ function validateRegister(){
                         console.log("Error message:", data.message);
                         //alert("Error: " + data.message);
                         //we are doing this because we can't use alerts
-                        throwCode(data.message)
+                        throwaCode(data.message)
                     });
                 }
             })
             .catch((error) => {
                 console.error("Fetch error:", error.message);
-                throwCode(error.message)
+                throwaCode(error.message)
             })
 
     }
 }
-function throwCode(text){
+function throwaCode(text){
     //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
     //that it doesn't add it and makes a mess. After clearing it we will add the error message
     let place = document.getElementById('error-code-handler-register');
     place.innerHTML = '';
-    place.insertAdjacentHTML("afterend", text)
+    place.insertAdjacentHTML("afterbegin", text)
 
 }
-function validatePassword(password, repeat_Password){
-    //Here we are first going to look if the passwords are equal to eachother
-    if (password.value !== repeat_Password.value) {
+    function validatePassword(password, repeat_Password){
+        //Here we are first going to look if the passwords are equal to eachother
+        if (password.value !== repeat_Password.value) {
 
-        throwCode("Passwords do not match.")
-        return false;
+            throwaCode("Passwords do not match.")
+            return false;
+        }
+        else{
+            return  true;
+        }
     }
-    else{
-        return  true;
-    }
-}
 
 

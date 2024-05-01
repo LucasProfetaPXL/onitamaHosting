@@ -4,12 +4,12 @@
 
 .register_title{
     margin-bottom: 5px;
+    margin-top: -20px;
 }
 
 .register_description{
     margin-bottom: 5px;
 }
-
 .close_button:hover{
     background-color: red;
     color: white;

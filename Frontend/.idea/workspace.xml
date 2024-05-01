@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="788c7d9d-a6c1-4265-9a06-84705124a8c1" name="Changes" comment="?">
-      <change beforePath="$PROJECT_DIR$/../Backend/Onitama.Api/Controllers/TablesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Onitama.Api/Controllers/TablesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/Onitama.Infrastructure/InMemoryTableRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Onitama.Infrastructure/InMemoryTableRepository.cs" afterDir="false" />
+    <list default="true" id="d8c96869-9ce6-4d55-aba7-40d9d059b8d9" name="Changes" comment="frontend cleanup">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,47 +15,31 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-    <option name="RESET_MODE" value="MIXED" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;LucasProfetaPXL&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="c416ae72-cafa-47be-b244-7d8fba5ec7f1" />
-        <option name="url" value="https://github.com/pxlit-projects/onitama-school52" />
-      </UrlAndAccount>
-    </option>
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
+  &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="2fDbomzeigroFxfxkTn5Og2MHgh" />
+  <component name="ProjectId" id="2fE276LJBxtpxzGLxvQRJ4MFyBj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/12301302/Documents/Project/Frontend&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -65,164 +48,75 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\12301302\Documents\Project\Frontend\js" />
-    </key>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
-      </set>
-    </attachedChunks>
+  <component name="RunManager" selected="JavaScript Debug.lobby.html">
+    <configuration name="lobby.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/register.html/Frontend/html/lobby.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="lobby.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/lobby.js" working-dir="$PROJECT_DIR$/js">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.lobby.html" />
+        <item itemvalue="Node.js.lobby.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="788c7d9d-a6c1-4265-9a06-84705124a8c1" name="Changes" comment="" />
-      <created>1713338772527</created>
+      <changelist id="d8c96869-9ce6-4d55-aba7-40d9d059b8d9" name="Changes" comment="" />
+      <created>1713351746914</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1713338772527</updated>
-      <workItem from="1713338773615" duration="592000" />
-      <workItem from="1713339395311" duration="4006000" />
-      <workItem from="1713343485209" duration="8000" />
-      <workItem from="1713349761974" duration="1564000" />
-      <workItem from="1713351776373" duration="426000" />
-      <workItem from="1713601430221" duration="435000" />
-      <workItem from="1713601970403" duration="71000" />
-      <workItem from="1713602167948" duration="5081000" />
-      <workItem from="1713626756643" duration="1523000" />
-      <workItem from="1713695828547" duration="62000" />
-      <workItem from="1713786032986" duration="7881000" />
-      <workItem from="1713795357825" duration="3403000" />
-      <workItem from="1713889658832" duration="3236000" />
-      <workItem from="1713894271954" duration="733000" />
-      <workItem from="1713959310205" duration="2007000" />
-      <workItem from="1714029367834" duration="8459000" />
-      <workItem from="1714118657670" duration="5650000" />
-      <workItem from="1714207535503" duration="26000" />
-      <workItem from="1714215948754" duration="788000" />
-      <workItem from="1714302505718" duration="84000" />
-      <workItem from="1714373390543" duration="158000" />
-      <workItem from="1714373829792" duration="47000" />
-      <workItem from="1714390758572" duration="2349000" />
-      <workItem from="1714395795628" duration="1774000" />
+      <updated>1713351746914</updated>
+      <workItem from="1713351749560" duration="468000" />
+      <workItem from="1713524230599" duration="8671000" />
+      <workItem from="1713784895845" duration="5776000" />
+      <workItem from="1713796997488" duration="25961000" />
+      <workItem from="1714398003452" duration="11000" />
     </task>
-    <task id="LOCAL-00001" summary="nog eens proberen te committen na de zoveelste keer">
+    <task id="LOCAL-00001" summary="login.js">
       <option name="closed" value="true" />
-      <created>1713350457403</created>
+      <created>1713535086890</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1713350457403</updated>
+      <updated>1713535086890</updated>
     </task>
-    <task id="LOCAL-00002" summary="nog een test man man man">
+    <task id="LOCAL-00002" summary="login.js">
       <option name="closed" value="true" />
-      <created>1713350742025</created>
+      <created>1713535922991</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1713350742025</updated>
+      <updated>1713535922991</updated>
     </task>
-    <task id="LOCAL-00003" summary="nog een test man man man">
+    <task id="LOCAL-00003" summary="start lobby.html">
       <option name="closed" value="true" />
-      <created>1713602017346</created>
+      <created>1713794455939</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1713602017347</updated>
+      <updated>1713794455939</updated>
     </task>
-    <task id="LOCAL-00004" summary="even een tussentijdse commit, hierin heb ik in register.html een paar id's veranderd en dan ook een link naar javasript gedaan.&#10;In register.js ben ik weer van nul bijna gestart en meer in met functies gewerkt">
+    <task id="LOCAL-00004" summary="start lobby.html">
       <option name="closed" value="true" />
-      <created>1713606026095</created>
+      <created>1713794577671</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1713606026095</updated>
+      <updated>1713794577671</updated>
     </task>
-    <task id="LOCAL-00005" summary="commit met de fetch request die ik half af heb">
+    <task id="LOCAL-00005" summary="frontend cleanup">
       <option name="closed" value="true" />
-      <created>1713607300369</created>
+      <created>1714228079223</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1713607300369</updated>
+      <updated>1714228079223</updated>
     </task>
-    <task id="LOCAL-00006" summary="nog eens iets">
-      <option name="closed" value="true" />
-      <created>1713789866180</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1713789866180</updated>
-    </task>
-    <task id="LOCAL-00007" summary="nog eens iets">
-      <option name="closed" value="true" />
-      <created>1713795167045</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1713795167045</updated>
-    </task>
-    <task id="LOCAL-00008" summary="nog eens iets">
-      <option name="closed" value="true" />
-      <created>1713894136231</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1713894136231</updated>
-    </task>
-    <task id="LOCAL-00009" summary="nog eens iets">
-      <option name="closed" value="true" />
-      <created>1713894291779</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1713894291779</updated>
-    </task>
-    <task id="LOCAL-00010" summary="register en login commit">
-      <option name="closed" value="true" />
-      <created>1714029530730</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1714029530730</updated>
-    </task>
-    <task id="LOCAL-00011" summary="deze was ik vergeten, hierin is index.html een link ingezet naar de login.js">
-      <option name="closed" value="true" />
-      <created>1714029557583</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1714029557583</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Tussentijdse commit van de register pagina, heb nog wat getest daar, login page heb ik wat aangepast, werkt nog neit helemaal">
-      <option name="closed" value="true" />
-      <created>1714038243869</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1714038243869</updated>
-    </task>
-    <task id="LOCAL-00013" summary="de javascript code van register en login is af alleen er moets iets aangepast worden in de html denk ik omdat ookal geef ik een foute ingave bij login gaat die gewoon refreshen en ik heb geen refresh gedaan in mijn javascript">
-      <option name="closed" value="true" />
-      <created>1714123639600</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1714123639600</updated>
-    </task>
-    <task id="LOCAL-00014" summary="?">
-      <option name="closed" value="true" />
-      <created>1714393101258</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1714393101258</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,16 +134,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="nog eens proberen te committen na de zoveelste keer" />
-    <MESSAGE value="nog een test man man man" />
-    <MESSAGE value="even een tussentijdse commit, hierin heb ik in register.html een paar id's veranderd en dan ook een link naar javasript gedaan.&#10;In register.js ben ik weer van nul bijna gestart en meer in met functies gewerkt" />
-    <MESSAGE value="commit met de fetch request die ik half af heb" />
-    <MESSAGE value="nog eens iets" />
-    <MESSAGE value="register en login commit" />
-    <MESSAGE value="deze was ik vergeten, hierin is index.html een link ingezet naar de login.js" />
-    <MESSAGE value="Tussentijdse commit van de register pagina, heb nog wat getest daar, login page heb ik wat aangepast, werkt nog neit helemaal" />
-    <MESSAGE value="de javascript code van register en login is af alleen er moets iets aangepast worden in de html denk ik omdat ookal geef ik een foute ingave bij login gaat die gewoon refreshen en ik heb geen refresh gedaan in mijn javascript" />
-    <MESSAGE value="?" />
-    <option name="LAST_COMMIT_MESSAGE" value="?" />
+    <MESSAGE value="login.js" />
+    <MESSAGE value="start lobby.html" />
+    <MESSAGE value="frontend cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="frontend cleanup" />
   </component>
 </project>
