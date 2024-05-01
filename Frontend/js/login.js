@@ -36,8 +36,13 @@ function login(){
         console.log("response status =",response.status)
         //looking if the status is a good response or a bad response
         if (response.status === 200){
-            console.log("succesful login");
-            window.location = '../html/lobby.html';
+            response.json().then(data =>{
+                const sessionID = data.sessionId;
+                localStorage.setItem('sessionID', sessionID);
+                console.log("succesful login");
+                window.location = '../html/lobby.html';
+            })
+
         }
         else {
             //If there is a different code that the 200 it will put out an error code
