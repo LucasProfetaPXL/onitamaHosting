@@ -39,8 +39,9 @@ function login(){
             response.json().then(data =>{
                 const sessionID = data.sessionId;
                 localStorage.setItem('sessionID', sessionID);
+                console.log(sessionID)
                 console.log("succesful login");
-                window.location = '../html/lobby.html';
+                window.location.replace('../html/lobby.html');
             })
 
         }
