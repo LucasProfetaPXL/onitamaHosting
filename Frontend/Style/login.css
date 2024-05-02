@@ -1,10 +1,45 @@
-.login_title{
-    margin-bottom: 5px;
+#login_modal{
+    height: 400px;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 350px;
+    color: rgba(243, 244, 246, 1);
+    background-color: rgba(17, 24, 39, 1);
 }
 
-.login_description{
-    margin-bottom: 5px;
+.login_title{
+    font-family: manrope, serif;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
 }
+
+
+
+/*Login button*/
+
+#submitButton{
+    padding: 10px;
+    margin: 5px auto auto;
+
+    width: 80%;
+
+    border: 1px solid var(--accentcolor2);
+    border-radius: 40px;
+
+    background-color: rgba(17, 24, 39, 1);
+    color: white;
+}
+
+#submitButton:hover{
+    background: linear-gradient(to right, #C7CFA2FF, #A2C7CFFF);
+    color: black;
+    cursor: pointer;
+}
+
+/* Set background color and center the text of the "Register" section */
 
 .register_button_login{
     padding: 10px;
@@ -12,14 +47,17 @@
 
     width: 100px;
 
-    border: 1px solid black;
-    border-radius: 5px;
+    border: 1px solid var(--accentcolor2);
+    border-radius: 40px;
 
-    background-color: var(--accentcolor1);
+    background-color: rgba(17, 24, 39, 1);
+    color: white;
 
     opacity: 0.9;
 }
 
 .register_button_login:hover{
-    opacity: 1;
+    background: linear-gradient(to right, #C7CFA2FF, #A2C7CFFF);
+    color: black;
+    cursor: pointer;
 }
