@@ -126,7 +126,7 @@ function submitForm(email, password) {
             })
             setTimeout(function () {
                 window.location.href = '../html/lobby.html';
-            }, 10000);
+            }, 100);
         }
     }).catch((error) => {
         console.log(error);
