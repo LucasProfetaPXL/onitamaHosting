@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="788c7d9d-a6c1-4265-9a06-84705124a8c1" name="Changes" comment="." />
+=======
     <list default="true" id="d8c96869-9ce6-4d55-aba7-40d9d059b8d9" name="Changes" comment="frontend cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+>>>>>>> 09d32fb030b3657233226f91f029e774a86adbb6
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
+  <component name="TaskManager">
+    <servers />
+  </component>
+=======
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -139,4 +148,5 @@
     <MESSAGE value="frontend cleanup" />
     <option name="LAST_COMMIT_MESSAGE" value="frontend cleanup" />
   </component>
+>>>>>>> 09d32fb030b3657233226f91f029e774a86adbb6
 </project>
