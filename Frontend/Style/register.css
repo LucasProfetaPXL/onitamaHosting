@@ -1,35 +1,92 @@
 #register_modal{
     height: 555px;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 350px;
+    color: rgba(243, 244, 246, 1);
+    background-color: rgba(17, 24, 39, 1);
 }
 
 .register_title{
-    margin-bottom: 5px;
-    margin-top: -20px;
+    font-family: manrope, serif;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
 }
 
-.register_description{
-    margin-bottom: 5px;
+.flex_container label{
+    display: block;
+    color: rgba(156, 163, 175, 1);
+    margin-bottom: 4px;
 }
-.close_button:hover{
-    background-color: red;
+
+.flex_container input{
+    width: 80%;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+}
+
+.flex_container input:hover{
+    border-color: var(--accentcolor2);
+}
+
+.close_button{
+    background-color: rgba(17, 24, 39, 1);
+    border: none;
     color: white;
 }
 
-/* Set a grey background color and center the text of the "login" section */
+.close_button:hover{
+    color: tomato;
+    cursor: pointer;
+}
+
+/*Register button*/
+
+#button-register{
+    padding: 10px;
+    margin: 5px auto auto;
+
+    width: 80%;
+
+    border: 1px solid var(--accentcolor2);
+    border-radius: 40px;
+
+    background-color: rgba(17, 24, 39, 1);
+    color: white;
+}
+
+#button-register:hover{
+    background: linear-gradient(to right, #C7CFA2FF, #A2C7CFFF);
+    color: black;
+    cursor: pointer;
+}
+
+/* Set background color and center the text of the "login" section */
 .login_button_register{
     padding: 10px;
-    margin: auto;
+    margin: 5px auto auto;
 
     width: 100px;
 
-    border: 1px solid black;
-    border-radius: 5px;
+    border: 1px solid var(--accentcolor2);
+    border-radius: 40px;
 
-    background-color: var(--accentcolor1);
-
-    opacity: 0.9;
+    background-color: rgba(17, 24, 39, 1);
+    color: white;
 }
 
 .login_button_register:hover{
-    opacity: 1;
+    background: linear-gradient(to right, #C7CFA2FF, #A2C7CFFF);
+    color: black;
+    cursor: pointer;
 }
+
+
+
