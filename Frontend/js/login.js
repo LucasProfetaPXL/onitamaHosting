@@ -122,10 +122,11 @@ function submitForm(email, password) {
                 localStorage.setItem('sessionID', sessionID);
                 console.dir(data.token)
                 console.log("succesful login");
+
             })
             setTimeout(function () {
                 window.location.href = '../html/lobby.html';
-            }, 100);
+            }, 10000);
         }
     }).catch((error) => {
         console.log(error);
