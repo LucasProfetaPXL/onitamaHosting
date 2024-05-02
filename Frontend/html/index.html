@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="../Style/stylesheet.css">
       <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
       <script src="../js/register.js"></script>
-      <script src="../js/login.js"></script>
   </head>
   <body id="centerMainPage">
   <h1 class="title">Onitama</h1>
@@ -19,15 +18,15 @@
               <h2 class="login_title">Login</h2>
               <p class="login_description">Please fill in this form to log into your account.</p>
               <hr>
-  
+
               <div class="flex_container">
                   <label class="label_mail" for="emailInput">E-mail</label>
-                  <input placeholder="Enter e-mail" class="input_mail" type="email" name="email" id="emailInput" required>
-  
+                  <input required placeholder="Enter e-mail" class="input_mail" type="email" name="email" id="emailInput" >
+
                   <label class="label_password" for="passwordInput">Password</label>
-                  <input placeholder="Enter password" class="input_password" type="password" name="password" id="passwordInput" required>
+                  <input required placeholder="Enter password" class="input_password" type="password" name="password" id="passwordInput" >
               </div>
-  
+
               <button class="submit_btn" id="submitButton" type="submit">Login</button>
             </form>
             <div id="error-code-handler-login">
@@ -71,7 +70,11 @@
         </div>
     </div>
 
-	<script src="../js/includes.js" type="module"></script>
+  <div id="toast">Some text some message..</div>
+
+  <script src="../js/includes.js" type="module"></script>
   <script src="../js/modal.js" type="module"></script>
+  <script src="../js/login.js" type="module"></script>
+  <script src="../js/toast.js" type="module"></script>
   </body>
 </html>
