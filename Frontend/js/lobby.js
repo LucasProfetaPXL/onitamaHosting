@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                //'Authorization' : `Bearer ${token}`
+                'Authorization' : `${token}`
             },
             body: JSON.stringify({
                 "moveCardSet": moveCardSet,

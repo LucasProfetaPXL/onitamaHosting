@@ -16,15 +16,12 @@
           <button id="login_close" class="close_button">X</button>
           <form action="" method="post" id="loginForm">
               <h2 class="login_title">Login</h2>
-              <p class="login_description">Please fill in this form to log into your account.</p>
-              <hr>
-
               <div class="flex_container">
-                  <label class="label_mail" for="emailInput">E-mail</label>
-                  <input required placeholder="Enter e-mail" class="input_mail" type="email" name="email" id="emailInput" >
+                  <label class="label_mail" for="emailInput">Email</label>
+                  <input required class="input_mail" type="email" name="email" id="emailInput" >
 
                   <label class="label_password" for="passwordInput">Password</label>
-                  <input required placeholder="Enter password" class="input_password" type="password" name="password" id="passwordInput" >
+                  <input required class="input_password" type="password" name="password" id="passwordInput" >
               </div>
 
               <button class="submit_btn" id="submitButton" type="submit">Login</button>
@@ -43,21 +40,19 @@
           <button id="register_close" class="close_button">X</button>
           <form id="form-register" action="" method="post">
             <h2 class="register_title">Register</h2>
-            <p class="registeR_description">Please fill in this form to create an account.</p>
-            <hr>
 
             <div class="flex_container">
               <label for="username">Username</label>
-              <input type="text" placeholder="Enter Username" name="email" id="username" required>
+              <input type="text" name="email" id="username" required>
 
               <label for="email">Email</label>
-              <input type="email" placeholder="Enter Email" name="email" id="email" required>
+              <input type="email" name="email" id="email" required>
 
               <label for="password">Password</label>
-              <input type="password" placeholder="Enter Password" name="password" id="password" required>
+              <input type="password" name="password" id="password" required>
 
               <label for="Repeat_Password">Repeat Password</label>
-              <input type="password" placeholder="Repeat Password" name="Repeat_Password" id="repeat_Password" required>
+              <input type="password" name="Repeat_Password" id="repeat_Password" required>
             </div>
 
               <button id="button-register" type="submit" class="submit_btn">Register</button>
