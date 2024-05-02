@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "notiflix": "^3.2.7",
+    "vue": "^3.4.26",
+    "vue-toastification": "^1.7.14"
+  }
+}
