@@ -5,17 +5,18 @@ let moveCardSet = 0;
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("makeTableButton").addEventListener('click', function (event) {
         event.preventDefault();
-
+        const token = localStorage.getItem('sessionID');
         fetch('https://localhost:5051/api/Tables', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                //'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify({
+                "moveCardSet": moveCardSet,
                 "numberOfPlayers": numberOfPlayers,
-                "playerMatSize": playerMatSize,
-                "moveCardSet": moveCardSet
+                "playerMatSize": playerMatSize
             })
             })
             .then(response => {
