@@ -58,6 +58,7 @@ internal class Table : ITable
     public void Join(User user)
     {
         Random randNumber = new Random();
+        bool erin = false;
         Direction direction;
         Color color = PossibleColors[randNumber.Next(PossibleColors.Length)];
         if (_playerList.Count == 0)
@@ -70,8 +71,21 @@ internal class Table : ITable
            direction= Direction.South;
            _hasAvailableSeat = false;
         }
+        if(_playerList.Count == 2) 
+        {
+            throw new InvalidOperationException("This table is full");
+        }
+        foreach(PlayerBase player in _playerList) 
+        { 
+            if(player.Id == user.Id) 
+            {
+                throw new InvalidOperationException("You are already seated");
+            }
+        }
+        
         HumanPlayer humanPlayer = new HumanPlayer(user.Id, user.WarriorName, color, direction);
         _playerList.Add(humanPlayer);
+        
         //throw new NotImplementedException();
     }
 

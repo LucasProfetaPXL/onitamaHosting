@@ -24,7 +24,7 @@ public interface IPlayer
     /// Color of the player
     /// </summary>
     Color Color { get; }
-
+    
     /// <summary>
     /// Direction in which the player is playing (north or south)
     /// </summary>

@@ -4,6 +4,7 @@
 @import './register.css';
 @import './main_page.css';
 @import './lobby.css';
+@import './toast.css';
 
 :root{
   --generalBackgroundcolor: #000000;

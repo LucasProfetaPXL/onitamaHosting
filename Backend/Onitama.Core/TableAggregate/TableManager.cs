@@ -40,25 +40,26 @@ internal class TableManager : ITableManager
 
     public void JoinTable(Guid tableId, User user)
     {
-        throw new NotImplementedException();
+        _tableRepository.Get(tableId).Join(user);
+        //throw new NotImplementedException();
     }
 
     public void LeaveTable(Guid tableId, User user)
     {
-        ITable thisTable = _tableRepository.Get(tableId);
 
-        thisTable.Leave(user.Id);
-
-        if (thisTable.SeatedPlayers.Count == 0)
+        var table = _tableRepository.Get(tableId);
+        table.Leave(user.Id);
+        if (table.SeatedPlayers.Count == 0)
         {
-            _tableRepository.Remove(tableId);           
+            _tableRepository.Remove(tableId);
         }
+
         //throw new NotImplementedException();
     }
 
     public void FillWithArtificialPlayers(Guid tableId, User user)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public IGame StartGameForTable(Guid tableId, User user)
