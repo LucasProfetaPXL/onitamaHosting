@@ -1,26 +1,64 @@
-let numberOfPlayers = 2;
-let playerMatSize = 5;
-let moveCardSet = 0;
-
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById("makeTableButton").addEventListener('click', function (event) {
-        event.preventDefault();
-        const token = localStorage.getItem('sessionID');
-        fetch('https://localhost:5051/api/Tables', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization' : `${token}`
-            },
-            body: JSON.stringify({
-                "moveCardSet": moveCardSet,
-                "numberOfPlayers": numberOfPlayers,
-                "playerMatSize": playerMatSize
-            })
-            })
-            .then(response => {
-                window.alert(response.status)
+    // const numberOfPlayers = 2;
+    // const playerMatSize = 5;
+    // const moveCardSet = 0;
+    // const makeTableButton = document.getElementById('makeTableButton');
+    // makeTableButton.addEventListener('click', function (event) {
+    //     event.preventDefault();
+    //     const token = localStorage.getItem('sessionID');
+    //     fetch('https://localhost:5051/api/Tables', {
+    //         method: 'POST',
+    //         headers: {
+    //             // 'Accept': 'text/plain',
+    //             'Content-Type': 'application/json',
+    //             'Authorization' : token
+    //         },
+    //         body: JSON.stringify({
+    //             "numberOfPlayers": numberOfPlayers,
+    //             "playerMatSize": playerMatSize,
+    //             "moveCardSet": moveCardSet
+    //
+    //         })
+    //     })
+    //     .then(response => {
+    //         if (response.status === 201){
+    //             window.Location = '../html/game.html';
+    //             window.alert("success");
+    //         }
+    //         else {
+    //             window.alert("error");
+    //             throw new Error('Error');
+    //         }
+    //     })
+    //     .catch(error => {
+    //        console.error("Fetch error:", error.message);
+    //         //throwCode(error.message)
+    //     });
+    // })
+})
+
+const numberOfPlayers = 2;
+const playerMatSize = 5;
+const moveCardSet = 0;
+const makeTableButton = document.getElementById('makeTableButton');
+makeTableButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('sessionID');
+
+    fetch('https://localhost:5051/api/Tables', {
+        method: 'POST',
+        headers: {
+            'Accept': 'text/plain',
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer' + token
+        },
+        body: JSON.stringify({
+            'numberOfPlayers': numberOfPlayers,
+            'playerMatSize': playerMatSize,
+            'moveCardSet': moveCardSet,
+        })
+    })
+    .then((response) => {
                 if (response.status === 201){
                     window.Location = '../html/game.html';
                     window.alert("success");
@@ -29,11 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.alert("error");
                     throw new Error('Error');
                 }
-            })
-            .catch(error => {
-                console.error("Fetch error:", error.message);
-                //throwCode(error.message)
-            });
-
+    })
+    .catch((error) => {
+        console.error("Fetch error:", error);
     })
 })
