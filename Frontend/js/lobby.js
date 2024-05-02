@@ -8,15 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const token = localStorage.getItem('sessionID');
         fetch('https://localhost:5051/api/Tables', {
             method: 'POST',
+            mode : 'cors',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization' : `${token}`
+                'Accept': 'text/plain',
+                'Authorization' : `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "moveCardSet": moveCardSet,
                 "numberOfPlayers": numberOfPlayers,
-                "playerMatSize": playerMatSize
+                "playerMatSize": playerMatSize,
+                "moveCardSet": moveCardSet
             })
             })
             .then(response => {
@@ -28,10 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 else {
                     window.alert("error");
                     throw new Error('Error');
+
                 }
             })
             .catch(error => {
-                console.error("Fetch error:", error.message);
+                console.error("Fetch error:", error);
                 //throwCode(error.message)
             });
 
