@@ -11,13 +11,17 @@ namespace Onitama.Core.GameAggregate;
 
 internal class GameFactory : IGameFactory
 {
+    private IMoveCardRepository _moveCardRepository;
     public GameFactory(IMoveCardRepository moveCardRepository)
     {
-       
+        _moveCardRepository = moveCardRepository;
     }
 
     public IGame CreateNewForTable(ITable table)
     {
+        //PlayMat playmat = new PlayMat();
+
+
         throw new NotImplementedException();
     }
 }

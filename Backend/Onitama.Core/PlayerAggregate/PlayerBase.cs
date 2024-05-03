@@ -14,6 +14,8 @@ internal class PlayerBase : IPlayer
     private string _name;
     private Color _color;
     private Direction _direction;
+    private ISchool _school;
+    private IList<IMoveCard> _moveCards;
 
     public Guid Id =>  _id;
 
@@ -23,9 +25,9 @@ internal class PlayerBase : IPlayer
 
     public Direction Direction => _direction;
 
-    public ISchool School => throw new NotImplementedException();
+    public ISchool School => _school;
 
-    public IList<IMoveCard> MoveCards => throw new NotImplementedException();
+    public IList<IMoveCard> MoveCards => _moveCards;
 
     protected PlayerBase(Guid id, string name, Color color, Direction direction)
     {
@@ -48,6 +50,8 @@ internal class PlayerBase : IPlayer
         _name = otherPlayer.Name;
         _color = otherPlayer.Color;
         _direction = otherPlayer.Direction;
-        throw new NotImplementedException("TODO: copy properties of other player");
+        _school = otherPlayer.School;
+        _moveCards = otherPlayer.MoveCards;
+        //throw new NotImplementedException("TODO: copy properties of other player");
     }
 }

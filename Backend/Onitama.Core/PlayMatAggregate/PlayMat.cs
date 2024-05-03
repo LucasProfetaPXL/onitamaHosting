@@ -15,6 +15,7 @@ namespace Onitama.Core.PlayMatAggregate;
 
 /// <inheritdoc cref="IPlayMat"/>
 internal class PlayMat : IPlayMat
+    
 {
     /// <summary>
     /// Creates a play mat that is a copy of another play mat

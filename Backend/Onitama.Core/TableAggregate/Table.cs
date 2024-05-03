@@ -48,10 +48,14 @@ internal class Table : ITable
 
     public bool HasAvailableSeat => _hasAvailableSeat;
 
-    public Guid GameId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Guid GameId { get; set; }
 
     public void FillWithArtificialPlayers(IGamePlayStrategy gamePlayStrategy)
     {
+        //if (_table.HasAvailableSeat)
+        //{
+        //    _table.Join();
+        //}
         throw new NotImplementedException();
     }
 

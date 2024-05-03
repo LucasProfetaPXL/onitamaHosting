@@ -14,6 +14,10 @@ namespace Onitama.Core.GameAggregate;
 /// <inheritdoc cref="IGame"/>
 internal class Game
 {
+    private Guid _id;
+    private IPlayMat _playMat;
+    private IPlayer[] _players;
+    private IMoveCard _extraMoveCard;
     /// <summary>
     /// Creates a new game and determines the player to play first.
     /// </summary>
@@ -31,6 +35,10 @@ internal class Game
     /// </param>
     public Game(Guid id, IPlayMat playMat, IPlayer[] players, IMoveCard extraMoveCard)
     {
+        _id = id;
+        _playMat = playMat;
+        _players = players;
+        _extraMoveCard = extraMoveCard;
     }
 
     /// <summary>
@@ -42,7 +50,11 @@ internal class Game
     /// </remarks>
     public Game(IGame otherGame)
     {
-        throw new NotImplementedException("TODO: copy the properties of the other game");
+        _id = otherGame.Id;
+        _playMat = otherGame.PlayMat;
+        _players = otherGame.Players;
+        _extraMoveCard = otherGame.ExtraMoveCard;
+        //throw new NotImplementedException("TODO: copy the properties of the other game");
         //Attention: the players should be copied, not just referenced
     }
 }
