@@ -1,11 +1,10 @@
-document.getElementById('join-button').addEventListener('click', function (event){
-    event.preventDefault()
+document.getElementById('leave-button').addEventListener('click', function (event){
     const tableid = localStorage.getItem('tableId');
     const sessionID = localStorage.getItem('sessionID');
-    fetch(`https://localhost:5051/api/Tables/${tableid}/join`,{
+    fetch(` https://localhost:5051/api/Tables/${tableid}/leave`,{
         method: 'POST',
         mode: 'cors',
-        headers: {
+        headers:{
             'Authorization': `Bearer ${sessionID}`
         }
     })
@@ -21,11 +20,14 @@ document.getElementById('join-button').addEventListener('click', function (event
                 console.log("This table is not found")
             }
             if (data.status === 200){
-                console.log("You just joined the table succesfully")
+                console.log("You just left succesfully")
                 setTimeout(function (){
-                    window.location.href = '../html/game.html'
+                    window.location.href = '../html/lobby.html'
                 }, 1000)
             }
-
+            else{
+                console.log(data.status);
+                console.log(data.json())
+            }
         })
 })

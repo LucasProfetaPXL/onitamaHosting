@@ -43,15 +43,15 @@ const moveCardSet = 0;
 const makeTableButton = document.getElementById('makeTableButton');
 makeTableButton.addEventListener('click', (e) => {
     e.preventDefault();
-    const token = sessionStorage.getItem('sessionID'); //TODO
+    const token = localStorage.getItem('sessionID');
 
     fetch('https://localhost:5051/api/Tables', {
         method: 'POST',
+        mode: 'cors',
         headers: {
-            'Accept': 'text/json',
+            'Accept': 'text/plain',
             'Content-type': 'application/json',
-            // 'Authorization': 'Bearer <token>'
-            'Authorization': token
+            'Authorization': 'Bearer' + token
         },
         body: JSON.stringify({
             'numberOfPlayers': numberOfPlayers,
@@ -59,17 +59,20 @@ makeTableButton.addEventListener('click', (e) => {
             'moveCardSet': moveCardSet,
         })
     })
-        .then((response) => {
-            if (response.status === 201){
-                window.Location = '../html/game.html';
-                window.alert("success");
-            }
-            else {
-                window.alert("error");
-                throw new Error('Error');
-            }
-        })
-        .catch((error) => {
-            console.error("Fetch error:", error);
-        })
+    .then((response) => {
+                if (response.status === 201){
+                    window.Location = '../html/game.html';
+                    window.alert("success");
+                    const tableId = response.id;
+                    localStorage.setItem('tableId', tableId)
+                }
+                else {
+                    window.alert("error");
+                    throw new Error('Error');
+                }
+    })
+
+    .catch((error) => {
+        console.error("Fetch error:", error);
+    })
 })
