@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('https://localhost:5051/api/Tables', {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
+                // 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization' : `${token}`
+                'Authorization' : 'Bearer' + `${token}`
             },
             body: JSON.stringify({
-                "moveCardSet": moveCardSet,
                 "numberOfPlayers": numberOfPlayers,
-                "playerMatSize": playerMatSize
+                "playerMatSize": playerMatSize,
+                "moveCardSet": moveCardSet
             })
             })
             .then(response => {

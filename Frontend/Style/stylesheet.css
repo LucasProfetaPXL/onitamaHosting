@@ -5,6 +5,7 @@
 @import './main_page.css';
 @import './lobby.css';
 @import './toast.css';
+@import './game.css';
 
 :root{
   --generalBackgroundcolor: #000000;
