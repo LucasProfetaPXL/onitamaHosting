@@ -5,24 +5,28 @@ document.addEventListener('DOMContentLoaded', function (){
         .find(row => row.startsWith('sessionID='))
         .split('=')[1];
      */
-    const sessionID = localStorage.getItem('sessionID');
+    const tablesButton = document.querySelector('#tableListButton');
+    tablesButton.addEventListener('click', () => {
+        const sessionID = localStorage.getItem('sessionID');
         fetch('https://localhost:5051/api/Tables/with-available-seats',{
-        method: 'GET',
-        headers:{
-            'Authorization' : `Bearer ${sessionID}`
-        }
-    })
-        .then(response =>{
-            if (!response.ok){
-                throw new Error("network response was not ok")
+            method: 'GET',
+            headers:{
+                'Authorization' : `Bearer ${sessionID}`
             }
-            return response.json();
         })
-        .then(data =>{
-            console.log(data)
-        })
-})
+            .then(response =>{
+                if (!response.ok){
+                    throw new Error("network response was not ok")
+                }
+                return response.json();
+            })
+            .then(data =>{
+                console.log(data)
+            })
 
+    });
+
+})
 function freeTables(tableid){
 
 }
