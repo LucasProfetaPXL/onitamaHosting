@@ -47,6 +47,7 @@ makeTableButton.addEventListener('click', (e) => {
 
     fetch('https://localhost:5051/api/Tables', {
         method: 'POST',
+        mode: 'cors',
         headers: {
             'Accept': 'text/plain',
             'Content-type': 'application/json',
@@ -62,12 +63,15 @@ makeTableButton.addEventListener('click', (e) => {
                 if (response.status === 201){
                     window.Location = '../html/game.html';
                     window.alert("success");
+                    const tableId = response.id;
+                    localStorage.setItem('tableId', tableId)
                 }
                 else {
                     window.alert("error");
                     throw new Error('Error');
                 }
     })
+
     .catch((error) => {
         console.error("Fetch error:", error);
     })
