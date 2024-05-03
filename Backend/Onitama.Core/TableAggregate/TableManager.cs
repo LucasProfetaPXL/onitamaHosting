@@ -64,6 +64,26 @@ internal class TableManager : ITableManager
 
     public IGame StartGameForTable(Guid tableId, User user)
     {
+        ITable table = _tableRepository.Get(tableId);
+
+        if (table.OwnerPlayerId != user.Id)
+        {
+            throw new InvalidOperationException("Enkel de table owner kan de game starten");
+        }
+        
+        if (table.HasAvailableSeat)
+        {
+            throw new InvalidOperationException("not enough spelers aanwezig voor de game te starten");
+        }
+
+        IGame createdGame = _gameFactory.CreateNewForTable(table);
+
+        _gameRepository.Add(createdGame);
+
+        table.GameId = createdGame.Id;
+
+
+        return createdGame;
         throw new NotImplementedException();
     }
 }

@@ -43,14 +43,15 @@ const moveCardSet = 0;
 const makeTableButton = document.getElementById('makeTableButton');
 makeTableButton.addEventListener('click', (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('sessionID');
+    const token = sessionStorage.getItem('sessionID'); //TODO
 
     fetch('https://localhost:5051/api/Tables', {
         method: 'POST',
         headers: {
-            'Accept': 'text/plain',
+            'Accept': 'text/json',
             'Content-type': 'application/json',
-            'Authorization': 'Bearer' + token
+            // 'Authorization': 'Bearer <token>'
+            'Authorization': token
         },
         body: JSON.stringify({
             'numberOfPlayers': numberOfPlayers,
