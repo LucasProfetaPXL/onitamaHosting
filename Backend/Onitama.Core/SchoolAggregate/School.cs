@@ -8,7 +8,7 @@ using System.Drawing;
 namespace Onitama.Core.SchoolAggregate;
 
 /// <inheritdoc cref="ISchool"/>
-internal class School
+internal class School : ISchool
 {
     /// <summary>
     /// Creates a school that is a copy of another school.
@@ -20,5 +20,18 @@ internal class School
     public School(ISchool otherSchool)
     {
         throw new NotImplementedException("TODO: copy properties of other school. Make sure to copy the pawns, not just reference them");
+    }
+
+    public IPawn Master => throw new NotImplementedException();
+
+    public IPawn[] Students => throw new NotImplementedException();
+
+    public IPawn[] AllPawns => throw new NotImplementedException();
+
+    public ICoordinate TempleArchPosition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public IPawn GetPawn(Guid pawnId)
+    {
+        throw new NotImplementedException();
     }
 }

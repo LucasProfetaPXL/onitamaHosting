@@ -119,7 +119,7 @@ function submitForm(email, password) {
         if (response.status === 200) {
             response.json().then(data => {
                 const sessionID = data.token;
-                localStorage.setItem('sessionID', sessionID);
+                sessionStorage.setItem('sessionID', sessionID); //TODO
                 console.dir(data.token)
                 console.log("succesful login");
 

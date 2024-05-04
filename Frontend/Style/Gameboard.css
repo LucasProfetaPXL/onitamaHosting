@@ -5,6 +5,7 @@
     justify-content: center;
     background-image: url("../Images/Onitama-BackgroundGameboard.jpg");
     object-fit: fill;
+    padding: 5%;
 }
 
 .box {

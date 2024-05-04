@@ -8,10 +8,13 @@ using Onitama.Core.Util.Contracts;
 namespace Onitama.Core.MoveCardAggregate;
 
 /// <inheritdoc cref="IMoveCard"/>
-internal class MoveCard
+internal class MoveCard : IMoveCard
 {
     public string Name { get; }
-   
+
+    public MoveCardGridCellType[,] Grid => throw new NotImplementedException();
+
+    public Color StampColor => throw new NotImplementedException();
 
     public MoveCard(string name, MoveCardGridCellType[,] grid, Color stampColor)
     {
@@ -35,5 +38,10 @@ internal class MoveCard
     public override int GetHashCode()
     {
         return (Name != null ? Name.GetHashCode() : 0);
+    }
+
+    public IReadOnlyList<ICoordinate> GetPossibleTargetCoordinates(ICoordinate startCoordinate, Direction playDirection, int matSize)
+    {
+        throw new NotImplementedException();
     }
 }

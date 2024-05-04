@@ -4,7 +4,7 @@ using Onitama.Core.Util.Contracts;
 namespace Onitama.Core.Util;
 
 /// <inheritdoc cref="ICoordinate"/>
-internal class Coordinate
+internal class Coordinate : ICoordinate
 {
     public int Row { get; }
     public int Column { get; }
@@ -38,5 +38,25 @@ internal class Coordinate
     public override string ToString()
     {
         return $"({Row}, {Column})";
+    }
+
+    public bool IsOutOfBounds(int playMatSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ICoordinate GetNeighbor(Direction direction)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ICoordinate RotateTowards(Direction direction)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int GetDistanceTo(ICoordinate other)
+    {
+        throw new NotImplementedException();
     }
 }
