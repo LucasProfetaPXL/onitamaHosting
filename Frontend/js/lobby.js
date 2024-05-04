@@ -51,7 +51,7 @@ makeTableButton.addEventListener('click', (e) => {
         headers: {
             'Accept': 'text/plain',
             'Content-type': 'application/json',
-            'Authorization': 'Bearer' + token
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
             'numberOfPlayers': numberOfPlayers,
