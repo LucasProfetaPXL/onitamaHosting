@@ -1,8 +1,8 @@
-document.getElementById('join-button').addEventListener('click', function (event){
+document.getElementById('join_Button').addEventListener('click', function (event) {
     event.preventDefault()
-    const tableid = localStorage.getItem('tableId');
+    const tabled = localStorage.getItem('tableId');
     const sessionID = localStorage.getItem('sessionID');
-    fetch(`https://localhost:5051/api/Tables/${tableid}/join`,{
+    fetch(`https://localhost:5051/api/Tables/${tabled}/join`,{
         method: 'POST',
         mode: 'cors',
         headers: {

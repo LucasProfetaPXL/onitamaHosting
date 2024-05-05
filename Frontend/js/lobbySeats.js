@@ -49,6 +49,7 @@ function showAvailableSeats(){
 
     const joinBtn = document.createElement('button');
     joinBtn.textContent = 'Join table';
+    joinBtn.id = 'join_Button';
     joinBtn.addEventListener('click', function() {
         console.log('Join button clicked');
     });
