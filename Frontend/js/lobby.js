@@ -62,7 +62,7 @@ makeTableButton.addEventListener('click', (e) => {
     .then((response) => {
                 if (response.status === 201){
                     window.location.href = '../html/game.html';
-                    window.alert("success");
+                    // window.alert("success");
                     const tableId = response.id;
                     localStorage.setItem('tableId', tableId)
                 }

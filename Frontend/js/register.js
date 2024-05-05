@@ -109,10 +109,9 @@ function submitForm(email, password) {
                 window.location.href = '../html/lobby.html';
             }, 100);
         }
-        else {
-            throwaCode("Wrong email or password");
-        }
-    }).catch((error) => {
+
+    })
+        .catch((error) => {
         console.log(error);
     });
 }

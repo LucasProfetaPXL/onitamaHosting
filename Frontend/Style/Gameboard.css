@@ -11,3 +11,11 @@
 .box {
     border: 2px solid black;
 }
+.leaveButton{
+    background-color: red;
+    padding: 10px;
+    margin: auto;
+    width: 100px;
+    place-items: end;
+    border-radius: 5px;
+}
