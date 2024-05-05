@@ -1,3 +1,5 @@
+//import { submitForm } from './login.js';
+
 window.addEventListener("load", loaded);
 
 function loaded(){
@@ -40,6 +42,8 @@ function validateRegister(){
                 console.log("response.status =", response.status);
                 if(response.status === 200) {
                     console.log("successful register");
+                    //automatisch inloggen na registreren:
+                    submitForm(email.value, password.value);
 
                 }
                 else{
@@ -81,3 +85,34 @@ function throwaCode(text){
     }
 
 
+function submitForm(email, password) {
+    fetch('https://localhost:5051/api/Authentication/token', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            "email": email,
+            "password": password
+        })
+    }).then((response) => {
+        console.log("response status =", response.status);
+        if (response.status === 200) {
+            response.json().then(data => {
+                const sessionID = data.token;
+                localStorage.setItem('sessionID', sessionID); //TODO
+                // console.dir(data.token)
+                console.log("succesful login");
+
+            })
+            setTimeout(function () {
+                window.location.href = '../html/lobby.html';
+            }, 100);
+        }
+        else {
+            throwaCode("Wrong email or password");
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
