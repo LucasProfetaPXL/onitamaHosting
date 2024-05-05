@@ -1,3 +1,4 @@
+export {submitForm} ;
 // window.addEventListener("load", loaded)
 //
 // function loaded(){
@@ -49,26 +50,27 @@
 //            }, 100);
 //         //
 //         // }
-//         // else {
-//         //     //If there is a different code that the 200 it will put out an error code
-//         //     response.json().then(data => {
-//         //         console.log("Error message:", data.message);
-//         //         throwCode(data.message);
-//         //     })
-//         // }
-//     }).catch((error) => {
-//         console.error("Fetch error:", error.message);
-//         throwCode(error.message)
-//     })
+        // else {
+        //     //If there is a different code that the 200 it will put out an error code
+        //     response.json().then(data => {
+        //         console.log("Error message:", data.message);
+        //         throwCode(data.message);
+        //     })
+        // }
+        // }).catch((error) => {
+        //     console.error("Fetch error:", error.message);
+        //     throwCode(error.message)
+        // })
+
 // }
-//     function throwCode(text){
-//         //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
-//         //that it doesn't add it and makes a mess. After clearing it we will add the error message
-//         let place = document.getElementById("error-code-handler-login");
-//         place.innerHTML = '';
-//         // place.insertAdjacentHTML("afterend", text);
-//         place.insertAdjacentHTML("afterbegin", text); //This fixes the multiple error messages
-//     }
+    function throwCode(text){
+        //So first we take the element where we want to insert it in to, after we clear it this is to prevent if you do something twice
+        //that it doesn't add it and makes a mess. After clearing it we will add the error message
+        let place = document.getElementById("error-code-handler-login");
+        place.innerHTML = '';
+        // place.insertAdjacentHTML("afterend", text);
+        place.insertAdjacentHTML("afterbegin", text); //This fixes the multiple error messages
+    }
 // //})
 import {toastHandler} from "./toast.js";
 
@@ -84,6 +86,7 @@ loginBtn.addEventListener('click', (e) => {
     if (validateForm(emailInput, passwordInput)) {
         submitForm(emailInput.value, passwordInput.value);
     }
+
 });
 
 function validateForm(emailInput, passwordInput) {
@@ -120,13 +123,16 @@ function submitForm(email, password) {
             response.json().then(data => {
                 const sessionID = data.token;
                 localStorage.setItem('sessionID', sessionID); //TODO
-                console.dir(data.token)
+                // console.dir(data.token)
                 console.log("succesful login");
 
             })
             setTimeout(function () {
                 window.location.href = '../html/lobby.html';
             }, 100);
+        }
+        else {
+            throwCode("Wrong email or password");
         }
     }).catch((error) => {
         console.log(error);
