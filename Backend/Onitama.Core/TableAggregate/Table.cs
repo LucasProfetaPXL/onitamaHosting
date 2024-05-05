@@ -33,10 +33,6 @@ internal class Table : ITable
         _playerList = new List<PlayerBase>();
     }
 
-
-
-
-
     //public Guid Id => throw new NotImplementedException();
     public Guid Id => _id;
 
