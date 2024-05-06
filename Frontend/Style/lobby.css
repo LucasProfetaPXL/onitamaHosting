@@ -1,7 +1,3 @@
-.homePageButtons{
-    min-width: 220px;
-}
-
 * {
     font-family: "manrope", serif;
     font-weight: normal;
@@ -11,10 +7,13 @@
     background-color: red;
     padding: 10px;
     margin: auto;
+    margin-top: 40px;
     width: 100px;
     place-items: end;
     border-radius: 5px;
 }
+
+/*Algemene code animatie en stijl bloemen knoppen*/
 
 .homePageButtons {
     height: 4em;
@@ -23,7 +22,7 @@
     align-items: center;
     justify-content: center;
     background: transparent;
-    border: 0 solid black;
+    border: none;
     cursor: pointer;
 }
 
