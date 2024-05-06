@@ -9,7 +9,7 @@
 }
 
 body{
-    background-image: url("../Images/Achtergrond_homepage.jpg");
+    background-image: url("../Images/CherryBolosom.webp");
     background-repeat: no-repeat;
     background-size: 100%;
     font-family: "manrope", serif;
@@ -71,3 +71,4 @@ body{
     border: 1px solid black;
     border-radius: 5px;
 }
+

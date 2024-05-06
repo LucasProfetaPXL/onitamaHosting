@@ -1,7 +1,7 @@
 .teamImg{
     width: 12%;
     min-width: 125px;
-    height: auto;
+    height: 12%;
     margin-right: -12%;
 }
 body{
@@ -12,6 +12,7 @@ body{
 .team-member{
     display: flex;
     align-items: center;
+
     margin-top: 15px;
     margin-bottom: 10px;
 }
