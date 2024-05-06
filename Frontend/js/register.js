@@ -42,10 +42,14 @@ function validateRegister(){
                 console.log("response.status =", response.status);
                 if(response.status === 200) {
                     console.log("successful register");
-                    //automatisch inloggen na registreren:
-                    submitForm(email.value, password.value);
-
-                }
+                    //inloggen na registreren & email moet ingevuld zijn.:
+                    //submitForm(email.value, password.value);
+                    document.getElementById("register_close").click();
+                    document.getElementsByClassName("modal_btn")[0].click();
+                    var emailinput = document.getElementById("emailInput");
+                    // emailinput.value = email.value;
+                    emailinput.value = email.value.toString();
+                    }
                 else{
                     //If there is a different response then the 200 status code, it will give the message from the error
                     response.json().then(data => {
