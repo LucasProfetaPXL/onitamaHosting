@@ -18,3 +18,19 @@
     place-items: end;
     border-radius: 5px;
 }
+#awaitingPlayer{
+    padding-top: 50px;
+    color: black;
+    display: none;
+    height: 0;
+}
+#startGameButton{
+    /*display: none;*/
+    background-color: green;
+    padding: 10px;
+    margin-top: 50px;
+
+    width: 100px;
+
+    border-radius: 5px;
+}
