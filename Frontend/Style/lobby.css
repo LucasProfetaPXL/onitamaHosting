@@ -16,6 +16,11 @@
     border-radius: 5px;
 }
 
+#join_Button{
+    margin: auto;
+    display: none;
+}
+
 /*Algemene code animatie en stijl bloemen knoppen*/
 
 .homePageButtons {

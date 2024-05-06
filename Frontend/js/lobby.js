@@ -43,7 +43,7 @@ const moveCardSet = 0;
 const makeTableButton = document.getElementById('makeTableButton');
 makeTableButton.addEventListener('click', (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('sessionID');
+    const token = sessionStorage.getItem('sessionID');
 
     fetch('https://localhost:5051/api/Tables', {
         method: 'POST',

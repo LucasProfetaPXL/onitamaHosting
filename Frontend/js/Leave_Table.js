@@ -1,6 +1,6 @@
 document.getElementById('leaveTable').addEventListener('click', function (event){
     const tableid = localStorage.getItem('tableId');
-    const sessionID = localStorage.getItem('sessionID');
+    const sessionID = sessionStorage.getItem('sessionID');
     fetch(` https://localhost:5051/api/Tables/${tableid}/leave`,{
         method: 'POST',
         mode: 'cors',

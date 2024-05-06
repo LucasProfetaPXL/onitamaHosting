@@ -1,31 +1,29 @@
 document.getElementById('join_Button').addEventListener('click', function (event) {
     event.preventDefault()
     const tabled = localStorage.getItem('tableId');
-    const sessionID = localStorage.getItem('sessionID');
+    const sessionID = sessionStorage.getItem('sessionID');
     fetch(`https://localhost:5051/api/Tables/${tabled}/join`,{
         method: 'POST',
         mode: 'cors',
         headers: {
+            'Accept': 'text/plain',
             'Authorization': `Bearer ${sessionID}`
         }
     })
         .then(response =>{
             if (!response.ok){
+                console.log(response.json());
                 throw new Error("error")
             }
-            return response.json()
-        })
-        .then(data =>{
-            console.log(data)
-            if (data.status === 404){
-                console.log("This table is not found")
-            }
-            if (data.status === 200){
+            if (response.status === 200){
                 console.log("You just joined the table succesfully")
-                setTimeout(function (){
-                    window.location.href = '../html/game.html'
-                }, 1000)
+                // setTimeout(function (){
+                window.location = '../html/game.html'
+                // }, 1000)
             }
-
+            // return response.json()
+        })
+        .catch((error) => {
+            console.log(error);
         })
 })
