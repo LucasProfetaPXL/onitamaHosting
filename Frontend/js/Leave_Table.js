@@ -23,6 +23,8 @@ document.getElementById('leave-button').addEventListener('click', function (even
                 console.log("You just left succesfully")
                 setTimeout(function (){
                     window.location.href = '../html/lobby.html'
+                    var element = document.getElementById('tableAvailability');
+
                 }, 1000)
             }
             else{
