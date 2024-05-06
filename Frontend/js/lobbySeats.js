@@ -58,3 +58,25 @@ function showAvailableSeats(){
     tableAvailable.appendChild(text);
     tableAvailable.appendChild(joinBtn);
 }
+
+const joinBtn = document.getElementById('join_Button');
+
+joinBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const tableId = localStorage.getItem('tableID');
+    fetch('https://localhost:5051/api/Tables', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Accept': 'text/plain',
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            'numberOfPlayers': numberOfPlayers,
+            'playerMatSize': playerMatSize,
+            'moveCardSet': moveCardSet,
+        })
+    })
+})
