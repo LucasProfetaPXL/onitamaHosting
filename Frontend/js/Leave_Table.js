@@ -1,4 +1,4 @@
-document.getElementById('leave-button').addEventListener('click', function (event){
+document.getElementById('leaveTable').addEventListener('click', function (event){
     const tableid = localStorage.getItem('tableId');
     const sessionID = localStorage.getItem('sessionID');
     fetch(` https://localhost:5051/api/Tables/${tableid}/leave`,{
@@ -22,6 +22,8 @@ document.getElementById('leave-button').addEventListener('click', function (even
             if (data.status === 200){
                 console.log("You just left succesfully")
                 setTimeout(function (){
+                    document.getElementById("tableAvailability").hidden;
+
                     window.location.href = '../html/lobby.html'
                     var element = document.getElementById('tableAvailability');
 
