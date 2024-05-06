@@ -23,7 +23,7 @@ document.getElementById('leaveTable').addEventListener('click', function (event)
                 console.log("You just left succesfully")
                 setTimeout(function (){
                     document.getElementById("tableAvailability").hidden;
-
+                    window.alert("h");
                     window.location.href = '../html/lobby.html'
                 }, 1000)
             }
