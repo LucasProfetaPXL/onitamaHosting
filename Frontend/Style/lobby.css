@@ -2,6 +2,9 @@
     font-family: "manrope", serif;
     font-weight: normal;
 }
+.Join_Table{
+    content-visibility: hidden;
+}
 
 #goBackButton{
     background-color: red;

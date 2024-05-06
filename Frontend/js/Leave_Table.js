@@ -25,6 +25,8 @@ document.getElementById('leaveTable').addEventListener('click', function (event)
                     document.getElementById("tableAvailability").hidden;
                     window.alert("h");
                     window.location.href = '../html/lobby.html'
+                    var element = document.getElementById('tableAvailability');
+
                 }, 1000)
             }
             else{
