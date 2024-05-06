@@ -63,8 +63,19 @@ makeTableButton.addEventListener('click', (e) => {
                 if (response.status === 201){
                     window.location.href = '../html/game.html';
                     // window.alert("success");
-                    const tableId = response.id;
-                    localStorage.setItem('tableId', tableId)
+                    //const tableId = response.id;
+                    // response.
+                    // window.alert(response.json());
+                    // window.alert(tableId);
+                    // localStorage.setItem('tableId', tableId)
+
+                        response.json().then(data => {
+                        const tableId = data.id;
+                        localStorage.setItem('tableId', tableId); //TODO
+                        // console.dir(data.token)
+                        console.log("succesful login");
+
+                    })
                 }
                 else {
                     window.alert("error");

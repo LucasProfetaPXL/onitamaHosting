@@ -22,6 +22,8 @@ document.getElementById('leaveTable').addEventListener('click', function (event)
             if (data.status === 200){
                 console.log("You just left succesfully")
                 setTimeout(function (){
+                    document.getElementById("tableAvailability").hidden;
+
                     window.location.href = '../html/lobby.html'
                 }, 1000)
             }
