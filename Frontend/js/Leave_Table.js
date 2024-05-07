@@ -1,6 +1,6 @@
 document.getElementById('leaveTable').addEventListener('click', function (event){
     const tableid = localStorage.getItem('tableId');
-    const sessionID = localStorage.getItem('sessionID');
+    const sessionID = sessionStorage.getItem('sessionID');
     fetch(` https://localhost:5051/api/Tables/${tableid}/leave`,{
         method: 'POST',
         mode: 'cors',
@@ -23,7 +23,7 @@ document.getElementById('leaveTable').addEventListener('click', function (event)
                 console.log("You just left succesfully")
                 setTimeout(function (){
                     document.getElementById("tableAvailability").hidden;
-
+                    window.alert("h");
                     window.location.href = '../html/lobby.html'
                     var element = document.getElementById('tableAvailability');
 
