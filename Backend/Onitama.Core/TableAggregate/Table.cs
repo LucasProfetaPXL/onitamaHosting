@@ -94,31 +94,29 @@ internal class Table : ITable
         //_table.SeatedPlayers 
         //_table._playerList.Contains(userId);
 
-        try
+        int i = 0;
+
+        while (i < _playerList.Count)
         {
-            for (int i = 0; i < _playerList.Count; i++)
+            if (_playerList[i].Id == userId)
             {
-                if (_playerList[i].Id == userId)
+                _playerList.Remove(_playerList[i]);
+                if (_playerList.Count == 1)
                 {
-                    _playerList.Remove(_playerList[i]);
                     _ownerPlayerId = _playerList[0].Id;
-                    break;
                 }
-                else if (i == _playerList.Count-1)
+            }
+            else 
+            {
+                if (i == _playerList.Count - 1)
                 {
                     throw new InvalidOperationException();
                 }
             }
+            i++;
         }
-        catch (InvalidOperationException)
-        {
-            throw;
-        }
-
-        //InvalidOperationException(_table.Leave(userId));
-
 
         //throw new NotImplementedException();
     }
-    
+
 }
