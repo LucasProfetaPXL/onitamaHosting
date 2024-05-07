@@ -6,7 +6,6 @@
     <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
     <link rel="stylesheet" href="../Style/stylesheet.css">
     <link rel="stylesheet" href="../Style/lobby.css">
-    <script src="../js/lobbySeats.js"></script>
 </head>
 <body>
     <h1 class="title">Hello Onitamaplayer</h1>
@@ -57,12 +56,15 @@
     </button>
 
     <div id="tableAvailability">
-        <button id="join_Button">Join table</button>
+        <div class="table_data">
+            <button id="join_Button">Join table</button>
+            <p id="player_name">Already in game: </p>
+        </div>
     </div>
 
     <a id="goBackButton" href="index.html">Back</a>
     <script src="../js/lobby.js"></script>
     <script src="../js/Join_Table.js"></script>
-
+    <script src="../js/lobbySeats.js"></script>
 </body>
 </html>

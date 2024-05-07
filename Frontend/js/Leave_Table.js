@@ -5,6 +5,7 @@ document.getElementById('leaveTable').addEventListener('click', function (event)
         method: 'POST',
         mode: 'cors',
         headers:{
+            'Accept': '*/*',
             'Authorization': `Bearer ${sessionID}`
         }
     })
@@ -12,26 +13,15 @@ document.getElementById('leaveTable').addEventListener('click', function (event)
             if (!response.ok){
                 throw new Error("error")
             }
-            return response.json()
-        })
-        .then(data =>{
-            console.log(data)
-            if (data.status === 404){
-                console.log("This table is not found")
-            }
-            if (data.status === 200){
+            if (response.status === 200){
+                // var element = document.getElementById('tableAvailability');
                 console.log("You just left succesfully")
-                setTimeout(function (){
-                    document.getElementById("tableAvailability").hidden;
-                    window.alert("h");
-                    window.location.href = '../html/lobby.html'
-                    var element = document.getElementById('tableAvailability');
-
-                }, 1000)
+                // document.getElementById("tableAvailability").hidden;
+                // window.alert("h");
+                window.location = '../html/lobby.html'
             }
-            else{
-                console.log(data.status);
-                console.log(data.json())
-            }
+        })
+        .catch((error) => {
+            console.log(error);
         })
 })

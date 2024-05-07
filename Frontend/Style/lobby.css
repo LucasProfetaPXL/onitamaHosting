@@ -2,6 +2,8 @@
     font-family: "manrope", serif;
     font-weight: normal;
 }
+
+
 .Join_Table{
     /*content-visibility: h;*/
 }
@@ -17,8 +19,23 @@
 }
 
 #join_Button{
-    margin: auto;
+    width: 101px;
+    border: none;
+    border-radius: 5px;
+    height: 31px;
     display: none;
+}
+#tableAvailability{
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+.table_data{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin: auto;
 }
 
 /*Algemene code animatie en stijl bloemen knoppen*/

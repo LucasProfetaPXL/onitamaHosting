@@ -1,3 +1,4 @@
+let name = document.querySelector("#player_name");
 
 document.addEventListener('DOMContentLoaded', function (){
     function fetchTableAvailability() {
@@ -20,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function (){
                     throwaCode("No available tables");
                 }
                 else{
-
-                    showAvailableSeats()
+                    showAvailableSeats();
+                    name.insertAdjacentHTML("beforeend", data[0].seatedPlayers[0].name);
                 }
             })
 
@@ -51,5 +52,5 @@ function showAvailableSeats(){
     joinBtn.style.display = 'block';
 
     const tableAvailable = document.getElementById('tableAvailability');
-    tableAvailable.appendChild(text);
+    tableAvailable.insertAdjacentElement('afterbegin',text);
 }
