@@ -28,6 +28,7 @@ internal class GameFactory : IGameFactory
     public IGame CreateNewForTable(ITable table)
     {
         Random random = new Random();
+       
         Color[] colorArray = new Color[table.SeatedPlayers.Count];
         for (int i = 0; i < table.SeatedPlayers.Count; i++)
         {
@@ -44,7 +45,7 @@ internal class GameFactory : IGameFactory
         //_game.Id = Guid.NewGuid();
         //table.Preferences.MoveCardSet.;
 
-        //return _game;
-        throw new NotImplementedException();
+        return _game;
+        //throw new NotImplementedException();
     }
 }
