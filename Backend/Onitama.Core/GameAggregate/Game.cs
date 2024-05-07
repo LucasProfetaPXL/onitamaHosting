@@ -12,12 +12,27 @@ using Onitama.Core.Util.Contracts;
 namespace Onitama.Core.GameAggregate;
 
 /// <inheritdoc cref="IGame"/>
-internal class Game
+internal class Game : IGame
 {
     private Guid _id;
     private IPlayMat _playMat;
     private IPlayer[] _players;
     private IMoveCard _extraMoveCard;
+
+    public Guid Id => _id;
+
+    public IPlayMat PlayMat => _playMat;
+
+    public IMoveCard ExtraMoveCard => _extraMoveCard;
+
+    public IPlayer[] Players => _players;
+
+    public Guid PlayerToPlayId => throw new NotImplementedException();
+
+    public Guid WinnerPlayerId => throw new NotImplementedException();
+
+    public string WinnerMethod => throw new NotImplementedException();
+
     /// <summary>
     /// Creates a new game and determines the player to play first.
     /// </summary>
@@ -56,5 +71,30 @@ internal class Game
         _extraMoveCard = otherGame.ExtraMoveCard;
         //throw new NotImplementedException("TODO: copy the properties of the other game");
         //Attention: the players should be copied, not just referenced
+    }
+
+    public IReadOnlyList<IMove> GetPossibleMovesForPawn(Guid playerId, Guid pawnId, string moveCardName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IReadOnlyList<IMove> GetAllPossibleMovesFor(Guid playerId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IPlayer GetNextOpponent(Guid playerId)
+    {
+        throw new NotImplementedException();
     }
 }

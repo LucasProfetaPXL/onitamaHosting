@@ -10,6 +10,11 @@ namespace Onitama.Core.SchoolAggregate;
 /// <inheritdoc cref="ISchool"/>
 internal class School : ISchool
 {
+    private IPawn _Master;
+    private IPawn[] _Students;
+    private IPawn[] _AllPawns;
+    private ICoordinate _TempleArchPosition;
+
     /// <summary>
     /// Creates a school that is a copy of another school.
     /// </summary>
@@ -19,16 +24,20 @@ internal class School : ISchool
     /// </remarks>
     public School(ISchool otherSchool)
     {
-        throw new NotImplementedException("TODO: copy properties of other school. Make sure to copy the pawns, not just reference them");
+        _Master = otherSchool.Master;
+        _Students = otherSchool.Students;
+        _AllPawns = otherSchool.AllPawns;
+        _TempleArchPosition = otherSchool.TempleArchPosition;
+        //throw new NotImplementedException("TODO: copy properties of other school. Make sure to copy the pawns, not just reference them");
     }
 
-    public IPawn Master => throw new NotImplementedException();
+    public IPawn Master => _Master;
 
-    public IPawn[] Students => throw new NotImplementedException();
+    public IPawn[] Students => _Students;
 
-    public IPawn[] AllPawns => throw new NotImplementedException();
+    public IPawn[] AllPawns => _AllPawns;
 
-    public ICoordinate TempleArchPosition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public ICoordinate TempleArchPosition { get => _TempleArchPosition; set => value = _TempleArchPosition; }
 
     public IPawn GetPawn(Guid pawnId)
     {
