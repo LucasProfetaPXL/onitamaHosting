@@ -37,7 +37,8 @@ internal class GameFactory : IGameFactory
         _moveCardRepository.LoadSet(table.Preferences.MoveCardSet, colorArray);
 
        
-        //PlayerBase playerbase = new PlayerBase();
+        PlayerBase playerbase = new PlayerBase(table.SeatedPlayers[0]);
+        //PlayMat playmat = new PlayMat();
         //table.SeatedPlayers.
         //_game = new Game(Guid.NewGuid(), table.Preferences, table.SeatedPlayers., );
 

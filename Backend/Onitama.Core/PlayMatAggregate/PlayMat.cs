@@ -15,7 +15,6 @@ namespace Onitama.Core.PlayMatAggregate;
 
 /// <inheritdoc cref="IPlayMat"/>
 internal class PlayMat : IPlayMat
-    
 {
     /// <summary>
     /// Creates a play mat that is a copy of another play mat
@@ -30,12 +29,13 @@ internal class PlayMat : IPlayMat
     /// </remarks>
     public PlayMat(IPlayMat otherPlayMat, IPlayer[] copiedPlayers)
     {
-
-        throw new NotImplementedException("TODO: copy properties of other playmat");
+        Grid = otherPlayMat.Grid;
+        Size = otherPlayMat.Size;
+        //throw new NotImplementedException("TODO: copy properties of other playmat");
     }
 
     //public IPawn[,] Grid => throw new NotImplementedException();
-    public IPawn[,] Grid { get; } = new IPawn[5,  5] ;
+    public IPawn[,] Grid { get; } = new IPawn[5,  5] ; 
 
     public int Size { get; } = 5; //TODO make variable from 5
 
@@ -51,6 +51,7 @@ internal class PlayMat : IPlayMat
 
     public void PositionSchoolOfPlayer(IPlayer player)
     {
+
         throw new NotImplementedException();
     }
 }

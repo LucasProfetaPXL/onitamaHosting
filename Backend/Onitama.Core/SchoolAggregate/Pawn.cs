@@ -6,7 +6,7 @@ namespace Onitama.Core.SchoolAggregate;
 /// <inheritdoc cref="IPawn"/>
 internal class Pawn : IPawn
 {
-    public Guid Id => throw new NotImplementedException();
+    public Guid Id => Guid.NewGuid();
 
     public Guid OwnerId => throw new NotImplementedException();
 
