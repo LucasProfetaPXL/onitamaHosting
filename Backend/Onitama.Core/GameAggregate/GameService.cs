@@ -9,19 +9,32 @@ namespace Onitama.Core.GameAggregate;
 
 internal class GameService : IGameService
 {
+    private readonly IGameRepository _gameRepository;
     public GameService(IGameRepository gameRepository)
     {
+        _gameRepository = gameRepository;
+
     }
 
     public IGame GetGame(Guid gameId)
     {
-        throw new NotImplementedException("TODO: use the constructor-injected repository to retrieve a game");
+        return _gameRepository.GetById(gameId);
+        //throw new NotImplementedException("TODO: use the constructor-injected repository to retrieve a game");
     }
 
     public IReadOnlyList<IMove> GetPossibleMovesForPawn(Guid gameId, Guid playerId, Guid pawnId, string moveCardName)
     {
-        throw new NotImplementedException(
-            "TODO: use the constructor-injected repository to retrieve the game and get the possible moves of that game");
+        var game = _gameRepository.GetById(gameId);
+        if(game == null)
+        {
+            throw new ArgumentException("game id not found");
+        }
+        var possibleMoves = game.GetAllPossibleMovesFor(pawnId);
+        return possibleMoves;
+        
+
+        //throw new NotImplementedException(
+        //    "TODO: use the constructor-injected repository to retrieve the game and get the possible moves of that game");
     }
 
     public void MovePawn(Guid gameId, Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)

@@ -39,8 +39,22 @@ internal class School : ISchool
 
     public ICoordinate TempleArchPosition { get => _TempleArchPosition; set => value = _TempleArchPosition; }
 
+ 
+
     public IPawn GetPawn(Guid pawnId)
     {
-        throw new NotImplementedException();
+        foreach (var pawn in _AllPawns)
+        {
+            if (pawn.Id == pawnId)
+            {
+                // Found the pawn; return it
+                return pawn;
+            }
+        }
+
+        // No pawn with the specified ID found; return null
+        return null;
+
+        //throw new NotImplementedException();
     }
 }

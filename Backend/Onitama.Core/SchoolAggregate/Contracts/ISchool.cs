@@ -6,7 +6,7 @@ namespace Onitama.Core.SchoolAggregate.Contracts;
 /// <summary>
 /// Represents a school (one master and 4 students)
 /// </summary>
-public interface ISchool
+public interface ISchool 
 {
     /// <summary>
     /// The master of the school

@@ -29,8 +29,12 @@ internal class PlayMat : IPlayMat
     /// </remarks>
     public PlayMat(IPlayMat otherPlayMat, IPlayer[] copiedPlayers)
     {
-        Grid = otherPlayMat.Grid;
+        Grid = (IPawn[,])otherPlayMat.Grid.Clone(); 
         Size = otherPlayMat.Size;
+        foreach (var player in copiedPlayers)
+        {
+            PositionSchoolOfPlayer(player);
+        }
         //throw new NotImplementedException("TODO: copy properties of other playmat");
     }
 

@@ -24,7 +24,12 @@ namespace Onitama.Infrastructure
             {
                 return game;
             }
-            throw new DataNotFoundException();
+            else
+            {
+                throw new DataNotFoundException();
+            }
+
+            //
         }
     }
 }
