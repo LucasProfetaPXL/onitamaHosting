@@ -1,15 +1,18 @@
-.game-board{
+/*Game bord, alle colommen en rijen*/
+
+#game-boardHTML{
     display: grid;
-    grid-template-columns: 120px 120px 120px 120px 120px;
-    grid-template-rows: 120px 120px 120px 120px 120px;
     justify-content: center;
+    grid-template-columns: repeat(5, 120px);
+    grid-template-rows: repeat(5, 120px);
     background: url("../Images/Onitama-BackgroundGameboard.png") no-repeat center center;
-    padding: 5%;
+    margin: 8%;
 }
 
-.box {
+.cell{
     border: 2px solid black;
 }
+
 .leaveButton{
     background-color: red;
     padding: 10px;
