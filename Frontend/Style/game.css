@@ -20,3 +20,10 @@ body{
     display: block;
     color: black;
 }
+.pawn {
+    width: 80%;
+    height: 80%;
+    background-color: #000;
+    border-radius: 50%;
+    margin: 10%;
+}
