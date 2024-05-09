@@ -5,15 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onitama</title>
     <link rel="stylesheet" href="../Style/stylesheet.css">
+    <script src="../js/Gameboard.js" type="module"></script>
+    <script src="../js/Game.js" type="module"></script>
 </head>
 <body>
     <div id="startGame">
       <button id="startGameButton">Start game</button>
     </div>
     <div class="cardinplaceholder">opponents cards</div>
-<!--    <iframe src="Gameboard.html" allowfullscreen ></iframe>-->
+    <div id="game-boardHTML">
+    </div>
     <div class="cardinplaceholder">your cards</div>
-    <button class="leaveButton" id="leaveTable">Leave</button>
-    <script src="../js/Leave_Table.js"></script>
+    <button class="leaveButton" id="leaveInGame">Leave</button>
+
+    <div class="modal_backdrop" id="wait_backdrop">
+        <div class="modal" id="wait_modal">
+            <p>Waiting for other player...</p>
+            <div class="orbit-spinner">
+                <div class="orbit"></div>
+                <div class="orbit"></div>
+                <div class="orbit"></div>
+            </div>
+            <button class="leaveButton" id="leaveInModal">Leave</button>
+        </div>
+    </div>
+    <script src="../js/Leave_Table.js" type="module"></script>
+    <script src="../js/secondPlayer.js" type="module"></script>
 </body>
 </html>

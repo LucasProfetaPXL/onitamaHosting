@@ -72,6 +72,7 @@ makeTableButton.addEventListener('click', (e) => {
                         response.json().then(data => {
                         const tableId = data.id;
                         localStorage.setItem('tableId', tableId); //TODO
+                         localStorage.setItem('hasSeats', data.hasAvailableSeat)
                         // console.dir(data.token)
                         console.log("succesful login");
 

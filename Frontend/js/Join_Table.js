@@ -17,11 +17,14 @@ document.getElementById('join_Button').addEventListener('click', function (event
             }
             if (response.status === 200){
                 console.log("You just joined the table succesfully")
+                response.json().then(data => {
+                    localStorage.setItem('hasSeats', data.hasAvailableSeat)
+                })
                 // setTimeout(function (){
                 window.location = '../html/game.html'
                 // }, 1000)
             }
-            // return response.json()
+            return response.json()
         })
         .catch((error) => {
             console.log(error);

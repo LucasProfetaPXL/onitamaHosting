@@ -1,6 +1,11 @@
-document.getElementById('leaveTable').addEventListener('click', function (event){
+const leaveFetch = (e) => {
     const tableid = localStorage.getItem('tableId');
     const sessionID = sessionStorage.getItem('sessionID');
+
+    if (e.id !== 'leaveInModal') {
+        localStorage.setItem('hasSeats', 'true');
+    }
+
     fetch(` https://localhost:5051/api/Tables/${tableid}/leave`,{
         method: 'POST',
         mode: 'cors',
@@ -24,4 +29,11 @@ document.getElementById('leaveTable').addEventListener('click', function (event)
         .catch((error) => {
             console.log(error);
         })
+}
+const leaveBtns = document.querySelectorAll('.leaveButton');
+const modalWait = document.querySelector('#wait_backdrop')
+
+leaveBtns.forEach((button) => {
+    button.addEventListener('click', leaveFetch)
+    modalWait.classList.remove('modal_close');
 })
