@@ -12,13 +12,15 @@ internal class MoveCard : IMoveCard
 {
     public string Name { get; }
 
-    public MoveCardGridCellType[,] Grid => throw new NotImplementedException();
+    public MoveCardGridCellType[,] Grid  { get; }
 
-    public Color StampColor => throw new NotImplementedException();
+    public Color StampColor { get; }
 
     public MoveCard(string name, MoveCardGridCellType[,] grid, Color stampColor)
     {
-
+        Name = name;
+        Grid = grid;
+        StampColor = stampColor;
     }
 
     //Do not change this method, it makes sure that two MoveCard instances are equal if their names are equal
@@ -43,6 +45,7 @@ internal class MoveCard : IMoveCard
     public IReadOnlyList<ICoordinate> GetPossibleTargetCoordinates(ICoordinate startCoordinate, Direction playDirection, int matSize)
     {
         List<ICoordinate> coordinates = new List<ICoordinate>();
+        
         
         return coordinates;
         throw new NotImplementedException();
