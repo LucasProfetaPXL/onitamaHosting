@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 var pawn = document.createElement('div');
                 pawn.className = 'pawn';
 
-                var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1];
-                pawn.style.backgroundColor = playerColors[playerId];
+               // var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1];
+               // pawn.style.backgroundColor = playerColors[playerId];
 
                 cell.appendChild(pawn);
             }
