@@ -28,6 +28,7 @@ internal class GameFactory : IGameFactory
 
     public IGame CreateNewForTable(ITable table)
     {
+        throw new NotImplementedException();
         //    Random random = new Random();
         //    _game = new Game(Guid.NewGuid(), table, table.OwnerPlayerId, _moveCard) ;
         //    Color[] colorArray = new Color[table.SeatedPlayers.Count];
