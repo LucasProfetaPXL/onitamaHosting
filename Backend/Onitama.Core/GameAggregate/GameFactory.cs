@@ -18,7 +18,6 @@ internal class GameFactory : IGameFactory
     private IMoveCardRepository _moveCardRepository;
     private IGame _game;
     private IMoveCard _moveCard;
-    private IPlayMat _otherPlayMat;
     private PlayMat _playMat;
 
     public GameFactory(IMoveCardRepository moveCardRepository)
@@ -29,42 +28,20 @@ internal class GameFactory : IGameFactory
     public IGame CreateNewForTable(ITable table)
     {
         IPlayer[] seatedPLayers = new IPlayer[2];
+        Color[] colors = new Color[2];
         for (int i = 0; i < table.SeatedPlayers.Count; i++)
         {
+            colors[i] = table.SeatedPlayers[i].Color;
             seatedPLayers[i] = table.SeatedPlayers[i];
+            for (int j = 0; j < 2; j++)
+            {
+                _moveCard = new MoveCard();
+                table.SeatedPlayers[i].MoveCards.Add(_moveCard);
+            }
         }
-        _playMat = new PlayMat(_otherPlayMat, seatedPLayers);
-        //    Random random = new Random();
+        _playMat = new PlayMat(seatedPLayers);
         _game = new Game(table.Id, _playMat, seatedPLayers, _moveCard) ;
-        //    Color[] colorArray = new Color[table.SeatedPlayers.Count];
-        //    for (int i = 0; i < table.SeatedPlayers.Count; i++)
-        //    {
-        //        colorArray[i] = table.SeatedPlayers[i].Color;
-
-        //    }
-
-        //    _moveCardRepository.LoadSet(table.Preferences.MoveCardSet, colorArray);
-
-
-        //    PlayerBase playerbase = new PlayerBase();
-        //    table.SeatedPlayers.
-        //    _game = new Game(Guid.NewGuid(), table.Preferences, table.SeatedPlayers., );
-
-        //    _game.Id = Guid.NewGuid();
-        //    table.Preferences.MoveCardSet.;
-
-        //    return _game;
-        //    throw new NotImplementedException();
-        //}
-        //_game = new Game(Guid.NewGuid(), table.I, table.Ow, _moveCard);
-
-        // Load color array based on seated players
-        //Color[] colorArray = new Color[table.SeatedPlayers.Count];
-        //for (int i = 0; i < table.SeatedPlayers.Count; i++)
-        //{
-        //    colorArray[i] = table.SeatedPlayers[i].Color;
-        //}
-        //_moveCardRepository.LoadSet(table.Preferences.MoveCardSet, colorArray);
+        _moveCardRepository.LoadSet(table.Preferences.MoveCardSet, colors);
         return _game;
     }
 }

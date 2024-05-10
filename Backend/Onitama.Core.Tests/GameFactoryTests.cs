@@ -130,6 +130,7 @@ public class GameFactoryTests
 
            IGame? game = _gameFactory.CreateNewForTable(_table);
 
+            
             _moveCardRepositoryMock.Verify(repo => repo.LoadSet(MoveCardSet.Original, _colors), Times.Once,
                 "The 'LoadSet' method of the constructor-injected repository is not called correctly");
 

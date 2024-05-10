@@ -10,15 +10,19 @@ namespace Onitama.Core.MoveCardAggregate;
 /// <inheritdoc cref="IMoveCard"/>
 internal class MoveCard : IMoveCard
 {
+    private MoveCardGridCellType[,] _cellType;
+    private Color _color;
     public string Name { get; }
 
-    public MoveCardGridCellType[,] Grid => throw new NotImplementedException();
+    public MoveCardGridCellType[,] Grid => _cellType;
 
-    public Color StampColor => throw new NotImplementedException();
+    public Color StampColor => _color;
 
     public MoveCard(string name, MoveCardGridCellType[,] grid, Color stampColor)
     {
-
+        Name = name;
+        _cellType = grid;
+        _color = stampColor;
     }
 
     //Do not change this method, it makes sure that two MoveCard instances are equal if their names are equal
