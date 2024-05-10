@@ -6,6 +6,7 @@
 @import './lobby.css';
 @import './toast.css';
 @import './game.css';
+@import './spinner.css';
 
 :root{
   --generalBackgroundcolor: #000000;

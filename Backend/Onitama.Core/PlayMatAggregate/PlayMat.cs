@@ -15,7 +15,6 @@ namespace Onitama.Core.PlayMatAggregate;
 
 /// <inheritdoc cref="IPlayMat"/>
 internal class PlayMat : IPlayMat
-    
 {
     private IPawn[,] _grid;
     private int _size;

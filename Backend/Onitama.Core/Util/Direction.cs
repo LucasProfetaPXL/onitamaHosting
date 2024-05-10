@@ -48,11 +48,44 @@ public class Direction
     {
         get
         {
-            throw new NotImplementedException();
+            if (this == North) //IDK why switch won't work
+            {
+                return East;
+            }
+            else if (this == East)
+            {
+                return South;
+            }
+            else if (this == South)
+            {
+                return West;
+            }
+            else if (this == West)
+            {
+                return North;
+            }
+            else if (this == North.CombineWith(East))
+            {
+                return South.CombineWith(East);
+            }
+            else if (this == North.CombineWith(West))
+            {
+                return North.CombineWith(East);
+            }
+            else if (this == South.CombineWith(West))
+            {
+                return North.CombineWith(West);
+            }
+            else if (this == South.CombineWith(East))
+            {
+                return North.CombineWith(East);
+            }
+            throw new System.ArgumentException("Invalid direction");
         }
     }
 
     //Do not change
+    
     private Direction(int xStep, int yStep)
     {
         XStep = xStep;
@@ -81,7 +114,39 @@ public class Direction
     /// </summary>
     public Direction CombineWith(Direction other)
     {
-        throw new NotImplementedException();
+        if (this == North && other == East)
+        {
+            return new Direction(1, 1);
+        }
+        else if (this == South && other == East)
+        {
+            return new Direction(1, -1);
+        }
+        else if (this == South && other == West)
+        {
+            return new Direction(-1, -1);
+        }
+        else if (this == North && other == West)
+        {
+            return new Direction(-1, 1);
+        }
+        else if (this == West && other == North)
+        {
+            return new Direction(-1, 1);
+        }
+        else if (this == West && other == South)
+        {
+            return new Direction(-1, -1);
+        }
+        else if (this == East && other == North)
+        {
+            return new Direction(1, 1);
+        }
+        else if (this == East && other == South)
+        {
+            return new Direction(1, -1);
+        }
+        throw new System.ArgumentException("Invalid direction");
     }
 
     /// <summary>
@@ -93,6 +158,39 @@ public class Direction
     /// <param name="playMatSize">The size of the <see cref="IPlayMat"/>. Typically, 5.</param>
     public ICoordinate GetStartCoordinate(int playMatSize)
     {
+        //Coordinate coordinate;
+        if (this == North)
+        {
+            return new Coordinate(0, playMatSize /2);
+        }
+        else if (this == East)
+        {
+            return new Coordinate(playMatSize / 2, playMatSize - 1);
+        }
+        else if (this == South)
+        {
+            return new Coordinate(playMatSize - 1, playMatSize / 2);
+        }
+        else if (this == West)
+        {
+            return new Coordinate(playMatSize / 2, 0);
+        }
+        else if (this == North.CombineWith(East) || this == East.CombineWith(North))
+        {
+            return new Coordinate(0,0);
+        }
+        else if (this == North.CombineWith(West) || this == West.CombineWith(North))
+        {
+            return new Coordinate(0, playMatSize -1);
+        }
+        else if (this == South.CombineWith(East) || this == East.CombineWith(South))
+        {
+            return new Coordinate(playMatSize -1, 0);
+        }
+        else if (this == South.CombineWith(West) || this == West.CombineWith(South))
+        {
+            return new Coordinate(playMatSize -1, playMatSize -1);
+        }
         throw new NotImplementedException();
     }
 
