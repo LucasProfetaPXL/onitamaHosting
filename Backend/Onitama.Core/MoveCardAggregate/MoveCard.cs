@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.RegularExpressions;
 using Onitama.Core.MoveCardAggregate.Contracts;
 using Onitama.Core.SchoolAggregate;
 using Onitama.Core.SchoolAggregate.Contracts;
@@ -45,9 +46,40 @@ internal class MoveCard : IMoveCard
     public IReadOnlyList<ICoordinate> GetPossibleTargetCoordinates(ICoordinate startCoordinate, Direction playDirection, int matSize)
     {
         List<ICoordinate> coordinates = new List<ICoordinate>();
-        
-        
+        int targetX;
+        int targetY;
+
+        //startCoordinate.RotateTowards(playDirection);
+
+        ICoordinate playStartCoordinate = playDirection.GetStartCoordinate(matSize);
+
+
+        for (int row = 0; row < Grid.GetLength(0); row++)
+        {
+            for (int col = 0; col < Grid.GetLength(1); col++)
+            {
+                if (Grid[row, col] == MoveCardGridCellType.Target)
+                {
+
+                    if (playDirection == Direction.North)
+                    {
+                        targetX = playStartCoordinate.Row + row;
+                        targetY = playStartCoordinate.Column + col - matSize / 2;
+
+                    }
+                    else
+                    {
+                        targetX = playStartCoordinate.Row + row;
+                        targetY = playStartCoordinate.Column + col;
+                    }
+
+                    if (targetX >= 0 && targetX < matSize && targetY >= 0 && targetY < matSize)
+                    {
+                        coordinates.Add(new Coordinate(targetX, targetY));
+                    }
+                }
+            }
+        }
         return coordinates;
-        throw new NotImplementedException();
     }
 }
