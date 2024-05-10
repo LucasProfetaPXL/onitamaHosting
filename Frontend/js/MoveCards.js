@@ -28,5 +28,15 @@ document.addEventListener('DOMContentLoaded', function (){
         })
 })
 function GetMoveCards(response){
-
+    response.json().then(data => {
+        var players = []
+        data.seatedPlayers.forEach(player => {
+            var playerData = {
+                id: player.id,
+                moveCards: player.moveCards
+            }
+            players.push(playerData)
+        })
+        console.log(players)
+    })
 }

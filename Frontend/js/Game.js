@@ -1,7 +1,9 @@
 document.getElementById('startGameButton').addEventListener('click', function (event){
     event.preventDefault()
+    localStorage.setItem('gameStarted', 'true'); //this was for testing purposes this can just be deleted
     const tabled = localStorage.getItem('tableId');
-    const sessionID = sessionStorage.getItem('sessionID');
+    const sessionID = sessionStorage.getItem('sessionID'); //this is for testing purposes this can just be deleted
+    window.location = '../html/Gameboard.html'
     fetch(`https://localhost:5051/api/Tables/${tabled}/start-game`,{
         method: 'POST',
         mode: 'cors',
@@ -14,6 +16,7 @@ document.getElementById('startGameButton').addEventListener('click', function (e
             if (response.status === 200){
                 console.log("You just started the game succesfully")
                 window.location = '../html/Gameboard.html'
+                localStorage.setItem('gameStarted', "true");
                 GetPlayerColor(response);
             }
             if (response.status === 500){
@@ -38,7 +41,7 @@ function GetPlayerColor(response){
         var playerId = response.seatedPlayers[i].id;
         color[playerId] = response.seatedPlayers[i].color;
     }
-    sessionStorage.setItem('PlayerColors', JSON.stringify(color));
+    localStorage.setItem('PlayerColors', JSON.stringify(color));
 }
 
 
