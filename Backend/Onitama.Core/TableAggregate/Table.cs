@@ -71,7 +71,7 @@ internal class Table : ITable
            direction= Direction.South;
            _hasAvailableSeat = false;
         }
-        if(_playerList.Count == 2) 
+        if (_playerList.Count == 2)
         {
             throw new InvalidOperationException("This table is full");
         }
