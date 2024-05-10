@@ -18,18 +18,24 @@ internal class GameFactory : IGameFactory
     private IMoveCardRepository _moveCardRepository;
     private IGame _game;
     private IMoveCard _moveCard;
+    private IPlayMat _otherPlayMat;
+    private PlayMat _playMat;
 
     public GameFactory(IMoveCardRepository moveCardRepository)
     {
         _moveCardRepository = moveCardRepository;
-
-
     }
 
     public IGame CreateNewForTable(ITable table)
     {
+        IPlayer[] seatedPLayers = new IPlayer[2];
+        for (int i = 0; i < table.SeatedPlayers.Count; i++)
+        {
+            seatedPLayers[i] = table.SeatedPlayers[i];
+        }
+        _playMat = new PlayMat(_otherPlayMat, seatedPLayers);
         //    Random random = new Random();
-        //    _game = new Game(Guid.NewGuid(), table, table.OwnerPlayerId, _moveCard) ;
+        _game = new Game(table.Id, _playMat, seatedPLayers, _moveCard) ;
         //    Color[] colorArray = new Color[table.SeatedPlayers.Count];
         //    for (int i = 0; i < table.SeatedPlayers.Count; i++)
         //    {
@@ -59,7 +65,6 @@ internal class GameFactory : IGameFactory
         //    colorArray[i] = table.SeatedPlayers[i].Color;
         //}
         //_moveCardRepository.LoadSet(table.Preferences.MoveCardSet, colorArray);
-        //return _game;
-
+        return _game;
     }
 }
