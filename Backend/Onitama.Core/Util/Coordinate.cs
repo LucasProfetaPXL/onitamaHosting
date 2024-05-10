@@ -42,20 +42,58 @@ internal class Coordinate : ICoordinate
 
     public bool IsOutOfBounds(int playMatSize)
     {
+        if (this.Row > playMatSize || this.Column > playMatSize)
+        {
+            return true;
+        }
+        return false;
         throw new NotImplementedException();
     }
 
     public ICoordinate GetNeighbor(Direction direction)
     {
-        throw new NotImplementedException();
+        if (direction == Direction.North) //switch not working idk why
+        {
+            return new Coordinate(this.Row, this.Column + 1);
+        }
+        else if (direction == Direction.South)
+        {
+            return new Coordinate(this.Row, this.Column - 1);
+        }
+        else if (direction == Direction.East)
+        {
+            return new Coordinate(this.Row + 1, this.Column);
+        }
+        else if (direction == Direction.West)
+        {
+            return new Coordinate(this.Row - 1, this.Column);
+        }
+        throw new System.ArgumentException("Invalid coordinate");
     }
 
     public ICoordinate RotateTowards(Direction direction)
     {
+        if (direction == Direction.North) //switch not working idk why
+        {
+            return new Coordinate(this.Row, this.Column);
+        }
+        else if (direction == Direction.South)
+        {
+            return new Coordinate(- this.Row, - this.Column);
+        }
+        else if (direction == Direction.East)
+        {
+            return new Coordinate( - this.Column, this.Row);
+        }
+        else if (direction == Direction.West)
+        {
+            return new Coordinate(this.Column, - this.Row);
+        }
+        throw new System.ArgumentException("Invalid coordinate");
         throw new NotImplementedException();
     }
 
-    public int GetDistanceTo(ICoordinate other)
+    public int GetDistanceTo(ICoordinate other) // extra
     {
         throw new NotImplementedException();
     }
