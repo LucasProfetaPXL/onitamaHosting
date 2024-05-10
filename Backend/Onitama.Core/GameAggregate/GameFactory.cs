@@ -18,7 +18,7 @@ internal class GameFactory : IGameFactory
     private IMoveCardRepository _moveCardRepository;
     private IGame _game;
     private IMoveCard _moveCard;
-
+    
     public GameFactory(IMoveCardRepository moveCardRepository)
     {
         _moveCardRepository = moveCardRepository;
@@ -29,8 +29,8 @@ internal class GameFactory : IGameFactory
     public IGame CreateNewForTable(ITable table)
     {
 
-
-       // _game = new Game(Guid.NewGuid(), table, table.OwnerPlayerId, _moveCard);
+        
+        // _game = new Game(Guid.NewGuid(), table, table.OwnerPlayerId, _moveCard);
         //    Random random = new Random();
         //    _game = new Game(Guid.NewGuid(), table, table.OwnerPlayerId, _moveCard) ;
         //    Color[] colorArray = new Color[table.SeatedPlayers.Count];
