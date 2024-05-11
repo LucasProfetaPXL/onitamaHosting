@@ -16,6 +16,18 @@ namespace Onitama.Core.PlayMatAggregate;
 /// <inheritdoc cref="IPlayMat"/>
 internal class PlayMat : IPlayMat
 {
+    private IPawn[,] _grid;
+    private int _size;
+
+    public PlayMat(IPlayer[] copiedPlayers)
+    {
+        _size = 5;
+        _grid = new IPawn[_size, _size];
+        foreach (var player in copiedPlayers)
+        {
+            PositionSchoolOfPlayer(player);
+        }
+    }
     /// <summary>
     /// Creates a play mat that is a copy of another play mat
     /// </summary>
@@ -27,10 +39,15 @@ internal class PlayMat : IPlayMat
     /// This is an EXTRA. Not needed to implement the minimal requirements.
     /// To make the mini-max algorithm for an AI game play strategy work, this constructor should be implemented.
     /// </remarks>
-    public PlayMat(IPlayMat otherPlayMat, IPlayer[] copiedPlayers)
+    public PlayMat(IPlayMat otherPlayMat, IPlayer[] copiedPlayers) : this(copiedPlayers)
     {
-        Grid = (IPawn[,])otherPlayMat.Grid.Clone(); 
-        Size = otherPlayMat.Size;
+        for (int row = 0; row < _size; row++)
+        {
+            for (int col = 0; col < _size; col++)
+            {
+                _grid[row, col] = otherPlayMat.Grid[row, col];
+            }
+        }
         foreach (var player in copiedPlayers)
         {
             PositionSchoolOfPlayer(player);
@@ -39,9 +56,9 @@ internal class PlayMat : IPlayMat
     }
 
     //public IPawn[,] Grid => throw new NotImplementedException();
-    public IPawn[,] Grid { get; } = new IPawn[5,  5] ; 
+    public IPawn[,] Grid => _grid;
 
-    public int Size { get; } = 5; //TODO make variable from 5
+    public int Size => _size; //TODO make variable from 5
 
     public void ExecuteMove(IMove move, out IPawn capturedPawn)
     {
@@ -55,7 +72,14 @@ internal class PlayMat : IPlayMat
 
     public void PositionSchoolOfPlayer(IPlayer player)
     {
+        int row = player.Direction == Direction.North ? 0 : _size - 1;
+        var pawns = player.School.AllPawns;
 
-        throw new NotImplementedException();
+        for (int i = 0; i < pawns.Length; i++)
+        {
+            int column = i;
+            pawns[i].Position = new Coordinate(row, column);
+            _grid[row, column] = pawns[i];
+        }
     }
 }

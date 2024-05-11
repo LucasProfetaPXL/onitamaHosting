@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function (){
     const tabled = localStorage.getItem('tableId');
-    const sessionID = sessionStorage.getItem('sessionID');
+    //const sessionID = sessionStorage.getItem('sessionID');
     fetch(`https://localhost:5051/api/Games/${tabled}`,{
         method : 'GET',
         mode : 'cors',
@@ -31,12 +31,15 @@ function GetMoveCards(response){
     response.json().then(data => {
         var players = []
         data.seatedPlayers.forEach(player => {
-            var playerData = {
-                id: player.id,
-                moveCards: player.moveCards
+            if(player.moveCards.length === 2) {
+                var playerData = {
+                    id: player.id,
+                    moveCards: player.moveCards
+                }
+                players.push(playerData)
             }
-            players.push(playerData)
         })
-        console.log(players)
+        localStorage.setItem('playerMoveCards', JSON.stringify(players))
     })
 }
+
