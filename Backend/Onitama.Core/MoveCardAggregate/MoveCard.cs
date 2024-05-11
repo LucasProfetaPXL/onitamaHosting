@@ -51,7 +51,10 @@ internal class MoveCard : IMoveCard
 
         //startCoordinate.RotateTowards(playDirection);
 
+        startCoordinate.GetNeighbor(playDirection);
+
         ICoordinate playStartCoordinate = playDirection.GetStartCoordinate(matSize);
+
 
         //for (int row = 0; row < Grid.GetLength(0); row++)
         //{
@@ -61,9 +64,36 @@ internal class MoveCard : IMoveCard
         {
             for (int col = 0; col < matSize; col++)
             {
+                //if (Grid[row, col] == MoveCardGridCellType.Target)
                 if (Grid[row, col] == MoveCardGridCellType.Target)
                 {
                     coordinates.Add(new Coordinate(row, col));
+
+
+                    //if (playDirection == Direction.North)
+                    //{
+                    //    coordinates.Add(new Coordinate(row, col));
+                        
+                    //}
+                    //else if (playDirection == Direction.South)
+                    //{
+                     
+                    //    coordinates.Add(new Coordinate(-row, -col));
+                        
+                    //}
+                    //else if (playDirection == Direction.East)
+                    //{
+              
+                    //    coordinates.Add(new Coordinate(-col, row));
+                        
+                    //}
+                    //else if (playDirection == Direction.West)
+                    //{
+         
+                    //    coordinates.Add(new Coordinate(col, -row));
+                        
+                    //}
+                    //coordinates.Add(new Coordinate(row, col));
 
                     //if (playDirection == Direction.North)
                     //{
