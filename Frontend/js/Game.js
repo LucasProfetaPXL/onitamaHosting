@@ -1,9 +1,8 @@
 document.getElementById('startGameButton').addEventListener('click', function (event){
-    event.preventDefault()
-    localStorage.setItem('gameStarted', 'true'); //this was for testing purposes this can just be deleted
+    event.preventDefault();
     const tabled = localStorage.getItem('tableId');
-    const sessionID = sessionStorage.getItem('sessionID'); //this is for testing purposes this can just be deleted
-    window.location = '../html/Gameboard.html'
+    const sessionID = sessionStorage.getItem('sessionID');
+
     fetch(`https://localhost:5051/api/Tables/${tabled}/start-game`,{
         method: 'POST',
         mode: 'cors',
@@ -15,7 +14,11 @@ document.getElementById('startGameButton').addEventListener('click', function (e
         .then(response =>{
             if (response.status === 200){
                 console.log("You just started the game succesfully")
-                window.location = '../html/Gameboard.html'
+                setTimeout(() =>{
+                    window.location = '../html/Gameboard.html'
+                }, 10000) //this is to look if everything returned in the console because if I don't do this the
+                                    //logs are gone because it went to another page
+
                 localStorage.setItem('gameStarted', "true");
                 GetPlayerColor(response);
             }
@@ -35,13 +38,14 @@ document.getElementById('startGameButton').addEventListener('click', function (e
 })
 
 function GetPlayerColor(response){
-    var color = {};
-
-    for (var i = 0; i < response.seatedPlayers.length; i++) {
-        var playerId = response.seatedPlayers[i].id;
-        color[playerId] = response.seatedPlayers[i].color;
-    }
-    localStorage.setItem('PlayerColors', JSON.stringify(color));
+    response.json().then(data => {
+        var color = {};
+        for (var i = 0; i < data.seatedPlayers.length; i++) {
+            var playerId = data.seatedPlayers[i].id;
+            color[playerId] = data.seatedPlayers[i].color;
+        }
+        localStorage.setItem('PlayerColors', JSON.stringify(color));
+    });
 }
 
 
