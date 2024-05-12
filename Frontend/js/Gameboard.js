@@ -30,9 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 var pawnImage = document.createElement('img');
                 pawnImage.className = 'pawn-image';
                 if (j === 2) {
-                    pawnImage.src = `../Images/master${playerId}.png`;
+                    imagename = `../Images/master${pawn.style.backgroundColor}.png`
+                    pawnImage.src = imagename;
                 } else {
-                    pawnImage.src = `../Images/apprenticePawn${playerId}.png`;
+                    imagename =  `../Images/apprenticePawn${pawn.style.backgroundColor}.png`
+                    pawnImage.src = imagename;
                 }
 
                 // Add the image to the pawn

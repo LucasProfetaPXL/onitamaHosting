@@ -58,12 +58,9 @@ internal class MoveCard : IMoveCard
                 ICoordinate newcord = new Coordinate(row, col);
                 ICoordinate rotatedCord = newcord.RotateTowards(playDirection);
 
-
-
-                if (_cellType[row, col] == MoveCardGridCellType.Target)
+                if (_cellType[rotatedCord.Row,rotatedCord.Column] == MoveCardGridCellType.Target)
                 {
-                        coordinates.Add(rotatedCord);
-                    
+                    coordinates.Add(rotatedCord);
                 }
             }
         }

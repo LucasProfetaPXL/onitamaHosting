@@ -71,6 +71,8 @@ internal class PlayMat : IPlayMat
 
     public void PositionSchoolOfPlayer(IPlayer player)
     {
+        int row = player.Direction == Direction.North ? 0 : _size - 1;
+        var pawns = player.School.AllPawns;
 
         for (int i = 0; i < pawns.Length; i++)
         {

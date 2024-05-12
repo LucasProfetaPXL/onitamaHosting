@@ -29,13 +29,13 @@ internal class School : ISchool
             if (column == 2)
             {
                 pawn = new Pawn(playerId, PawnType.Master);
-                //pawn.Position = new Coordinate(row, column);
+                pawn.Position = new Coordinate(row, column);
                 _Master = pawn;
             }
             else
             {
                 pawn = new Pawn(playerId, PawnType.Student);
-                //pawn.Position = new Coordinate(row, column);
+                pawn.Position = new Coordinate(row, column);
                 if (column <= 1)
                 {
                     _Students[i] = pawn;
