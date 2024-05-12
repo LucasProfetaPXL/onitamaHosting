@@ -35,6 +35,8 @@ internal class PlayerBase : IPlayer
         _name = name;
         _color = color;
         _direction = direction;
+        _moveCards = new List<IMoveCard>();
+        _school = new School(id, direction);
     }
 
     /// <summary>
