@@ -46,9 +46,9 @@ internal class GameFactory : IGameFactory
     private List<MoveCard> GeneratePossibleMoveCards()
     {
         List<MoveCard> possibleMoveCards = new List<MoveCard>();
+        MoveCardGridCellType[,] grid = GenerateRandomGrid();
         for (int i = 0; i < 10; i++)
         {
-            MoveCardGridCellType[,] grid = GenerateRandomGrid(); 
             MoveCard moveCard = new MoveCard("MoveCard" + i, grid, Color.Black); 
             possibleMoveCards.Add(moveCard);
         }
