@@ -11,15 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
     for (var i = 0; i < 5; i++) {
         for (var j = 0; j < 5; j++) {
             // Create a new cell
-            var cell = document.createElement('div');
+            let cell = document.createElement('div');
+
             cell.className = 'cell';
             cell.dataset.row = i;
             cell.dataset.col = j;
             cell.id = `cell${k}`;
+            cell.setAttribute('square-id', (i*j))
 
             if (i === 0 || i === 4) {
 
-                var pawn = document.createElement('div');
+                let pawn = document.createElement('div');
                 pawn.className = 'pawn';
 
                 var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1];
