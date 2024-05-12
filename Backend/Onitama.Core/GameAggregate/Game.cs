@@ -5,9 +5,11 @@ using Onitama.Core.PlayerAggregate;
 using Onitama.Core.PlayerAggregate.Contracts;
 using Onitama.Core.PlayMatAggregate;
 using Onitama.Core.PlayMatAggregate.Contracts;
+using Onitama.Core.SchoolAggregate;
 using Onitama.Core.SchoolAggregate.Contracts;
 using Onitama.Core.Util;
 using Onitama.Core.Util.Contracts;
+using System.Drawing;
 
 namespace Onitama.Core.GameAggregate;
 
@@ -18,6 +20,7 @@ internal class Game : IGame
     private IPlayMat _playMat;
     private IPlayer[] _players;
     private IMoveCard _extraMoveCard;
+    private int _currentplayernr;
 
     public Guid Id => _id;
 
@@ -27,9 +30,9 @@ internal class Game : IGame
 
     public IPlayer[] Players => _players;
 
-    public Guid PlayerToPlayId => throw new NotImplementedException();
+    public Guid PlayerToPlayId => _players[_currentplayernr].Id;
 
-    public Guid WinnerPlayerId => throw new NotImplementedException();
+    public Guid WinnerPlayerId => _players[_currentplayernr].Id;
 
     public string WinnerMethod => throw new NotImplementedException();
 
@@ -75,6 +78,37 @@ internal class Game : IGame
 
     public IReadOnlyList<IMove> GetPossibleMovesForPawn(Guid playerId, Guid pawnId, string moveCardName)
     {
+        Direction playDirection = Direction.North;
+        Color playercolor = Color.AliceBlue;      
+
+        IMoveCard moveCard;
+        IMoveCardRepository moveCardRepository;
+        //IMoveCard card;
+        // startcoordinate
+        // playdirection
+        //matsize
+        for (int i = 0; i < _players.Length; i++)
+        {
+            if (_players[i].Id == playerId)
+            {
+                playDirection = _players[i].Direction;
+                playercolor = _players[i].Color;
+            }
+        }
+
+        //for (int i = 0; i < moveCardRepository.LoadSet(MoveCardSet.Original, _players[].Color); i++)
+        //{
+        //    if (moveCardRepository[i].Name == moveCardName)
+        //    {
+
+        //    }
+        //}
+        //moveCard = new MoveCard(moveCardName, moveCard., playercolor);
+        
+        
+        //_playMat.GetValidMoves(pawnId, moveCard , playDirection);
+
+        //MoveCard.GetPossibleTargetCoordinates();
         throw new NotImplementedException();
     }
 
@@ -85,6 +119,7 @@ internal class Game : IGame
 
     public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
     {
+        _currentplayernr = (_currentplayernr + 1) % _players.Count();
         throw new NotImplementedException();
     }
 
@@ -93,7 +128,7 @@ internal class Game : IGame
         throw new NotImplementedException();
     }
 
-    public IPlayer GetNextOpponent(Guid playerId)
+    public IPlayer GetNextOpponent(Guid playerId) //extra
     {
         throw new NotImplementedException();
     }

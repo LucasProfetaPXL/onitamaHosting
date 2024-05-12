@@ -70,6 +70,10 @@ internal class Table : ITable
         {
            direction= Direction.South;
            _hasAvailableSeat = false;
+            while (color == _playerList[0].Color)
+            {
+                color = PossibleColors[randNumber.Next(PossibleColors.Length)];
+            }
         }
         if (_playerList.Count == 2)
         {
@@ -95,25 +99,31 @@ internal class Table : ITable
         //_table._playerList.Contains(userId);
 
         int i = 0;
+        bool userFound = false;
+
 
         while (i < _playerList.Count)
         {
             if (_playerList[i].Id == userId)
             {
                 _playerList.Remove(_playerList[i]);
+                userFound = true;
                 if (_playerList.Count == 1)
                 {
                     _ownerPlayerId = _playerList[0].Id;
                 }
+                break;
             }
             else 
             {
+
                 if (i == _playerList.Count - 1)
                 {
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException("User that is not seated can't leave");
                 }
+                i++;
+
             }
-            i++;
         }
 
         //throw new NotImplementedException();
