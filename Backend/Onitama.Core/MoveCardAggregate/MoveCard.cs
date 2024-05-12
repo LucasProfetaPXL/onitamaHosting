@@ -48,15 +48,17 @@ internal class MoveCard : IMoveCard
     public IReadOnlyList<ICoordinate> GetPossibleTargetCoordinates(ICoordinate startCoordinate, Direction playDirection, int matSize)
     {
         List<ICoordinate> coordinates = new List<ICoordinate>();
-        //int targetX;
-        //int targetY;
+        int targetX;
+        int targetY;
 
         //startCoordinate.RotateTowards(playDirection);
+        _cellType[startCoordinate.Row, startCoordinate.Column] = MoveCardGridCellType.Start;
+        _cellType[startCoordinate.RotateTowards(playDirection).Row, startCoordinate.RotateTowards(playDirection).Column] = MoveCardGridCellType.Start;
 
-        startCoordinate.GetNeighbor(playDirection);
 
-        ICoordinate playStartCoordinate = playDirection.GetStartCoordinate(matSize);
+        //startCoordinate.GetNeighbor(playDirection);
 
+        //startCoordinate = playDirection.GetStartCoordinate(matSize);
 
         //for (int row = 0; row < Grid.GetLength(0); row++)
         //{
@@ -66,34 +68,46 @@ internal class MoveCard : IMoveCard
         {
             for (int col = 0; col < matSize; col++)
             {
-                //if (Grid[row, col] == MoveCardGridCellType.Target)
-                if (Grid[row, col] == MoveCardGridCellType.Target)
-                {
-                    coordinates.Add(new Coordinate(row, col));
+                targetX = row;
+                targetY = col;
+                ICoordinate newcord = new Coordinate(targetY, targetY);
 
+
+                targetX = newcord.RotateTowards(playDirection).Row;
+                targetY = newcord.RotateTowards(playDirection).Column;
+
+
+
+                if (_cellType[row, col] == MoveCardGridCellType.Target)
+                //if (Grid[row, col] == MoveCardGridCellType.Target)
+                {
+                    //if (!(targetX == 0 && targetY == 0))
+                    //{
+                        coordinates.Add(new Coordinate(targetX, targetY));
+                    //}
 
                     //if (playDirection == Direction.North)
                     //{
                     //    coordinates.Add(new Coordinate(row, col));
-                        
+
                     //}
                     //else if (playDirection == Direction.South)
                     //{
-                     
-                    //    coordinates.Add(new Coordinate(-row, -col));
-                        
+
+                    //    coordinates.Add(new Coordinate(matSize - row, matSize - col));
+
                     //}
                     //else if (playDirection == Direction.East)
                     //{
-              
+
                     //    coordinates.Add(new Coordinate(-col, row));
-                        
+
                     //}
                     //else if (playDirection == Direction.West)
                     //{
-         
+
                     //    coordinates.Add(new Coordinate(col, -row));
-                        
+
                     //}
                     //coordinates.Add(new Coordinate(row, col));
 
