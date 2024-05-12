@@ -48,6 +48,7 @@ internal class School : ISchool
 
             _AllPawns[i] = pawn;
         }
+        _TempleArchPosition = new Coordinate(direction.XStep, direction.YStep);
     }
     /// <summary>
     /// Creates a school that is a copy of another school.

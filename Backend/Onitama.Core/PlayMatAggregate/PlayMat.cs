@@ -72,6 +72,24 @@ internal class PlayMat : IPlayMat
 
     public void PositionSchoolOfPlayer(IPlayer player)
     {
+        Direction direction = player.Direction;
+        ISchool school = player.School;
+        IPawn[] allPawns = school.AllPawns;
+        ICoordinate masterPosition;
+        ICoordinate studentPosition;
+        for (int i = 0; i < allPawns.Length; i++)
+        {
+            if (i == 2)
+            {
+                masterPosition = allPawns[i].Position;
+                _grid[masterPosition.Row, masterPosition.Column] = allPawns[i];
+            }
+            else
+            {
 
+                studentPosition = allPawns[i].Position;
+                _grid[studentPosition.Row, studentPosition.Column] = allPawns[i];
+            }
+        }
     }
 }
