@@ -6,11 +6,23 @@ namespace Onitama.Core.SchoolAggregate;
 /// <inheritdoc cref="IPawn"/>
 internal class Pawn : IPawn
 {
+    private Guid _ownerId;
+    private PawnType _type;
+    private ICoordinate _position;
+
     public Guid Id => Guid.NewGuid();
 
-    public Guid OwnerId => throw new NotImplementedException();
+    public Guid OwnerId => _ownerId;
 
-    public PawnType Type => throw new NotImplementedException();
+    public PawnType Type => _type;
 
-    public ICoordinate Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public ICoordinate Position { get => _position; set => _position = value; }
+
+    public Pawn(Guid ownerId, PawnType type, ICoordinate position)
+    {
+        _ownerId = ownerId;
+        _type = type;
+        _position = position;
+
+    }
 }
