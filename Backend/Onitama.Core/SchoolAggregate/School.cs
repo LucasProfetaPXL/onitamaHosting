@@ -16,7 +16,6 @@ internal class School : ISchool
     private IPawn[] _Students;
     private IPawn[] _AllPawns;
     private ICoordinate _TempleArchPosition;
-    private ICoordinate _pawnPosition;
 
     public School(Guid playerId, Direction direction)
     {
@@ -27,15 +26,16 @@ internal class School : ISchool
         for (int i = 0; i < 5; i++)
         {
             int column = i;
-            _pawnPosition = new Coordinate(row, column);
             if (column == 2)
             {
-                pawn = new Pawn(playerId, PawnType.Master, _pawnPosition);
+                pawn = new Pawn(playerId, PawnType.Master);
+                //pawn.Position = new Coordinate(row, column);
                 _Master = pawn;
             }
             else
             {
-                pawn = new Pawn(playerId, PawnType.Student, _pawnPosition);
+                pawn = new Pawn(playerId, PawnType.Student);
+                //pawn.Position = new Coordinate(row, column);
                 if (column <= 1)
                 {
                     _Students[i] = pawn;
@@ -48,6 +48,7 @@ internal class School : ISchool
 
             _AllPawns[i] = pawn;
         }
+        _TempleArchPosition = new Coordinate(direction.XStep, direction.YStep);
     }
     /// <summary>
     /// Creates a school that is a copy of another school.
