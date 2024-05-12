@@ -11,11 +11,10 @@ internal class Pawn : IPawn
     private PawnType _type;
     private ICoordinate _position;
 
-    public Pawn(Guid ownerId, PawnType type, ICoordinate position)
+    public Pawn(Guid ownerId, PawnType type)
     {
         _ownerId = ownerId;
         _type = type;
-        _position = position;
     }
 
     public Guid Id => Guid.NewGuid();
