@@ -12,18 +12,16 @@
     background-color: red;
     padding: 10px;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 100px;
     width: 100px;
-    place-items: end;
     border-radius: 5px;
+    border: none;
+    color: white;
 }
 
 #join_Button{
-    width: 101px;
-    border: none;
-    border-radius: 5px;
-    height: 31px;
-    display: none;
+    display: flex;
+    align-items: center;
 }
 #tableAvailability{
     gap: 5px;
@@ -33,7 +31,6 @@
 }
 .table_data{
     display: flex;
-    gap: 30px;
     align-items: center;
     margin: auto;
 }
