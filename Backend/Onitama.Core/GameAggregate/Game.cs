@@ -57,6 +57,7 @@ internal class Game : IGame
         _playMat = playMat;
         _players = players;
         _extraMoveCard = extraMoveCard;
+        _currentplayernr = 0; // owner
     }
 
     /// <summary>
@@ -125,7 +126,29 @@ internal class Game : IGame
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
     {
-        //throw new NotImplementedException();
+        if (!(_players[_currentplayernr].Id == playerId))
+        {
+            throw new ApplicationException("turn");
+        }
+        if (GetAllPossibleMovesFor(playerId).Count() == 0)
+        {
+            throw new ApplicationException("valid move");
+        }
+        for (int i = 0; i < _players.Length; i++)
+        {
+            if (_players[i].Id == playerId)
+            {
+                for (int j = 0; j < _players[i].MoveCards.Count; j++)
+                {
+                    if (_players[i].MoveCards[j].Name == moveCardName)
+                    {
+                        _players[i].MoveCards.RemoveAt(j);
+                        _players[i].MoveCards.Insert(j,_extraMoveCard);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     public IPlayer GetNextOpponent(Guid playerId) //extra
