@@ -39,3 +39,19 @@
 
     border-radius: 5px;
 }
+.cardholder {
+    background-color: green;
+    width: 200px;
+    height: 200px;
+    z-index: 5;
+    border: black solid 5px;
+    margin: 5px;
+}
+
+.cardholderParent {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 500px;
+
+}
