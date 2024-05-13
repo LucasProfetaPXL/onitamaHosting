@@ -80,12 +80,6 @@ function flipBoard(boardContainer, playerColors) {
 }
 
 
-
-
-
-
-
-
 /*document.addEventListener('DOMContentLoaded', function() {
     // Retrieve player colors object from sessionStorage
     var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
