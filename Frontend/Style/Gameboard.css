@@ -13,6 +13,9 @@
 .cell{
     border: 2px solid black;
 }
+.who{
+    color: black;
+}
 
 .leaveButton{
     background-color: red;

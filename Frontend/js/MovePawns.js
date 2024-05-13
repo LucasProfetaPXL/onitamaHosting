@@ -1,7 +1,7 @@
-const allCells =  document.querySelectorAll("#game-boardHTML .cell");
+const allCells =  document.querySelectorAll("#game-board .cell");
 allCells.forEach(cell =>{
     cell.addEventListener('dragstart', dragStart);
-    cell.addEventListener('dragsOver', dragOver);
+    cell.addEventListener('dragover', dragOver);
     cell.addEventListener('drop', dragDrop);
 })
 let startPositionId;
@@ -12,12 +12,19 @@ function dragStart(e){
 }
 
 function dragOver(e){
-    e.preventDefault()
+    e.preventDefault();
 }
 
 function dragDrop(e){
     e.stopPropagation()
 
+    const targetCell = e.target;
+
+    // Check if the target cell has a child (pawn)
+    if (!targetCell.firstElementChild) {
+        targetCell.appendChild(draggedElement);
+    }
+
     e.target.parentNode.append(draggedElement)
-    e.target.append(draggedElement)
+    e.target.appendChild(draggedElement)
 }

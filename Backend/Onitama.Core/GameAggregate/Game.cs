@@ -125,7 +125,7 @@ internal class Game : IGame
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public IPlayer GetNextOpponent(Guid playerId) //extra

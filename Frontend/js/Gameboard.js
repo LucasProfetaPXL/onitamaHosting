@@ -13,22 +13,24 @@ document.addEventListener('DOMContentLoaded', function() {
         for (var j = 0; j < 5; j++) {
             // Create a new cell
             let cell = document.createElement('div');
-
+            cell.classList.add('cell')
             cell.className = 'cell';
             cell.dataset.row = i;
             cell.dataset.col = j;
             cell.id = `cell${k}`;
+            //cell.firstElementChild.setAttribute("draggable", true)
+            //cell.firstChild?.firstChild.setAttribute('draggable', true)
             cell.setAttribute('square-id', (i*j))
-
             if (i === 0 || i === 4) {
 
                 let pawn = document.createElement('div');
+
                 pawn.className = 'pawn';
-
                 var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1];
-                pawn.style.backgroundColor = playerColors[playerId];
 
+                pawn.style.backgroundColor = playerColors[playerId];
                 var pawnImage = document.createElement('img');
+
                 pawnImage.className = 'pawn-image';
                 if (j === 2) {
                     imagename = `../Images/master${pawn.style.backgroundColor}.png`
@@ -38,14 +40,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     imagename =  `../Images/apprenticePawn${pawn.style.backgroundColor}.png`
                     pawnImage.src = imagename;
                 }
-
+                pawnImage.setAttribute('draggable', true)
                 // Add the image to the pawn
-                pawn.appendChild(pawnImage);
 
+                pawn.appendChild(pawnImage);
                 // Add the pawn to the cell
+
                 cell.appendChild(pawn);
             }
             k++;
+            console.log(cell.firstElementChild);
 
             boardContainer.appendChild(cell);
         }
