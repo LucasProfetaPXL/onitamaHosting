@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    //var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
+    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
+
     // Created a local object for testing
-    var playerColors = {
-        "player1": "red",
-        "player2": "blue"
-    };
+    // var playerColors = {
+    //     "player1": "red",
+    //     "player2": "blue"
+    // };
 
     var boardContainer = document.getElementById('game-boardHTML');
     let k = 1;
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 pawnImage.className = 'pawn-image';
                 if (j === 2) {
                     imagename = `../Images/master${pawn.style.backgroundColor}.png`
+                    //window.alert(imagename)
                     pawnImage.src = imagename;
                 } else {
                     imagename =  `../Images/apprenticePawn${pawn.style.backgroundColor}.png`
@@ -49,16 +51,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    boardContainer.addEventListener("click", (e) => {
+    flipBoard(boardContainer, playerColors)
+    boardContainer.addEventListener("DOMContentLoaded", (e) => {
         console.log(e.target.id);
     });
 });
 
-function flipBoard(boardContainer) {
+function flipBoard(boardContainer, playerColors) {
     var rows = Array.from(boardContainer.children);
     rows.reverse();
-    rows.forEach(row => boardContainer.appendChild(row));
+
+    // Get the current player's session ID (you already have this)
+    var currentSessionId = sessionStorage.getItem('sessionID');
+
+    // Check if the current session ID matches any player ID
+    for (var playerId in playerColors) {
+        if (playerId === currentSessionId) {
+            var currentPlayerColor = playerColors[playerId];
+
+            // Check if the current player's color is at the top
+            if (currentPlayerColor === "red") {
+                rows.forEach(row => boardContainer.appendChild(row));
+            }
+            // Otherwise, keep the board as is (blue player's color at the bottom)
+            break; // Exit the loop once we find a match
+        }
+    }
 }
+
+
+
+
+
 
 
 
