@@ -93,8 +93,10 @@ internal class Coordinate : ICoordinate
         throw new NotImplementedException();
     }
 
-    public int GetDistanceTo(ICoordinate other) // extra
+    public int GetDistanceTo(ICoordinate other)
     {
-        throw new NotImplementedException();
+        int rowDifference = other.Row - Row;
+        int columnDifference = other.Column - Column;
+        return (int)Math.Sqrt(rowDifference * rowDifference + columnDifference * columnDifference);
     }
 }
