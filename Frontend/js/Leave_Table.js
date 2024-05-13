@@ -55,7 +55,6 @@ leaveBtns.forEach((button) => {
 
 // window.addEventListener('load', updateWaitModal);
 
-// if (window.location.href === 'Gameboard.html'){
 if (window.location.pathname.endsWith('/Gameboard.html')){
     document.getElementById('leaveTable').addEventListener('click', function (event) {
         event.preventDefault();
@@ -63,11 +62,4 @@ if (window.location.pathname.endsWith('/Gameboard.html')){
     })
 }
 
-// if (window.location.href.includes('Gameboard.html')) {
-//     document.getElementById('leaveTable').addEventListener('click', function(event) {
-//         event.preventDefault();
-//         window.alert("hee");
-//         document.getElementById('leaveTable').addEventListener('click', leaveFetch);
-//     });
-// }
 
