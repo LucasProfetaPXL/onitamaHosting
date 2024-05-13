@@ -31,8 +31,12 @@ document.getElementById('startGameButton').addEventListener('click', function (e
                 response.json().then(error =>{
                     console.log(error.message)
                 })
-                console.log("There went something wrong")
-                console.log(response.message)
+                console.log("There went something wrong");
+                console.log(response.message);
+
+                let place = document.getElementById("startGameButton");
+                place.innerHTML = '';
+                place.insertAdjacentHTML("afterbegin", "Only the owner can start the game");
             }
         })
 })
