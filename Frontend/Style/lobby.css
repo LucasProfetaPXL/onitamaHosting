@@ -24,7 +24,6 @@
     align-items: center;
 }
 #tableAvailability{
-    gap: 5px;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -44,8 +43,9 @@
 /*Algemene code animatie en stijl bloemen knoppen*/
 
 .homePageButtons {
+    padding: 0;
     height: 4em;
-    width: 12em;
+    width: 10em;
     display: flex;
     align-items: center;
     justify-content: center;
