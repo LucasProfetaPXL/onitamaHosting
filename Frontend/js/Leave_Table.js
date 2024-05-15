@@ -22,8 +22,8 @@ const leaveFetch = (e) => {
                 // var element = document.getElementById('tableAvailability');
                 console.log("You just left succesfully")
                 // document.getElementById("tableAvailability").hidden;
-                // window.alert("h");
-                window.location = '../html/lobby.html'
+                 //window.alert("h");
+                window.location = '../html/lobby.html';
             }
         })
         .catch((error) => {
@@ -37,3 +37,29 @@ leaveBtns.forEach((button) => {
     button.addEventListener('click', leaveFetch)
     modalWait.classList.remove('modal_close');
 })
+
+
+
+
+//document.getElementById('leaveTable').addEventListener('click', leaveFetch);
+
+// window.addEventListener('DOMContentLoaded', function(event) {
+//
+//     if (localStorage.getItem('gameStarted') === true) {
+//         window.alert("hee");
+//
+//         document.getElementById('leaveTable').addEventListener('click', leaveFetch);
+//
+//     }
+// });
+
+// window.addEventListener('load', updateWaitModal);
+
+if (window.location.pathname.endsWith('/Gameboard.html')){
+    document.getElementById('leaveTable').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('leaveTable').addEventListener('click', leaveFetch);
+    })
+}
+
+

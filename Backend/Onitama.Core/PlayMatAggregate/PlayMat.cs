@@ -55,7 +55,6 @@ internal class PlayMat : IPlayMat
         //throw new NotImplementedException("TODO: copy properties of other playmat");
     }
 
-    //public IPawn[,] Grid => throw new NotImplementedException();
     public IPawn[,] Grid => _grid;
 
     public int Size => _size; //TODO make variable from 5

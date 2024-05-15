@@ -1,3 +1,11 @@
+#wait_modal{
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(17, 24, 39, 1);
+    color: white;
+}
+
 .orbit-spinner, .orbit-spinner * {
     box-sizing: border-box;
 }
@@ -7,6 +15,8 @@
     width: 55px;
     border-radius: 50%;
     perspective: 800px;
+    margin: auto;
+    margin-top: 50px;
 }
 
 .orbit-spinner .orbit {
@@ -18,15 +28,15 @@
 }
 
 .orbit-spinner .orbit:nth-child(1) {
-    left: 0%;
-    top: 0%;
+    left: 0;
+    top: 0;
     animation: orbit-spinner-orbit-one-animation 1200ms linear infinite;
     border-bottom: 3px solid #ff1d5e;
 }
 
 .orbit-spinner .orbit:nth-child(2) {
-    right: 0%;
-    top: 0%;
+    right: 0;
+    top: 0;
     animation: orbit-spinner-orbit-two-animation 1200ms linear infinite;
     border-right: 3px solid #ff1d5e;
 }

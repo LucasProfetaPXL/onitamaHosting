@@ -79,22 +79,24 @@ internal class Coordinate : ICoordinate
         }
         else if (direction == Direction.South)
         {
-            return new Coordinate(- this.Row, - this.Column);
+            return new Coordinate(-this.Row, -this.Column);
         }
         else if (direction == Direction.East)
         {
-            return new Coordinate( - this.Column, this.Row);
+            return new Coordinate(-this.Column, this.Row);
         }
         else if (direction == Direction.West)
         {
-            return new Coordinate(this.Column, - this.Row);
+            return new Coordinate(this.Column, -this.Row);
         }
         throw new System.ArgumentException("Invalid coordinate");
         throw new NotImplementedException();
     }
 
-    public int GetDistanceTo(ICoordinate other) // extra
+    public int GetDistanceTo(ICoordinate other)
     {
-        throw new NotImplementedException();
+        int rowDifference = other.Row - Row;
+        int columnDifference = other.Column - Column;
+        return (int)Math.Sqrt(rowDifference * rowDifference + columnDifference * columnDifference);
     }
 }

@@ -15,7 +15,7 @@ document.getElementById('startGameButton').addEventListener('click', function (e
             if (response.status === 200){
                 console.log("You just started the game succesfully")
                 setTimeout(() =>{
-                    window.location = '../html/Gameboard.html'
+                    window.location = '../html/Gameboard.html';
                 }, 10000) //this is to look if everything returned in the console because if I don't do this the
                                     //logs are gone because it went to another page
 
@@ -31,8 +31,12 @@ document.getElementById('startGameButton').addEventListener('click', function (e
                 response.json().then(error =>{
                     console.log(error.message)
                 })
-                console.log("There went something wrong")
-                console.log(response.message)
+                console.log("There went something wrong");
+                console.log(response.message);
+
+                let place = document.getElementById("startGameButton");
+                place.innerHTML = '';
+                place.insertAdjacentHTML("afterbegin", "Only the owner can start the game");
             }
         })
 })
@@ -49,3 +53,9 @@ function GetPlayerColor(response){
 }
 
 
+window.addEventListener('storage', function(event) {
+    if (localStorage.getItem('gameStarted') === 'true' && localStorage.getItem('hasSeats') === 'false')
+    {
+        window.location = '../html/Gameboard.html';
+    }
+});

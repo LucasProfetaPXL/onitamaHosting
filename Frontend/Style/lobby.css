@@ -28,6 +28,12 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 6%;
+    & p{
+        padding-right: 6%;
+    }
 }
 .table_data{
     display: flex;
