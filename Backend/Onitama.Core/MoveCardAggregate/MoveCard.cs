@@ -50,13 +50,27 @@ internal class MoveCard : IMoveCard
     {
         List<ICoordinate> coordinates = new List<ICoordinate>();
 
+<<<<<<< HEAD
         int mapTargetRow, mapTargetCol;
         int diffRow, diffCol;
+=======
+        //MoveCardGridCellType[,] newgrid = new MoveCardGridCellType[matSize, matSize];
+
+        //_cellType[startCoordinate.Row, startCoordinate.Column] = MoveCardGridCellType.Empty;
+
+        //startCoordinate.RotateTowards(playDirection);
+
+        //_cellType[startCoordinate.RotateTowards(playDirection).Row, startCoordinate.RotateTowards(playDirection).Column] = MoveCardGridCellType.Start;
+        
+        _cellType[startCoordinate.Row, startCoordinate.Column] = MoveCardGridCellType.Start;
+>>>>>>> 11c367267d36add3b71c0384ac52a977655ea36c
+
 
         for (int row = 0; row < matSize; row++)
         {
             for (int col = 0; col < matSize; col++)
             {
+<<<<<<< HEAD
                 if (_cellType[row, col] == MoveCardGridCellType.Target)
                 {
                     diffRow = 2 - row;
@@ -78,9 +92,43 @@ internal class MoveCard : IMoveCard
                     {
                         coordinates.Add(new Coordinate(mapTargetRow, mapTargetCol));
                     }
+=======
+                ICoordinate newcord = new Coordinate(row, col);
+                //ICoordinate rotatedCord = newcord.RotateTowards(playDirection);
+
+                if (playDirection == Direction.South)
+                {
+                    //rotatedCord = new Coordinate(matSize - row -1, matSize - col -1).RotateTowards(playDirection);
+                    if (_cellType[newcord.Row, newcord.Column] == MoveCardGridCellType.Target)
+                    {
+                        coordinates.Add(newcord);
+                    }
+                    //newgrid[row, col] = Grid[row, col];
+                    //coordinates.Add(new Coordinate(matSize - 1 - row, matSize - 1 - col));
+>>>>>>> 11c367267d36add3b71c0384ac52a977655ea36c
                 }
+                else
+                {
+                    //ICoordinate newCoordinate = new Coordinate(row, col);
+                    if (_cellType[newcord.Row, newcord.Column] == MoveCardGridCellType.Target)
+                    {
+                        coordinates.Add(newcord);
+                    }
+                    //coordinates.Add(new Coordinate(row, col));
+                }
+                //if (_cellType[rotatedCord.Row, rotatedCord.Column] == MoveCardGridCellType.Target)
+                //{
+                //    coordinates.Add(rotatedCord);
+                //}
             }
+
         }
-        return coordinates;
+        List<ICoordinate> rotatedcoordinates = new List<ICoordinate>();
+
+        foreach (ICoordinate cord in coordinates)
+        {
+            rotatedcoordinates.Add(cord.RotateTowards(playDirection));
+        }
+        return rotatedcoordinates;
     }
 }
