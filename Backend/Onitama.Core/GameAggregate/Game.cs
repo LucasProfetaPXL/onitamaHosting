@@ -120,6 +120,12 @@ internal class Game : IGame
 
     public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
     {
+
+        if (playerId != _players[_currentplayernr].Id)
+        {
+            throw new ApplicationException("It's not your turn!");
+        }
+
         _currentplayernr = (_currentplayernr + 1) % _players.Count();
         throw new NotImplementedException();
     }
