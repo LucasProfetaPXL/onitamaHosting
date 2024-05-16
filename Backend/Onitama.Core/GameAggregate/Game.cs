@@ -20,6 +20,7 @@ internal class Game : IGame
     private IPlayMat _playMat;
     private IPlayer[] _players;
     private IMoveCard _extraMoveCard;
+    private IMoveCard _moveCard;
     private int _currentplayernr;
 
     public Guid Id => _id;
@@ -82,7 +83,7 @@ internal class Game : IGame
         Direction playDirection = Direction.North;
         Color playercolor = Color.AliceBlue;      
 
-        IMoveCard moveCard;
+       
         IMoveCardRepository moveCardRepository;
         //IMoveCard card;
         // startcoordinate
@@ -121,13 +122,33 @@ internal class Game : IGame
     public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
     {
 
+        //if (playerId != _players[_currentplayernr].Id)
+        //{
+        //    throw new ApplicationException("It's not your turn!");
+        //}
+
+        //_currentplayernr = (_currentplayernr + 1) % _players.Count();
+        ////throw new NotImplementedException();
+        //var position = new MoveCardGridCellType[to.Column, to.Row];
+
+        //var moveCard = new MoveCard(moveCardName, position, Color.Red);
+
         if (playerId != _players[_currentplayernr].Id)
         {
             throw new ApplicationException("It's not your turn!");
         }
 
         _currentplayernr = (_currentplayernr + 1) % _players.Count();
-        throw new NotImplementedException();
+
+        var position = new MoveCardGridCellType[to.Column, to.Row];
+        var moveCard = new MoveCard(moveCardName, position, Color.Red);
+
+        // Construct an IMove object based on the provided parameters
+        //IMove move = new Move(pawnId, to, moveCard);
+
+        // Call ExecuteMove on the play mat with the constructed IMove object
+        //_playMat.ExecuteMove(move, out _);
+
     }
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
