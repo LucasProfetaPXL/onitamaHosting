@@ -125,8 +125,8 @@ internal class Game : IGame
     }
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
-    {
-        if (!(_players[_currentplayernr].Id == playerId))
+    {    
+        if (!(PlayerToPlayId == playerId))
         {
             throw new ApplicationException("turn");
         }
