@@ -128,6 +128,14 @@ internal class Game : IGame
 
         _currentplayernr = (_currentplayernr + 1) % _players.Count();
         throw new NotImplementedException();
+
+        IPlayer opponent = _players.FirstOrDefault(player => player.Id != playerId);
+        if (opponent != null && opponent.School.Master.Id == pawnId)
+        {
+            _winnerPlayerId = playerId;
+            _winnerMethod = "WinningMoveByWayOfTheStone";
+        }
+
     }
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
