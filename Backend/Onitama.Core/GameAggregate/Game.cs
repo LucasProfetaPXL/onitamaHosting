@@ -128,7 +128,7 @@ internal class Game : IGame
         //}
 
         //_currentplayernr = (_currentplayernr + 1) % _players.Count();
-        ////throw new NotImplementedException();
+        //throw new NotImplementedException();
         //var position = new MoveCardGridCellType[to.Column, to.Row];
 
         //var moveCard = new MoveCard(moveCardName, position, Color.Red);
