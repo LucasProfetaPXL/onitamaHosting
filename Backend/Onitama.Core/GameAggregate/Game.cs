@@ -121,7 +121,6 @@ internal class Game : IGame
 
     public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
     {
-
         if (playerId != _players[_currentplayernr].Id)
         {
             throw new ApplicationException("It's not your turn!");
@@ -132,7 +131,7 @@ internal class Game : IGame
 
         // Vind de pion die verplaatst wordt
         IPawn pawn = null;
-        foreach (var p in currentPlayer.School.Pawns)
+        foreach (var p in currentPlayer.School.AllPawns)
         {
             if (p.Id == pawnId)
             {
@@ -163,10 +162,11 @@ internal class Game : IGame
         }
 
         // Maak een nieuwe Move
-        IMove move = new Move(pawn, to, card);
+        IMove move = new Move(card);
 
         // Voer de zet uit
-        _playMat.ExecuteMove(move, out var capturedPawn);
+        IPawn capturedPawn;
+        _playMat.ExecuteMove(move, out capturedPawn);
 
         // Controleer of de master-pion van de tegenstander is veroverd
         foreach (var opponent in _players.Where(p => p.Id != playerId))
@@ -174,14 +174,11 @@ internal class Game : IGame
             if (opponent.School.Master.Id == capturedPawn?.Id)
             {
                 // Tegenstander’s master-pion is veroverd
-                _winner = new GameResult
-                {
-                    WinnerPlayerId = playerId,
-                    WinningMethod = "Way of the Stone"
-                };
+                _winnerPlayerId = playerId;
+                _winnerMethod = "WinningMoveByWayOfTheStone";
 
                 // Spel beëindigen
-                EndGame(_winner);
+                EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
                 return;
             }
         }
@@ -189,6 +186,27 @@ internal class Game : IGame
         // Wissel van speler
         _currentplayernr = (_currentplayernr + 1) % _players.Length;
     }
+
+    private void EndGame(GameResult result)
+    {
+        // Logica voor het beëindigen van het spel, zoals het printen van de winnaar,
+        // het stoppen van verdere zetten, enz.
+        Console.WriteLine($"Player {result.WinnerPlayerId} wins by {result.WinningMethod}!");
+        //_gameOver = true;
+    }
+
+    public class GameResult
+    {
+        public Guid WinnerPlayerId { get; set; }
+        public string WinningMethod { get; set; }
+    }
+
+    // Properties for storing the winner
+    private Guid _winnerPlayerId;
+    private string _winnerMethod;
+
+
+
 
     //var position = new MoveCardGridCellType[to.Column, to.Row];
     //var moveCard = new MoveCard(moveCardName, position, Color.Red);
@@ -199,7 +217,6 @@ internal class Game : IGame
     //Call ExecuteMove on the play mat with the constructed IMove object
     //_playMat.ExecuteMove(move, out _);
 
-}
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
     {
