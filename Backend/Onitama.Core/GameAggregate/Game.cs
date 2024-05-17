@@ -116,7 +116,23 @@ internal class Game : IGame
 
     public IReadOnlyList<IMove> GetAllPossibleMovesFor(Guid playerId)
     {
-        
+        IPlayer currentPlayer = null;
+        List<IMove> moveList = new List<IMove>();
+        foreach (var player in _players) 
+        {
+            if (player.Id == playerId)
+            {
+                currentPlayer = player;
+            }
+        }
+        foreach (var moveCard in currentPlayer.MoveCards)
+        {
+            for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
+            {
+                moveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+            }
+        }
+        return moveList;
         throw new NotImplementedException();
     }
 
