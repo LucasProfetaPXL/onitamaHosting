@@ -115,6 +115,7 @@ internal class Game : IGame
 
     public IReadOnlyList<IMove> GetAllPossibleMovesFor(Guid playerId)
     {
+        
         throw new NotImplementedException();
     }
 
