@@ -1,4 +1,5 @@
 ﻿using Onitama.Core.GameAggregate.Contracts;
+using Onitama.Core.MoveCardAggregate;
 using Onitama.Core.MoveCardAggregate.Contracts;
 using Onitama.Core.PlayerAggregate;
 using Onitama.Core.PlayerAggregate.Contracts;
@@ -51,4 +52,5 @@ public interface IPlayMat
     /// The execution of the move results in the position of the pawn being updated on the play mat and in the pawn instance itself.
     /// </remarks>
     void ExecuteMove(IMove move, out IPawn capturedPawn);
+    
 }
