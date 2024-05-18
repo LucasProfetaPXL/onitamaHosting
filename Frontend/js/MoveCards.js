@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function (){
             'Accept': 'application/json',
             'Authorization': `Bearer ${sessionID}`
         }
-
     })
         .then(response =>{
             if (response.status === 200){

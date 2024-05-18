@@ -189,3 +189,50 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
  */
+
+
+const tableId = localStorage.getItem('tableId');
+const sessionID = sessionStorage.getItem('sessionID');
+// Define the request body
+const requestBody = {
+    numberOfPlayers: 2,
+    playerMatSize: 5,
+    moveCardSet: 0
+};
+fetch(`https://localhost:5051/api/Games/${tableId}`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${sessionID}`
+    },
+    body: JSON.stringify(requestBody)
+})
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response
+        console.log('Response:', data);
+
+        // Accessing moveCards from the response
+        if (data.seatedPlayers && data.seatedPlayers.length > 0) {
+            const moveCards = data.seatedPlayers[0].moveCards;
+
+            for (var i = 0; i < moveCards.length; i++){
+                var id = "card" + i;
+                window.alert(id);
+                let place = document.getElementById(id);
+                place.innerHTML = '';
+                place.insertAdjacentHTML("afterbegin", moveCards[i]);
+            }
+            // Use the moveCards
+            moveCards.forEach(card => {
+                console.log('Move Card Name:', card.name);
+                console.log('Move Card Grid:', card.grid);
+                console.log('Move Card Stamp Color:', card.stampColor);
+            });
+        } else {
+            console.log('No seated players found in the response.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
