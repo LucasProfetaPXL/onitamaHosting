@@ -82,12 +82,15 @@ internal class Game : IGame
     {
         IPlayer currentPlayer = null;
         IMoveCard currentMoveCard = null;
+        IReadOnlyList<ICoordinate> coordinateList = null;
+        IPawn currentPawn = null;
         List<IMove> moveList = new List<IMove>();
         foreach (var player in _players)
         {
             if (player.Id == playerId)
             {
                 currentPlayer = player;
+                currentPawn = currentPlayer.School.GetPawn(currentPlayer.Id);
             }
         }
         foreach (var moveCard in currentPlayer.MoveCards)
@@ -97,38 +100,18 @@ internal class Game : IGame
                 currentMoveCard = moveCard;
             }
         }
-
-        //Direction playDirection = Direction.North;
-        //Color playercolor = Color.AliceBlue;      
-
-
-        //IMoveCardRepository moveCardRepository;
-        ////IMoveCard card;
-        //// startcoordinate
-        //// playdirection
-        ////matsize
-        //for (int i = 0; i < _players.Length; i++)
-        //{
-        //    if (_players[i].Id == playerId)
-        //    {
-        //        playDirection = _players[i].Direction;
-        //        playercolor = _players[i].Color;
-        //    }
-        //}
-
-        //for (int i = 0; i < moveCardRepository.LoadSet(MoveCardSet.Original, _players[].Color); i++)
-        //{
-        //    if (moveCardRepository[i].Name == moveCardName)
-        //    {
-
-        //    }
-        //}
-        //moveCard = new MoveCard(moveCardName, moveCard., playercolor);
-
-
-        //_playMat.GetValidMoves(pawnId, moveCard , playDirection);
-
-        //MoveCard.GetPossibleTargetCoordinates();
+        for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
+        {
+            if (currentPlayer.School.AllPawns[i].Id == pawnId)
+            {
+                coordinateList = currentMoveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+            }
+        }
+        for (int i = 0; i < coordinateList.Count; i++)
+        {
+            moveList.Add(new Move(currentMoveCard, currentPawn, currentPlayer.Direction, coordinateList[i]));
+        }
+        return moveList;
         throw new NotImplementedException();
     }
 
@@ -136,7 +119,7 @@ internal class Game : IGame
     {
         IPlayer currentPlayer = null;
         List<IMove> moveList = new List<IMove>();
-        List<IMove> moveListForPawn = null;
+        IReadOnlyList<IMove> movesForPawn = null;
         foreach (var player in _players) 
         {
             if (player.Id == playerId)
@@ -148,7 +131,11 @@ internal class Game : IGame
         {
             for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
             {
-                moveListForPawn = moveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+                movesForPawn = GetPossibleMovesForPawn(currentPlayer.Id, currentPlayer.School.AllPawns[i].Id, moveCard.Name);
+                for (int j = 0; j < movesForPawn.Count; j++)
+                {
+                    moveList.Add(movesForPawn[j]);
+                }
             }
         }
         return moveList;

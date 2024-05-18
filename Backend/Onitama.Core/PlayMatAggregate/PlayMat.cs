@@ -66,6 +66,13 @@ internal class PlayMat : IPlayMat
 
     public IReadOnlyList<IMove> GetValidMoves(IPawn pawn, IMoveCard card, Direction playerDirection)
     {
+        IReadOnlyList<ICoordinate> coordinateList = card.GetPossibleTargetCoordinates(pawn.Position, playerDirection, Size);
+        List<IMove> moveList = new List<IMove>();
+        for (int i = 0; i < coordinateList.Count; i++)
+        {
+            moveList.Add(new Move(card, pawn, playerDirection, coordinateList[i]));
+        }
+        return moveList;
         throw new NotImplementedException();
     }
 
