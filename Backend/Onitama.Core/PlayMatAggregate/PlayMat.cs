@@ -60,7 +60,7 @@ internal class PlayMat : IPlayMat
     public int Size => _size; //TODO make variable from 5
 
     public void ExecuteMove(IMove move, out IPawn capturedPawn)
-    {
+    {   
         throw new NotImplementedException();
     }
 
