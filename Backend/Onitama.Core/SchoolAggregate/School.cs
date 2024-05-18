@@ -19,7 +19,7 @@ internal class School : ISchool
 
     public School(Guid playerId, Direction direction)
     {
-        int row = direction == Direction.North ? 0 : 5 - 1;
+        int row = direction == Direction.North ? 0 : 4;
         _Students = new Pawn[4];
         _AllPawns = new Pawn[5];
         IPawn pawn;
@@ -45,8 +45,8 @@ internal class School : ISchool
                     _Students[i - 1] = pawn;
                 }
             }
-
             _AllPawns[i] = pawn;
+            Console.WriteLine($"Pawn created at position: ({pawn.Position.Row}, {pawn.Position.Column})");
         }
         _TempleArchPosition = new Coordinate(direction.XStep, direction.YStep);
     }
@@ -72,7 +72,7 @@ internal class School : ISchool
 
     public IPawn[] AllPawns => _AllPawns;
 
-    public ICoordinate TempleArchPosition { get => _TempleArchPosition; set => value = _TempleArchPosition; }
+    public ICoordinate TempleArchPosition { get => _TempleArchPosition; set => _TempleArchPosition = value; }
 
  
 
