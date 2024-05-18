@@ -148,7 +148,7 @@ internal class Game : IGame
         {
             for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
             {
-                moveListForPawn = moveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+                //moveListForPawn = moveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
             }
         }
         return moveList;
@@ -157,30 +157,26 @@ internal class Game : IGame
 
     public void MovePawn(Guid playerId, Guid pawnId, String moveCardName, ICoordinate to)
     {
-        //_currentplayernr = (_currentplayernr + 1) % _players.Length;
-
+        _currentplayernr = (_currentplayernr + 1) % _players.Length;
         if (playerId != _players[_currentplayernr].Id)
         {
             throw new ApplicationException("It's not your turn!");
         }
 
-
         // Vind de speler die aan de beurt is
         IPlayer currentPlayer = _players[_currentplayernr];
-        if (currentPlayer == null)
-        {
-            throw new ApplicationException("Current player is null.");
-        }
 
         // Vind de pion die verplaatst wordt
-        IPawn pawn = currentPlayer.School?.AllPawns?.FirstOrDefault(p => p.Id == pawnId);
+        IPawn pawn = currentPlayer.School.AllPawns.FirstOrDefault(p => p.Id == pawnId);
+
         if (pawn == null)
         {
             throw new ApplicationException("Pawn not found!");
         }
 
         // Vind de bijbehorende move card
-        IMoveCard card = currentPlayer.MoveCards?.FirstOrDefault(c => c.Name == moveCardName);
+        IMoveCard card = currentPlayer.MoveCards.FirstOrDefault(c => c.Name == moveCardName);
+
         if (card == null)
         {
             throw new ApplicationException("Move card not found!");
@@ -188,35 +184,19 @@ internal class Game : IGame
 
         // Maak een nieuwe Move
         IMove move = new Move(card);
-        if (move == null)
-        {
-            throw new ApplicationException("Move could not be created.");
-        }
 
-        // Voer de zet uit en controleer op null-referenties
-        // IPawn capturedPawn = null;
-        if (to
-        try
-        {
-            _playMat.ExecuteMove(move);
-        }
-        catch (NullReferenceException ex)
-        {
-            throw new ApplicationException("A null reference occurred while executing the move.", ex);
-        }
-        catch (Exception ex)
-        {
-            throw new ApplicationException("An unexpected error occurred while executing the move.", ex);
-        }
+        // Voer de zet uit
+        IPawn capturedPawn = null;
+        _playMat.ExecuteMove(move, out capturedPawn);
 
-        // Controleer of de master-pion van de tegenstander is veroverd
+        // Controleer of een tegenstander is gevangen
         if (capturedPawn != null)
         {
             foreach (var opponent in _players.Where(p => p.Id != playerId))
             {
-                if (opponent?.School?.Master?.Id == capturedPawn.Id)
+                if (opponent.School.AllPawns.Any(p => p.Id == capturedPawn.Id))
                 {
-                    // Tegenstander’s master-pion is veroverd
+                    // Tegenstander’s pion is veroverd
                     _winnerPlayerId = playerId;
                     _winnerMethod = "WinningMoveByWayOfTheStone";
 
@@ -227,10 +207,9 @@ internal class Game : IGame
             }
         }
 
+        // Wissel van speler
         _currentplayernr = (_currentplayernr + 1) % _players.Length;
     }
-
-    
 
     private void EndGame(GameResult result)
     {
