@@ -142,8 +142,9 @@ internal class Game : IGame
         throw new NotImplementedException();
     }
 
-    public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
+    public void MovePawn(Guid playerId, Guid pawnId, String moveCardName, ICoordinate to)
     {
+        _currentplayernr = (_currentplayernr + 1) % _players.Length;
         if (playerId != _players[_currentplayernr].Id)
         {
             throw new ApplicationException("It's not your turn!");
@@ -153,15 +154,7 @@ internal class Game : IGame
         IPlayer currentPlayer = _players[_currentplayernr];
 
         // Vind de pion die verplaatst wordt
-        IPawn pawn = null;
-        foreach (var p in currentPlayer.School.AllPawns)
-        {
-            if (p.Id == pawnId)
-            {
-                pawn = p;
-                break;
-            }
-        }
+        IPawn pawn = currentPlayer.School.AllPawns.FirstOrDefault(p => p.Id == pawnId);
 
         if (pawn == null)
         {
@@ -169,15 +162,7 @@ internal class Game : IGame
         }
 
         // Vind de bijbehorende move card
-        IMoveCard card = null;
-        foreach (var c in currentPlayer.MoveCards)
-        {
-            if (c.Name == moveCardName)
-            {
-                card = c;
-                break;
-            }
-        }
+        IMoveCard card = currentPlayer.MoveCards.FirstOrDefault(c => c.Name == moveCardName);
 
         if (card == null)
         {
@@ -188,21 +173,24 @@ internal class Game : IGame
         IMove move = new Move(card);
 
         // Voer de zet uit
-        IPawn capturedPawn;
+        IPawn capturedPawn = null;
         _playMat.ExecuteMove(move, out capturedPawn);
 
-        // Controleer of de master-pion van de tegenstander is veroverd
-        foreach (var opponent in _players.Where(p => p.Id != playerId))
+        // Controleer of een tegenstander is gevangen
+        if (capturedPawn != null)
         {
-            if (opponent.School.Master.Id == capturedPawn?.Id)
+            foreach (var opponent in _players.Where(p => p.Id != playerId))
             {
-                // Tegenstander’s master-pion is veroverd
-                _winnerPlayerId = playerId;
-                _winnerMethod = "WinningMoveByWayOfTheStone";
+                if (opponent.School.AllPawns.Any(p => p.Id == capturedPawn.Id))
+                {
+                    // Tegenstander’s pion is veroverd
+                    _winnerPlayerId = playerId;
+                    _winnerMethod = "WinningMoveByWayOfTheStone";
 
-                // Spel beëindigen
-                EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
-                return;
+                    // Spel beëindigen
+                    EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
+                    return;
+                }
             }
         }
 
@@ -215,7 +203,7 @@ internal class Game : IGame
         // Logica voor het beëindigen van het spel, zoals het printen van de winnaar,
         // het stoppen van verdere zetten, enz.
         Console.WriteLine($"Player {result.WinnerPlayerId} wins by {result.WinningMethod}!");
-        //_gameOver = true;
+        _gameOver = true;  // Spel beëindigen door _gameOver in te stellen
     }
 
     public class GameResult
@@ -227,8 +215,7 @@ internal class Game : IGame
     // Properties for storing the winner
     private Guid _winnerPlayerId;
     private string _winnerMethod;
-
-
+    private bool _gameOver = false; // Voeg deze property toe om de game-over status bij te houden
 
 
     //var position = new MoveCardGridCellType[to.Column, to.Row];
