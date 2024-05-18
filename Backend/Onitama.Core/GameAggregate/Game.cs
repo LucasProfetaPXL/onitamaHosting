@@ -132,8 +132,8 @@ internal class Game : IGame
         IPlayer opponent = _players.FirstOrDefault(player => player.Id != playerId);
         if (opponent != null && opponent.School.Master.Id == pawnId)
         {
-            _winnerPlayerId = playerId;
-            _winnerMethod = "WinningMoveByWayOfTheStone";
+            //_winnerPlayerId = playerId;
+            //_winnerMethod = "WinningMoveByWayOfTheStone";
         }
 
     }
