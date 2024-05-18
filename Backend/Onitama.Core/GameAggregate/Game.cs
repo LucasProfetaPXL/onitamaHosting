@@ -35,7 +35,7 @@ internal class Game : IGame
 
     public Guid WinnerPlayerId => _players[_currentplayernr].Id;
 
-    public string WinnerMethod => throw new NotImplementedException();
+    public string WinnerMethod => _winnerMethod;
 
     /// <summary>
     /// Creates a new game and determines the player to play first.
