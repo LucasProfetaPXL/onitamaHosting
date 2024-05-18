@@ -18,11 +18,14 @@ internal class Move : IMove
 
     public Move(IMoveCard card)
     {
-
+        Card = card;
     }
 
     public Move(IMoveCard card, IPawn pawn, Direction playerDirection, ICoordinate to)
     {
-
+        Card = card;
+        Pawn = pawn;
+        PlayerDirection = playerDirection;
+        To = to;
     }
 }

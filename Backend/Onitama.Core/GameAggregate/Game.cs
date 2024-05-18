@@ -80,48 +80,71 @@ internal class Game : IGame
 
     public IReadOnlyList<IMove> GetPossibleMovesForPawn(Guid playerId, Guid pawnId, string moveCardName)
     {
-        Direction playDirection = Direction.North;
-        Color playercolor = Color.AliceBlue;      
-
-       
-        IMoveCardRepository moveCardRepository;
-        //IMoveCard card;
-        // startcoordinate
-        // playdirection
-        //matsize
-        for (int i = 0; i < _players.Length; i++)
+        IPlayer currentPlayer = null;
+        IMoveCard currentMoveCard = null;
+        IReadOnlyList<ICoordinate> coordinateList = null;
+        IPawn currentPawn = null;
+        List<IMove> moveList = new List<IMove>();
+        foreach (var player in _players)
         {
-            if (_players[i].Id == playerId)
+            if (player.Id == playerId)
             {
-                playDirection = _players[i].Direction;
-                playercolor = _players[i].Color;
+                currentPlayer = player;
+                currentPawn = currentPlayer.School.GetPawn(currentPlayer.Id);
             }
         }
-
-        //for (int i = 0; i < moveCardRepository.LoadSet(MoveCardSet.Original, _players[].Color); i++)
-        //{
-        //    if (moveCardRepository[i].Name == moveCardName)
-        //    {
-
-        //    }
-        //}
-        //moveCard = new MoveCard(moveCardName, moveCard., playercolor);
-        
-        
-        //_playMat.GetValidMoves(pawnId, moveCard , playDirection);
-
-        //MoveCard.GetPossibleTargetCoordinates();
+        foreach (var moveCard in currentPlayer.MoveCards)
+        {
+            if (moveCard.Name == moveCardName)
+            {
+                currentMoveCard = moveCard;
+            }
+        }
+        for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
+        {
+            if (currentPlayer.School.AllPawns[i].Id == pawnId)
+            {
+                coordinateList = currentMoveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+            }
+        }
+        for (int i = 0; i < coordinateList.Count; i++)
+        {
+            moveList.Add(new Move(currentMoveCard, currentPawn, currentPlayer.Direction, coordinateList[i]));
+        }
+        return moveList;
         throw new NotImplementedException();
     }
 
     public IReadOnlyList<IMove> GetAllPossibleMovesFor(Guid playerId)
     {
+        IPlayer currentPlayer = null;
+        List<IMove> moveList = new List<IMove>();
+        IReadOnlyList<IMove> movesForPawn = null;
+        foreach (var player in _players) 
+        {
+            if (player.Id == playerId)
+            {
+                currentPlayer = player;
+            }
+        }
+        foreach (var moveCard in currentPlayer.MoveCards)
+        {
+            for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
+            {
+                movesForPawn = GetPossibleMovesForPawn(currentPlayer.Id, currentPlayer.School.AllPawns[i].Id, moveCard.Name);
+                for (int j = 0; j < movesForPawn.Count; j++)
+                {
+                    moveList.Add(movesForPawn[j]);
+                }
+            }
+        }
+        return moveList;
         throw new NotImplementedException();
     }
 
-    public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
+    public void MovePawn(Guid playerId, Guid pawnId, String moveCardName, ICoordinate to)
     {
-
+        _currentplayernr = (_currentplayernr + 1) % _players.Length;
         if (playerId != _players[_currentplayernr].Id)
         {
             throw new ApplicationException("It's not your turn!");
@@ -131,15 +154,7 @@ internal class Game : IGame
         IPlayer currentPlayer = _players[_currentplayernr];
 
         // Vind de pion die verplaatst wordt
-        IPawn pawn = null;
-        foreach (var p in currentPlayer.School.Pawns)
-        {
-            if (p.Id == pawnId)
-            {
-                pawn = p;
-                break;
-            }
-        }
+        IPawn pawn = currentPlayer.School.AllPawns.FirstOrDefault(p => p.Id == pawnId);
 
         if (pawn == null)
         {
@@ -147,15 +162,7 @@ internal class Game : IGame
         }
 
         // Vind de bijbehorende move card
-        IMoveCard card = null;
-        foreach (var c in currentPlayer.MoveCards)
-        {
-            if (c.Name == moveCardName)
-            {
-                card = c;
-                break;
-            }
-        }
+        IMoveCard card = currentPlayer.MoveCards.FirstOrDefault(c => c.Name == moveCardName);
 
         if (card == null)
         {
@@ -163,32 +170,53 @@ internal class Game : IGame
         }
 
         // Maak een nieuwe Move
-        IMove move = new Move(pawn, to, card);
+        IMove move = new Move(card);
 
         // Voer de zet uit
-        _playMat.ExecuteMove(move, out var capturedPawn);
+        IPawn capturedPawn = null;
+        _playMat.ExecuteMove(move, out capturedPawn);
 
-        // Controleer of de master-pion van de tegenstander is veroverd
-        foreach (var opponent in _players.Where(p => p.Id != playerId))
+        // Controleer of een tegenstander is gevangen
+        if (capturedPawn != null)
         {
-            if (opponent.School.Master.Id == capturedPawn?.Id)
+            foreach (var opponent in _players.Where(p => p.Id != playerId))
             {
-                // Tegenstander’s master-pion is veroverd
-                _winner = new GameResult
+                if (opponent.School.AllPawns.Any(p => p.Id == capturedPawn.Id))
                 {
-                    WinnerPlayerId = playerId,
-                    WinningMethod = "Way of the Stone"
-                };
+                    // Tegenstander’s pion is veroverd
+                    _winnerPlayerId = playerId;
+                    _winnerMethod = "WinningMoveByWayOfTheStone";
 
-                // Spel beëindigen
-                EndGame(_winner);
-                return;
+                    // Spel beëindigen
+                    EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
+                    return;
+                }
             }
         }
 
         // Wissel van speler
         _currentplayernr = (_currentplayernr + 1) % _players.Length;
     }
+
+    private void EndGame(GameResult result)
+    {
+        // Logica voor het beëindigen van het spel, zoals het printen van de winnaar,
+        // het stoppen van verdere zetten, enz.
+        Console.WriteLine($"Player {result.WinnerPlayerId} wins by {result.WinningMethod}!");
+        _gameOver = true;  // Spel beëindigen door _gameOver in te stellen
+    }
+
+    public class GameResult
+    {
+        public Guid WinnerPlayerId { get; set; }
+        public string WinningMethod { get; set; }
+    }
+
+    // Properties for storing the winner
+    private Guid _winnerPlayerId;
+    private string _winnerMethod;
+    private bool _gameOver = false; // Voeg deze property toe om de game-over status bij te houden
+
 
     //var position = new MoveCardGridCellType[to.Column, to.Row];
     //var moveCard = new MoveCard(moveCardName, position, Color.Red);
@@ -199,7 +227,6 @@ internal class Game : IGame
     //Call ExecuteMove on the play mat with the constructed IMove object
     //_playMat.ExecuteMove(move, out _);
 
-}
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
     {

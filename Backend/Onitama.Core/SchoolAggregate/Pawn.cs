@@ -15,6 +15,7 @@ internal class Pawn : IPawn
     {
         _ownerId = ownerId;
         _type = type;
+        _position = null;
     }
 
     public Guid Id => Guid.NewGuid();
@@ -23,5 +24,11 @@ internal class Pawn : IPawn
 
     public PawnType Type => _type;
 
-    public ICoordinate Position { get => _position; set => value = _position; }
+    public ICoordinate Position { 
+        get => _position;
+        set 
+        {
+            _position = value; 
+        } 
+    }
 }
