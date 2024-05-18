@@ -148,7 +148,7 @@ internal class Game : IGame
         {
             for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
             {
-                moveListForPawn = moveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+                //moveListForPawn = moveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
             }
         }
         return moveList;
