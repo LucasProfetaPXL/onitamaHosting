@@ -284,11 +284,6 @@ internal class Game : IGame
 
 
 
-
-
-
-
-
     //var position = new MoveCardGridCellType[to.Column, to.Row];
     //var moveCard = new MoveCard(moveCardName, position, Color.Red);
 
@@ -305,7 +300,7 @@ internal class Game : IGame
         {
             throw new ApplicationException("turn");
         }
-        if (GetAllPossibleMovesFor(playerId).Count() == 0)
+        if (GetAllPossibleMovesFor(playerId).Count() > 0)
         {
             throw new ApplicationException("valid move");
         }
@@ -318,13 +313,14 @@ internal class Game : IGame
                     if (_players[i].MoveCards[j].Name == moveCardName)
                     {
                         _players[i].MoveCards.RemoveAt(j);
-                        _players[i].MoveCards.Insert(j,_extraMoveCard);
+                        _players[i].MoveCards.Insert(j, _extraMoveCard);
                         return;
                     }
                 }
             }
         }
     }
+
 
     public IPlayer GetNextOpponent(Guid playerId) //extra
     {
