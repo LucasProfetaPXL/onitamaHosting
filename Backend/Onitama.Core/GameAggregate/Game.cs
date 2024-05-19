@@ -23,6 +23,10 @@ internal class Game : IGame
     private IMoveCard _moveCard;
     private int _currentplayernr;
 
+    private Guid _winnerPlayerId;
+    private string _winnerMethod;
+    private bool _gameOver = false;
+
     public Guid Id => _id;
 
     public IPlayMat PlayMat => _playMat;
@@ -81,36 +85,80 @@ internal class Game : IGame
     public IReadOnlyList<IMove> GetPossibleMovesForPawn(Guid playerId, Guid pawnId, string moveCardName)
     {
         IPlayer currentPlayer = null;
-        IMoveCard currentMoveCard = null;
-        IReadOnlyList<ICoordinate> coordinateList = null;
+        bool inPossession = false;
         IPawn currentPawn = null;
-        List<IMove> moveList = new List<IMove>();
+        IMoveCard currentcard = null;
+        if (PlayerToPlayId != playerId)
+        {
+            throw new InvalidOperationException("player");
+        }
+
+
         foreach (var player in _players)
         {
-            if (player.Id == playerId)
+            if (playerId == player.Id)
             {
                 currentPlayer = player;
-                currentPawn = currentPlayer.School.GetPawn(currentPlayer.Id);
             }
         }
-        foreach (var moveCard in currentPlayer.MoveCards)
+        foreach (var card in currentPlayer.MoveCards)
         {
-            if (moveCard.Name == moveCardName)
+            if (moveCardName == card.Name)
             {
-                currentMoveCard = moveCard;
+                inPossession = true;
+                currentcard = card;
+                break;
             }
         }
-        for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
+        if (inPossession == false)
         {
-            if (currentPlayer.School.AllPawns[i].Id == pawnId)
+            throw new ApplicationException("card");
+        }
+
+        foreach(var pawn in currentPlayer.School.AllPawns) 
+        {
+            if (pawn.Id == pawnId)
             {
-                coordinateList = currentMoveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+                currentPawn = pawn;
             }
         }
-        for (int i = 0; i < coordinateList.Count; i++)
-        {
-            moveList.Add(new Move(currentMoveCard, currentPawn, currentPlayer.Direction, coordinateList[i]));
-        }
+
+
+        return _playMat.GetValidMoves(currentPawn, currentcard, currentPlayer.Direction);
+
+        //IMoveCard currentMoveCard = null;
+        //IReadOnlyList<ICoordinate> coordinateList = null;
+        //IPawn currentPawn = null;
+        List<IMove> moveList = new List<IMove>();
+
+
+
+        //foreach (var player in _players)
+        //{
+        //    if (player.Id == playerId)
+        //    {
+        //        currentPlayer = player;
+        //        currentPawn = currentPlayer.School.GetPawn(currentPlayer.Id);
+        //    }
+        //}
+        //foreach (var moveCard in currentPlayer.MoveCards)
+        //{
+        //    if (moveCard.Name == moveCardName)
+        //    {
+        //        currentMoveCard = moveCard;
+        //    }
+        //}
+        //for (int i = 0; i < currentPlayer.School.AllPawns.Length; i++)
+        //{
+        //    if (currentPlayer.School.AllPawns[i].Id == pawnId)
+        //    {
+        //        coordinateList = currentMoveCard.GetPossibleTargetCoordinates(currentPlayer.School.AllPawns[i].Position, currentPlayer.Direction, _playMat.Size);
+        //    }
+        //}
+        //for (int i = 0; i < coordinateList.Count; i++)
+        //{
+        //    moveList.Add(new Move(currentMoveCard, currentPawn, currentPlayer.Direction, coordinateList[i]));
+        //}
         return moveList;
         throw new NotImplementedException();
     }
@@ -219,10 +267,7 @@ internal class Game : IGame
         public string WinningMethod { get; set; }
     }
 
-    // Properties for storing the winner
-    private Guid _winnerPlayerId;
-    private string _winnerMethod;
-    private bool _gameOver = false; // Voeg deze property toe om de game-over status bij te houden
+
 
 
     //var position = new MoveCardGridCellType[to.Column, to.Row];
