@@ -3,27 +3,47 @@ const container = document.querySelector('.game-boardHTML');
 
 draggables.forEach(draggable => {
     draggable.addEventListener('dragstart', (e) => {
-        draggable.classList.add('dragging');
+        draggable.classList.add('dragging')
     })
     draggable.addEventListener('dragend', () => {
-        draggable.classList.remove('dragging');
+        draggable.classList.remove('dragging')
     })
 })
+
 container.addEventListener('dragover', (e) => {
     e.preventDefault()
-    const afterElement = getDragAfterElement(container, e.clientY);
-    const draggable  = document.querySelector('.dragging')
-    container.appendChild(draggable)
+    const afterElement = getDragAfterElement(container, e.clientY)
+    const draggable = document.querySelector('.dragging')
+
+    if (draggable && afterElement) {
+        console.log(afterElement)
+        if (afterElement.nextSibling !== draggable) {
+            container.insertBefore(draggable, afterElement.nextSibling)
+        }
+    }
 })
 
-function getDragAfterElement(container, y){
-    const draggableElements =  container.querySelectorAll('.pawn:not(.dragging)')
+function getDragAfterElement(container, y) {
+    const draggableElements = container.querySelectorAll('.pawn:not(.dragging)');
 
-    draggableElements.reduce((closest, child)=>{
+    // Test to see if there is a draggable element
+    if (draggableElements.length === 0) {
+        return null;
+    }
+
+    return [...draggableElements].reduce((closest, child) => {
         const box = child.getBoundingClientRect()
-        console.log(box)
-    },{offset: Number.POSITIVE_INFINITY} )
+        const offset = y - box.top - box.height / 2;
+        console.log(offset);
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child }
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element
 }
+
+
 
 
 
