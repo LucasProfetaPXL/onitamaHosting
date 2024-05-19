@@ -225,33 +225,48 @@ internal class Game : IGame
         var possibleTargets = card.GetPossibleTargetCoordinates(pawn.Position, currentPlayer.Direction, _playMat.Size);
         Console.WriteLine("Possible targets: " + string.Join(", ", possibleTargets.Select(c => c.ToString())));
 
-        if (!possibleTargets.Contains(to))
+        if (!possibleTargets.Any(pt => pt.Equals(to)))
         {
             Console.WriteLine("Invalid move: Target coordinate is not in the possible targets.");
-            throw new ApplicationException("Invalid move!");
         }
 
         IMove move = new Move(card, pawn, currentPlayer.Direction, to);
         IPawn capturedPawn = null;
         _playMat.ExecuteMove(move, out capturedPawn);
 
+        // Update pion positie
+        pawn.Position = to;
+
+        // Controleer of een tegenstander is gevangen (WinningMoveByWayOfTheStone)
         if (capturedPawn != null)
         {
             foreach (var opponent in _players.Where(p => p.Id != playerId))
             {
-                if (opponent.School.AllPawns.Any(p => p.Id == capturedPawn.Id))
+                if (opponent.School.Master.Id == capturedPawn.Id)
                 {
                     _winnerPlayerId = playerId;
-                    _winnerMethod = "WinningMoveByWayOfTheStone";
+                    _winnerMethod = "Way Of The Stone";
                     EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
                     return;
                 }
             }
         }
 
+        // Controleer of de master pawn op de tempelpositie staat (WinningMoveByWayOfTheWind)
+        foreach (var opponent in _players.Where(p => p.Id != playerId))
+        {
+            if (pawn.Id == currentPlayer.School.Master.Id && to.Equals(opponent.School.TempleArchPosition))
+            {
+                _winnerPlayerId = playerId;
+                _winnerMethod = "Way Of The Stream";
+                EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
+                return;
+            }
+        }
+
+        // Wissel van speler
         _currentplayernr = (_currentplayernr + 1) % _players.Length;
     }
-
 
     private void EndGame(GameResult result)
     {
@@ -266,6 +281,10 @@ internal class Game : IGame
         public Guid WinnerPlayerId { get; set; }
         public string WinningMethod { get; set; }
     }
+
+
+
+
 
 
 
