@@ -31,17 +31,64 @@ document.addEventListener('DOMContentLoaded', function (){
 })
 function GetMoveCards(response){
     response.json().then(data => {
-        var players = []
-        data.seatedPlayers.forEach(player => {
-            if(player.moveCards.length === 2) {
-                var playerData = {
-                    id: player.id,
-                    moveCards: player.moveCards
+        const imageArray = ["../Images/spelkaarten/boar.png", "../Images/spelkaarten/cobra.png", "../Images/spelkaarten/crab.png", "../Images/spelkaarten/crane.png", "../Images/spelkaarten/dragon.png", "../Images/spelkaarten/eel.png", "../Images/spelkaarten/elephant.png", "../Images/spelkaarten/frog.png", "../Images/spelkaarten/goose.png", "../Images/spelkaarten/horse.png", "../Images/spelkaarten/mantis.png", "../Images/spelkaarten/monkey.png", "../Images/spelkaarten/ox.png", "../Images/spelkaarten/rabbit.png", "../Images/spelkaarten/rooster.png", "../Images/spelkaarten/tiger.png"];
+        if (localStorage.getItem("card1") == null){ //images aanvullen
+            var playcards = [];
+            for (var i = 1; i <= 5; i++){
+                var id = "card" + i;
+                var randomIndex = Math.floor(Math.random() * imageArray.length);
+                playcards.push(imageArray[randomIndex]);
+                while (playcards.includes(imageArray[randomIndex])){
+                    randomIndex = Math.floor(Math.random() * imageArray.length);
                 }
-                players.push(playerData)
+                playcards.push(imageArray[randomIndex]);
+                                                                                                                // document.createElement('img')
+
+                //window.alert(i + id);
+                localStorage.setItem(id, imageArray[randomIndex]);
+                let card = "card" + i;
+                let cardimg = document.createElement('img');
+                let path = imageArray[i];
+                cardimg.src = path;
+                //window.alert(cardimg + path + imageArray[i]);
+                document.getElementById(card).appendChild(cardimg);
             }
-        })
-        localStorage.setItem('playerMoveCards', JSON.stringify(players))
+        }
+        else{
+            for (var i = 1; i <= 5; i++){
+                let card = "card" + i;
+                let cardimg = document.createElement('img');
+                let path = imageArray[i];
+                cardimg.src = path;
+                //window.alert(cardimg + " else" + path + imageArray[i]);
+                document.getElementById(card).appendChild(cardimg);
+            }
+
+
+        }
+
+
+
+        // for (var i = 1; i <= 5; i++){
+        //     var id = "card" + i;
+        //     window.alert(id);
+        //     let place = document.getElementById(id);
+        //     place.innerHTML = '';
+        //     window.alert("?");
+        //     place.insertAdjacentHTML("afterbegin", moveCards[i]);
+        // }
+        //var players = []
+        // data.seatedPlayers.forEach(player => {
+        //     if(player.moveCards.length === 2) {
+        //         var playerData = {
+        //             id: player.id,
+        //             moveCards: player.moveCards
+        //         }
+        //         window.alert(playerData);
+        //         players.push(playerData)
+        //     }
+        // })
+        // localStorage.setItem('playerMoveCards', JSON.stringify(players))
     })
 }
 
