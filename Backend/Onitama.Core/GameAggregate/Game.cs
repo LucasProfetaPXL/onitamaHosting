@@ -142,61 +142,68 @@ internal class Game : IGame
         throw new NotImplementedException();
     }
 
-    public void MovePawn(Guid playerId, Guid pawnId, String moveCardName, ICoordinate to)
+    public void MovePawn(Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
     {
-        _currentplayernr = (_currentplayernr + 1) % _players.Length;
+        if (_gameOver)
+        {
+            throw new ApplicationException("The game is already over!");
+        }
+
         if (playerId != _players[_currentplayernr].Id)
         {
             throw new ApplicationException("It's not your turn!");
         }
 
-        // Vind de speler die aan de beurt is
         IPlayer currentPlayer = _players[_currentplayernr];
-
-        // Vind de pion die verplaatst wordt
         IPawn pawn = currentPlayer.School.AllPawns.FirstOrDefault(p => p.Id == pawnId);
-
         if (pawn == null)
         {
             throw new ApplicationException("Pawn not found!");
         }
 
-        // Vind de bijbehorende move card
         IMoveCard card = currentPlayer.MoveCards.FirstOrDefault(c => c.Name == moveCardName);
-
         if (card == null)
         {
             throw new ApplicationException("Move card not found!");
         }
 
-        // Maak een nieuwe Move
-        IMove move = new Move(card);
+        // Log de huidige status en parameters
+        Console.WriteLine($"Current player: {currentPlayer.Id}");
+        Console.WriteLine($"Pawn ID: {pawnId}");
+        Console.WriteLine($"Move card: {moveCardName}");
+        Console.WriteLine($"Target coordinate: {to}");
 
-        // Voer de zet uit
+        // Controleer mogelijke doelcoördinaten
+        var possibleTargets = card.GetPossibleTargetCoordinates(pawn.Position, currentPlayer.Direction, _playMat.Size);
+        Console.WriteLine("Possible targets: " + string.Join(", ", possibleTargets.Select(c => c.ToString())));
+
+        if (!possibleTargets.Contains(to))
+        {
+            Console.WriteLine("Invalid move: Target coordinate is not in the possible targets.");
+            throw new ApplicationException("Invalid move!");
+        }
+
+        IMove move = new Move(card, pawn, currentPlayer.Direction, to);
         IPawn capturedPawn = null;
         _playMat.ExecuteMove(move, out capturedPawn);
 
-        // Controleer of een tegenstander is gevangen
         if (capturedPawn != null)
         {
             foreach (var opponent in _players.Where(p => p.Id != playerId))
             {
                 if (opponent.School.AllPawns.Any(p => p.Id == capturedPawn.Id))
                 {
-                    // Tegenstander’s pion is veroverd
                     _winnerPlayerId = playerId;
                     _winnerMethod = "WinningMoveByWayOfTheStone";
-
-                    // Spel beëindigen
                     EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
                     return;
                 }
             }
         }
 
-        // Wissel van speler
         _currentplayernr = (_currentplayernr + 1) % _players.Length;
     }
+
 
     private void EndGame(GameResult result)
     {
