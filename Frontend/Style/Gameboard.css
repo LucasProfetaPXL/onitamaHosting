@@ -12,7 +12,13 @@
 
 .cell{
     border: 2px solid black;
+    cursor: move;
+
 }
+.cell.dragging{
+    opacity: .5;
+}
+
 .who{
     color: black;
 }

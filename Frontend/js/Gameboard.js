@@ -1,12 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
 
+document.addEventListener('DOMContentLoaded', function() {
+
+    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
     // Created a local object for testing
     // var playerColors = {
     //     "player1": "red",
     //     "player2": "blue"
-    // };
 
+    // };
     var boardContainer = document.getElementById('game-boardHTML');
     let k = 1;
     for (var i = 0; i < 5; i++) {
@@ -21,16 +22,16 @@ document.addEventListener('DOMContentLoaded', function() {
             //cell.firstElementChild.setAttribute("draggable", true)
             //cell.firstChild?.firstChild.setAttribute('draggable', true)
             cell.setAttribute('square-id', (i*j))
+
             if (i === 0 || i === 4) {
 
                 let pawn = document.createElement('div');
-
                 pawn.className = 'pawn';
+                pawn.setAttribute('draggable', "true")
                 var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1];
-
                 pawn.style.backgroundColor = playerColors[playerId];
-                var pawnImage = document.createElement('img');
 
+                var pawnImage = document.createElement('img');
                 pawnImage.className = 'pawn-image';
                 if (j === 2) {
                     imagename = `../Images/master${pawn.style.backgroundColor}.png`
@@ -40,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     imagename =  `../Images/apprenticePawn${pawn.style.backgroundColor}.png`
                     pawnImage.src = imagename;
                 }
-                pawnImage.setAttribute('draggable', true)
                 // Add the image to the pawn
 
                 pawn.appendChild(pawnImage);
