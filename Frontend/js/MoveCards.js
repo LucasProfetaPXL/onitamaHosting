@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function (){
     const tabled = localStorage.getItem('tableId');
     const sessionID = sessionStorage.getItem('sessionID');
-    //const sessionID = sessionStorage.getItem('sessionID');
+
     fetch(`https://localhost:5051/api/Games/${tabled}`,{
         method : 'GET',
         mode : 'cors',
