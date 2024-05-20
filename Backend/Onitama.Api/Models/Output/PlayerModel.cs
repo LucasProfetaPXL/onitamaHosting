@@ -18,7 +18,9 @@ public class PlayerModel
     {
         public MappingProfile()
         {
-            CreateMap<IPlayer, PlayerModel>();
+            CreateMap<IPlayer, PlayerModel>()
+                .ForMember(dest => dest.Color, opt => opt.MapFrom(src => src.Color.Name)) // Map Color property
+                .ForMember(dest => dest.Direction, opt => opt.MapFrom(src => src.Direction.ToString())); // Map Direction property
         }
     }
 }
