@@ -1,86 +1,75 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
-    // Created a local object for testing
-    // var playerColors = {
-    //     "player1": "red",
-    //     "player2": "blue"
-
-    // };
+    var playerColors = JSON.parse(localStorage.getItem('PlayerColors')) || {
+        "player1": "red",
+        "player2": "blue"
+    };
     var boardContainer = document.getElementById('game-boardHTML');
     let k = 1;
+
     for (var i = 0; i < 5; i++) {
         for (var j = 0; j < 5; j++) {
-            // Create a new cell
             let cell = document.createElement('div');
-            cell.classList.add('cell')
-            cell.className = 'cell';
-            cell.dataset.row = i;
-            cell.dataset.col = j;
-            cell.id = `cell${k}`;
-            //cell.firstElementChild.setAttribute("draggable", true)
-            //cell.firstChild?.firstChild.setAttribute('draggable', true)
-            cell.setAttribute('square-id', (i*j))
+            cell.classList.add('cell');
+            cell.dataset.row = i
+            cell.dataset.col = j
+            cell.id = `cell${k}`
+            cell.setAttribute('square-id', (i * j));
+
+            cell.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            })
+
+            cell.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const draggable = document.querySelector('.dragging');
+                if (draggable && !cell.querySelector('.pawn')) {
+                    cell.appendChild(draggable);
+                }
+            })
 
             if (i === 0 || i === 4) {
-
-                let pawn = document.createElement('div');
+                let pawn = document.createElement('div')
                 pawn.className = 'pawn';
-                pawn.setAttribute('draggable', "true")
-                var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1];
+                pawn.setAttribute('draggable', "true");
+                var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1]
                 pawn.style.backgroundColor = playerColors[playerId];
 
                 var pawnImage = document.createElement('img');
                 pawnImage.className = 'pawn-image';
                 if (j === 2) {
-                    imagename = `../Images/master${pawn.style.backgroundColor}.png`
-                    //window.alert(imagename)
-                    pawnImage.src = imagename;
+                    pawnImage.src = `../Images/master${pawn.style.backgroundColor}.png`;
                 } else {
-                    imagename =  `../Images/apprenticePawn${pawn.style.backgroundColor}.png`
-                    pawnImage.src = imagename;
+                    pawnImage.src = `../Images/apprenticePawn${pawn.style.backgroundColor}.png`;
                 }
-                // Add the image to the pawn
 
                 pawn.appendChild(pawnImage);
-                // Add the pawn to the cell
-
                 cell.appendChild(pawn);
             }
             k++;
-            console.log(cell.firstElementChild);
-
             boardContainer.appendChild(cell);
         }
     }
 
-    flipBoard(boardContainer, playerColors)
-    boardContainer.addEventListener("DOMContentLoaded", (e) => {
-        console.log(e.target.id);
-    });
-});
+    flipBoard(boardContainer, playerColors);
+})
 
 function flipBoard(boardContainer, playerColors) {
     var rows = Array.from(boardContainer.children);
     rows.reverse();
-
-    // Get the current player's session ID (you already have this)
     var currentSessionId = sessionStorage.getItem('sessionID');
 
-    // Check if the current session ID matches any player ID
     for (var playerId in playerColors) {
         if (playerId === currentSessionId) {
             var currentPlayerColor = playerColors[playerId];
 
-            // Check if the current player's color is at the top
             if (currentPlayerColor === "red") {
-                rows.forEach(row => boardContainer.appendChild(row));
+                rows.forEach(row => boardContainer.appendChild(row))
             }
-            // Otherwise, keep the board as is (blue player's color at the bottom)
-            break; // Exit the loop once we find a match
+            break;
         }
     }
 }
+
 
 
 /*document.addEventListener('DOMContentLoaded', function() {
