@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', function (){
                 console.log("request werkte");
                 GetMoveCards(response);
             }
-            if (response.status === 500){
+            else if (response.status === 500){ //eerst stond er alleen maar een if maar het ding is
+                                                //omdat er een if stond en zag dat die status 200 gaf
+                                                //ging die die else uitvoeren omdat ja slechte fout afhandeling
+                                                //doordat die bijde if's gaat kijken en de tweede ging zoizo fout zijn
                 console.log(response);
                 console.log(response.json());
             }
@@ -26,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 })
                 console.log("There went something wrong");
                 console.log(response.message);
+                console.log(response.json());
             }
         })
 })
