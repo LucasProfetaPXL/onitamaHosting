@@ -69,3 +69,12 @@
     margin-top: -500px;
     margin-right: 50px;
 }
+.card-image {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.card-image.highlight {
+    border: 2px solid red;
+    transform: scale(1.1);
+}

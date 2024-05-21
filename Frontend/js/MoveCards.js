@@ -1,75 +1,166 @@
-document.addEventListener('DOMContentLoaded', function (){
+document.addEventListener('DOMContentLoaded', function () {
     const tabled = localStorage.getItem('tableId');
     const sessionID = sessionStorage.getItem('sessionID');
 
-    fetch(`https://localhost:5051/api/Games/${tabled}`,{
-        method : 'GET',
-        mode : 'cors',
+    fetch(`https://localhost:5051/api/Games/${tabled}`, {
+        method: 'GET',
+        mode: 'cors',
         headers: {
-            // 'Accept': 'text/plain',
             'Accept': 'application/json',
             'Authorization': `Bearer ${sessionID}`
         }
     })
-        .then(response =>{
-            if (response.status === 200){
-                console.log("request werkte");
+        .then(response => {
+            if (response.status === 200) {
+                console.log("request worked");
                 GetMoveCards(response);
-            }
-            else if (response.status === 500){ //eerst stond er alleen maar een if maar het ding is
-                                                //omdat er een if stond en zag dat die status 200 gaf
-                                                //ging die die else uitvoeren omdat ja slechte fout afhandeling
-                                                //doordat die bijde if's gaat kijken en de tweede ging zoizo fout zijn
+            } else if (response.status === 500) {
                 console.log(response);
-                console.log(response.json());
-            }
-            else{
-                response.json().then(error =>{
+                response.json().then(error => {
                     console.log(error.message);
-                })
-                console.log("There went something wrong");
-                console.log(response.message);
-                console.log(response.json());
+                });
+            } else {
+                response.json().then(error => {
+                    console.log(error.message);
+                });
+                console.log("Something went wrong");
             }
         })
 })
-function GetMoveCards(response){
+
+function GetMoveCards(response) {
     response.json().then(data => {
-        const imageArray = ["../Images/spelkaarten/boar.png", "../Images/spelkaarten/cobra.png", "../Images/spelkaarten/crab.png", "../Images/spelkaarten/crane.png", "../Images/spelkaarten/dragon.png", "../Images/spelkaarten/eel.png", "../Images/spelkaarten/elephant.png", "../Images/spelkaarten/frog.png", "../Images/spelkaarten/goose.png", "../Images/spelkaarten/horse.png", "../Images/spelkaarten/mantis.png", "../Images/spelkaarten/monkey.png", "../Images/spelkaarten/ox.png", "../Images/spelkaarten/rabbit.png", "../Images/spelkaarten/rooster.png", "../Images/spelkaarten/tiger.png"];
-        if (localStorage.getItem("card1") == null){ //images aanvullen
+        const imageArray = [
+            "../Images/spelkaarten/boar.png", "../Images/spelkaarten/cobra.png", "../Images/spelkaarten/crab.png", "../Images/spelkaarten/crane.png",
+            "../Images/spelkaarten/dragon.png", "../Images/spelkaarten/eel.png", "../Images/spelkaarten/elephant.png", "../Images/spelkaarten/frog.png",
+            "../Images/spelkaarten/goose.png", "../Images/spelkaarten/horse.png", "../Images/spelkaarten/mantis.png", "../Images/spelkaarten/monkey.png",
+            "../Images/spelkaarten/ox.png", "../Images/spelkaarten/rabbit.png", "../Images/spelkaarten/rooster.png", "../Images/spelkaarten/tiger.png"
+        ]
+
+        if (localStorage.getItem("card1") == null) {
             var playcards = [];
-            for (var i = 1; i <= 5; i++){
+            for (var i = 1; i <= 5; i++) {
                 var id = "card" + i;
                 var randomIndex = Math.floor(Math.random() * imageArray.length);
-                playcards.push(imageArray[randomIndex]);
-                while (playcards.includes(imageArray[randomIndex])){
+                while (playcards.includes(imageArray[randomIndex])) {
                     randomIndex = Math.floor(Math.random() * imageArray.length);
                 }
                 playcards.push(imageArray[randomIndex]);
-                                                                                                                // document.createElement('img')
 
-                //window.alert(i + id);
                 localStorage.setItem(id, imageArray[randomIndex]);
                 let card = "card" + i;
                 let cardimg = document.createElement('img');
-                let path = imageArray[i];
+                let path = imageArray[randomIndex];
                 cardimg.src = path;
-                //window.alert(cardimg + path + imageArray[i]);
+                cardimg.classList.add('card-image');
+                cardimg.dataset.cardId = id; // Add data attribute to store card id
                 document.getElementById(card).appendChild(cardimg);
+
+                cardimg.addEventListener('click', function () {
+                    highlightCard(cardimg);
+                    localStorage.setItem('selectedCard', path);
+                })
             }
-        }
-        else{
-            for (var i = 1; i <= 5; i++){
+        } else {
+            for (var i = 1; i <= 5; i++) {
                 let card = "card" + i;
                 let cardimg = document.createElement('img');
-                let path = imageArray[i];
+                let path = localStorage.getItem(card);
                 cardimg.src = path;
-                //window.alert(cardimg + " else" + path + imageArray[i]);
+                cardimg.classList.add('card-image');
+                cardimg.dataset.cardId = card; // Add data attribute to store card id
                 document.getElementById(card).appendChild(cardimg);
+
+                cardimg.addEventListener('click', function () {
+                    highlightCard(cardimg);
+                    localStorage.setItem('selectedCard', path);
+                })
             }
-
-
         }
+    })
+}
+
+function highlightCard(cardimg) {
+    const allCards = document.querySelectorAll('.card-image');
+    allCards.forEach(card => card.classList.remove('highlight'));
+    cardimg.classList.add('highlight');
+}
+
+
+// document.addEventListener('DOMContentLoaded', function (){
+//     const tabled = localStorage.getItem('tableId');
+//     const sessionID = sessionStorage.getItem('sessionID');
+//
+//     fetch(`https://localhost:5051/api/Games/${tabled}`,{
+//         method : 'GET',
+//         mode : 'cors',
+//         headers: {
+//             // 'Accept': 'text/plain',
+//             'Accept': 'application/json',
+//             'Authorization': `Bearer ${sessionID}`
+//         }
+//     })
+//         .then(response =>{
+//             if (response.status === 200){
+//                 console.log("request werkte");
+//                 GetMoveCards(response);
+//             }
+//             else if (response.status === 500){ //eerst stond er alleen maar een if maar het ding is
+//                                                 //omdat er een if stond en zag dat die status 200 gaf
+//                                                 //ging die die else uitvoeren omdat ja slechte fout afhandeling
+//                                                 //doordat die bijde if's gaat kijken en de tweede ging zoizo fout zijn
+//                 console.log(response);
+//                 console.log(response.json());
+//             }
+//             else{
+//                 response.json().then(error =>{
+//                     console.log(error.message);
+//                 })
+//                 console.log("There went something wrong");
+//                 console.log(response.message);
+//                 console.log(response.json());
+//             }
+//         })
+// })
+// function GetMoveCards(response){
+//     response.json().then(data => {
+//         const imageArray = ["../Images/spelkaarten/boar.png", "../Images/spelkaarten/cobra.png", "../Images/spelkaarten/crab.png", "../Images/spelkaarten/crane.png", "../Images/spelkaarten/dragon.png", "../Images/spelkaarten/eel.png", "../Images/spelkaarten/elephant.png", "../Images/spelkaarten/frog.png", "../Images/spelkaarten/goose.png", "../Images/spelkaarten/horse.png", "../Images/spelkaarten/mantis.png", "../Images/spelkaarten/monkey.png", "../Images/spelkaarten/ox.png", "../Images/spelkaarten/rabbit.png", "../Images/spelkaarten/rooster.png", "../Images/spelkaarten/tiger.png"];
+//         if (localStorage.getItem("card1") == null){ //images aanvullen
+//             var playcards = [];
+//             for (var i = 1; i <= 5; i++){
+//                 var id = "card" + i;
+//                 var randomIndex = Math.floor(Math.random() * imageArray.length);
+//                 playcards.push(imageArray[randomIndex]);
+//                 while (playcards.includes(imageArray[randomIndex])){
+//                     randomIndex = Math.floor(Math.random() * imageArray.length);
+//                 }
+//                 playcards.push(imageArray[randomIndex]);
+//                 // document.createElement('img')
+//
+//                 //window.alert(i + id);
+//                 localStorage.setItem(id, imageArray[randomIndex]);
+//                 let card = "card" + i;
+//                 let cardimg = document.createElement('img');
+//                 let path = imageArray[i];
+//                 cardimg.src = path;
+//                 //window.alert(cardimg + path + imageArray[i]);
+//                 document.getElementById(card).appendChild(cardimg);
+//             }
+//         }
+//         else{
+//             for (var i = 1; i <= 5; i++){
+//                 let card = "card" + i;
+//                 let cardimg = document.createElement('img');
+//                 let path = imageArray[i];
+//                 cardimg.src = path;
+//                 //window.alert(cardimg + " else" + path + imageArray[i]);
+//                 document.getElementById(card).appendChild(cardimg);
+//             }
+//
+//
+//         }
+// })
+// }
 
 
 
@@ -93,6 +184,4 @@ function GetMoveCards(response){
         //     }
         // })
         // localStorage.setItem('playerMoveCards', JSON.stringify(players))
-    })
-}
 
