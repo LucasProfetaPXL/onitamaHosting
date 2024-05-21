@@ -1,6 +1,7 @@
 ﻿using Onitama.Core.GameAggregate.Contracts;
 using Onitama.Core.PlayerAggregate;
 using Onitama.Core.PlayerAggregate.Contracts;
+using Onitama.Core.SchoolAggregate;
 using Onitama.Core.SchoolAggregate.Contracts;
 using Onitama.Core.Util;
 using Onitama.Core.Util.Contracts;
@@ -39,12 +40,29 @@ internal class GameService : IGameService
 
     public void MovePawn(Guid gameId, Guid playerId, Guid pawnId, string moveCardName, ICoordinate to)
     {
-        throw new NotImplementedException(
-            "TODO: use the constructor-injected repository to retrieve the game and get move a pawn of that game");
+        //implemented in game.cs
+        for (int i = 0; i < _gameRepository.GetById(gameId).GetPossibleMovesForPawn(playerId, pawnId, moveCardName).Count; i++)
+        {
+            if (_gameRepository.GetById(gameId).GetPossibleMovesForPawn(playerId, pawnId, moveCardName)[i] == to)
+            {
+                for (int j = 0; j < _gameRepository.GetById(gameId).Players.Length; j++)
+                {
+                    if (_gameRepository.GetById(gameId).Players[j].Id == playerId)
+                    {
+                        _gameRepository.GetById(gameId).Players[j].School.GetPawn(pawnId).Position = to;
+                    }
+                }
+                break;
+            }
+        }
+
+        //throw new NotImplementedException(
+            //"TODO: use the constructor-injected repository to retrieve the game and get move a pawn of that game");
     }
 
     public void SkipMovementAndExchangeCard(Guid gameId, Guid playerId, string moveCardName)
     {
+        // implemented in Game.cs
         throw new NotImplementedException(
             "TODO: use the constructor-injected repository to retrieve the game and skip a movement for that game");
     }

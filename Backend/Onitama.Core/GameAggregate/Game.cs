@@ -322,8 +322,16 @@ internal class Game : IGame
     }
 
 
-    public IPlayer GetNextOpponent(Guid playerId) //extra
+    public IPlayer GetNextOpponent(Guid playerId)
     {
+        for (int i = 0; i < _players.Length; i++)
+        {
+            if (_players[i].Id == playerId)
+            {
+                return _players[(i + 1) % 2];
+            }
+        }
+
         throw new NotImplementedException();
     }
 }
