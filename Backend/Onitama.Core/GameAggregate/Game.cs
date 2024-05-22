@@ -265,6 +265,7 @@ internal class Game : IGame
         }
 
         // Wissel van speler
+
         _currentplayernr = (_currentplayernr + 1) % _players.Length;
     }
 
@@ -304,6 +305,15 @@ internal class Game : IGame
         {
             throw new ApplicationException("valid move");
         }
+        //for (int i = 0; i < _players[_currentplayernr].MoveCards.Count; i++)
+        //{
+        //    if (_players[_currentplayernr].MoveCards[i].Name == moveCardName)
+        //    {
+
+        //        (_extraMoveCard, _players[_currentplayernr].MoveCards[i]) = (_players[_currentplayernr].MoveCards[i], _extraMoveCard);
+        //    }
+        //}
+
         for (int i = 0; i < _players.Length; i++)
         {
             if (_players[i].Id == playerId)
@@ -312,13 +322,17 @@ internal class Game : IGame
                 {
                     if (_players[i].MoveCards[j].Name == moveCardName)
                     {
-                        _players[i].MoveCards.RemoveAt(j);
-                        _players[i].MoveCards.Insert(j, _extraMoveCard);
+                        (_extraMoveCard, _players[_currentplayernr].MoveCards[j]) = (_players[_currentplayernr].MoveCards[j], _extraMoveCard);
+
+                        //_players[i].MoveCards.RemoveAt(j);
+                        //_players[i].MoveCards.Insert(j, _extraMoveCard);
+                        _currentplayernr = (_currentplayernr + 1) % _players.Length;
                         return;
                     }
                 }
             }
         }
+
     }
 
 
