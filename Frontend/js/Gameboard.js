@@ -1,57 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
-    // var playerColors = JSON.parse(localStorage.getItem('PlayerColors')) || {
-    //     "player1": "red",
-    //     "player2": "blue"
-    // };
-    var boardContainer = document.getElementById('game-boardHTML');
-    let k = 1;
+    const tabled = localStorage.getItem('tableId');
+    const sessionID = sessionStorage.getItem('sessionID');
 
-    for (var i = 0; i < 5; i++) {
-        for (var j = 0; j < 5; j++) {
-            let cell = document.createElement('div');
-            cell.classList.add('cell');
-            cell.dataset.row = i
-            cell.dataset.col = j
-            cell.id = `cell${k}`
-            cell.setAttribute('square-id', (i * j));
-
-            cell.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            })
-
-            cell.addEventListener('drop', (e) => {
-                e.preventDefault();
-                const draggable = document.querySelector('.dragging');
-                if (draggable && !cell.querySelector('.pawn')) {
-                    cell.appendChild(draggable);
-                }
-            })
-
-            if (i === 0 || i === 4) {
-                let pawn = document.createElement('div')
-                pawn.className = 'pawn';
-                pawn.setAttribute('draggable', "true");
-                var playerId = Object.keys(playerColors)[i === 0 ? 0 : 1]
-                pawn.style.backgroundColor = playerColors[playerId];
-
-                var pawnImage = document.createElement('img');
-                pawnImage.className = 'pawn-image';
-                if (j === 2) {
-                    pawnImage.src = `../Images/master${pawn.style.backgroundColor}.png`;
-                } else {
-                    pawnImage.src = `../Images/apprenticePawn${pawn.style.backgroundColor}.png`;
-                }
-
-                pawn.appendChild(pawnImage);
-                cell.appendChild(pawn);
-            }
-            k++;
-            boardContainer.appendChild(cell);
+    fetch(`https://localhost:5051/api/Games/${tabled}`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            // 'Accept': 'text/plain',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${sessionID}`
         }
-    }
-
-    flipBoard(boardContainer, playerColors);
+    })
+        .then(response => {
+            if (response.status === 200) {
+                console.log("request werkte");
+                response.json().then(data => {
+                    GetMoveCards(data);
+                    CreateTableAndPawns(data);
+                    console.log(data);
+                })
+            } else if (response.status === 500) { //eerst stond er alleen maar een if maar het ding is
+                //omdat er een if stond en zag dat die status 200 gaf
+                //ging die die else uitvoeren omdat ja slechte fout afhandeling
+                //doordat die bijde if's gaat kijken en de tweede ging zoizo fout zijn
+                console.log(response);
+                console.log(response.json());
+            } else {
+                response.json().then(error => {
+                    console.log(error.message);
+                })
+                console.log("There went something wrong");
+                console.log(response.message);
+                console.log(response.json());
+            }
+        })
 })
 
 function flipBoard(boardContainer, playerColors) {
@@ -70,6 +52,108 @@ function flipBoard(boardContainer, playerColors) {
         }
     }
 }
+
+function GetMoveCards(data) {
+    const imageArray = ["../Images/spelkaarten/boar.png", "../Images/spelkaarten/cobra.png", "../Images/spelkaarten/crab.png", "../Images/spelkaarten/crane.png", "../Images/spelkaarten/dragon.png", "../Images/spelkaarten/eel.png", "../Images/spelkaarten/elephant.png", "../Images/spelkaarten/frog.png", "../Images/spelkaarten/goose.png", "../Images/spelkaarten/horse.png", "../Images/spelkaarten/mantis.png", "../Images/spelkaarten/monkey.png", "../Images/spelkaarten/ox.png", "../Images/spelkaarten/rabbit.png", "../Images/spelkaarten/rooster.png", "../Images/spelkaarten/tiger.png"];
+    if (localStorage.getItem("card1") == null) { //images aanvullen
+        var playcards = [];
+        for (var i = 1; i <= 5; i++) {
+            var id = "card" + i;
+            var randomIndex = Math.floor(Math.random() * imageArray.length);
+            playcards.push(imageArray[randomIndex]);
+            while (playcards.includes(imageArray[randomIndex])) {
+                randomIndex = Math.floor(Math.random() * imageArray.length);
+            }
+            playcards.push(imageArray[randomIndex]);
+            // document.createElement('img')
+
+            //window.alert(i + id);
+            localStorage.setItem(id, imageArray[randomIndex]);
+            let card = "card" + i;
+            let cardimg = document.createElement('img');
+            let path = imageArray[i];
+            cardimg.src = path;
+            //window.alert(cardimg + path + imageArray[i]);
+            document.getElementById(card).appendChild(cardimg);
+        }
+    } else {
+        for (var i = 1; i <= 5; i++) {
+            let card = "card" + i;
+            let cardimg = document.createElement('img');
+            let path = imageArray[i];
+            cardimg.src = path;
+            //window.alert(cardimg + " else" + path + imageArray[i]);
+            document.getElementById(card).appendChild(cardimg);
+        }
+
+
+    }
+}
+
+function CreateTableAndPawns(data){
+    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
+    var boardContainer = document.getElementById('game-boardHTML');
+    let k = 1;
+
+    console.log(data);
+    var rows = 5;
+    var cols = 5;
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.row = rows - 1 - i; // Починаємо відлік з нижнього лівого кута
+            cell.dataset.col = j;
+            cell.id = `cell${(rows - 1 - i) * cols + (j + 1)}`;
+            // cell.setAttribute('square-id', (i * j));
+
+            cell.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            })
+
+            cell.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const draggable = document.querySelector('.dragging');
+                if (draggable && !cell.querySelector('.pawn')) {
+                    cell.appendChild(draggable);
+                }
+            })
+
+            if (rows - 1 - i === 0 || rows - 1 - i === 4) {
+                let pawn = document.createElement('div')
+                pawn.className = 'pawn';
+                pawn.setAttribute('draggable', "true");
+                var playerId = Object.keys(playerColors)[rows - 1 - i === 0 ? 0 : 1]
+                pawn.style.backgroundColor = playerColors[playerId];
+
+                for (const player of data.players) {
+                    if (player.id === playerId) {
+                        for (const pawnIndex of player.school.allPawns) {
+                            if (pawnIndex.position.row === rows - 1 - i && pawnIndex.position.column === j) {
+                                pawn.id = pawnIndex.id;
+                            }
+                        }
+                    }
+                }
+
+                var pawnImage = document.createElement('img');
+                pawnImage.className = 'pawn-image';
+                if (j === 2) {
+                    pawnImage.src = `../Images/master${pawn.style.backgroundColor}.png`;
+                } else {
+                    pawnImage.src = `../Images/apprenticePawn${pawn.style.backgroundColor}.png`;
+                }
+                pawn.appendChild(pawnImage);
+                cell.appendChild(pawn);
+            }
+            k++;
+            boardContainer.appendChild(cell);
+        }
+    }
+
+    flipBoard(boardContainer, playerColors);
+}
+
 
 
 
