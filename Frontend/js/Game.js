@@ -2,7 +2,8 @@ document.getElementById('startGameButton').addEventListener('click', function (e
     event.preventDefault();
     const tabled = localStorage.getItem('tableId');
     const sessionID = sessionStorage.getItem('sessionID');
-
+    const check = localStorage.getItem('tableId')
+    console.log(check);
     fetch(`https://localhost:5051/api/Tables/${tabled}/start-game`,{
         method: 'POST',
         mode: 'cors',

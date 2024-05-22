@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var playerColors = JSON.parse(localStorage.getItem('PlayerColors')) || {
-        "player1": "red",
-        "player2": "blue"
-    };
+    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
+    // var playerColors = JSON.parse(localStorage.getItem('PlayerColors')) || {
+    //     "player1": "red",
+    //     "player2": "blue"
+    // };
     var boardContainer = document.getElementById('game-boardHTML');
     let k = 1;
 

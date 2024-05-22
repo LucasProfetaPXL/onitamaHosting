@@ -78,3 +78,20 @@
     border: 2px solid red;
     transform: scale(1.1);
 }
+
+
+
+.cell {
+    border: 2px solid black;
+    cursor: move;
+}
+
+.cell.highlight {
+    border: 2px solid green;
+    background-color: rgba(0, 255, 0, 0.3);
+}
+
+.cell.dragging {
+    opacity: 0.5;
+}
+
