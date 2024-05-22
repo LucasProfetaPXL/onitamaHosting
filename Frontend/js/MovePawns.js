@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     const API_URL = 'http://localhost:5051';
-    let selectedPawnId = null;
+    const gameBoard = document.querySelector("#game-boardHTML");
+    let selectedPawnId;
+    gameBoard.addEventListener('click', (e) => {
+        e.preventDefault();
+        selectedPawnId = e.target.closest('.pawn').id;
+    });
     let selectedCardName = null;
     let moves = [];
 

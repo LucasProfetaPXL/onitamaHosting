@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 response.json().then(data => {
                     GetMoveCards(data);
                     CreateTableAndPawns(data);
-                    console.log(data);
                 })
             } else if (response.status === 500) { //eerst stond er alleen maar een if maar het ding is
                 //omdat er een if stond en zag dat die status 200 gaf
@@ -95,7 +94,6 @@ function CreateTableAndPawns(data){
     var boardContainer = document.getElementById('game-boardHTML');
     let k = 1;
 
-    console.log(data);
     var rows = 5;
     var cols = 5;
     for (var i = 0; i < rows; i++) {
