@@ -1,18 +1,21 @@
+const playersColor = localStorage.getItem('PlayerColors')
+console.log(playersColor)
 document.addEventListener('DOMContentLoaded', function() {
-    const API_URL = 'http://localhost:5051';
     const gameBoard = document.querySelector("#game-boardHTML");
     let selectedPawnId;
-    gameBoard.addEventListener('click', (e) => {
+    gameBoard.addEventListener('dragend', (e) => {
         e.preventDefault();
-        selectedPawnId = e.target.closest('.pawn').id;
+        // selectedPawnId = e.target.closest('.pawn').id;
+        console.log(e.target.closest('.pawn').id)
     });
     let selectedCardName = null;
-    let moves = [];
 
+    let moves = [];
     const fetchGameState = () => {
-        const gameId = localStorage.getItem('tableId');
-        const sessionID = localStorage.getItem('sessionID');
-        fetch(`${API_URL}/api/Games/${gameId}`, {
+        const tabled = localStorage.getItem('tableId');
+        const sessionID = sessionStorage.getItem('sessionID');
+
+        return fetch(`https://localhost:5051/api/Games/${tabled}`, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -25,17 +28,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     return response.json().then(err => { throw new Error(err.message) });
                 }
                 return response.json();
-            })
-            .then(data => {
-                moves = data.moves;
-                updateBoard();
-            })
-            .catch(error => console.error('Fetch error:', error));
+            });
     };
 
-    const fetchPossibleMoves = (pawnId, cardName) => {
+// Example usage
+    fetchGameState()
+        .then(gameData => {
+            updateBoard(gameData);
+        })
+        .catch(error => console.error('Error fetching game state:', error));
+
+    const fetchPossibleMoves = (playerId, cardName) => {
         const gameId = localStorage.getItem('tableId');
-        const url = `${API_URL}/api/Games/${gameId}/possible-moves/${pawnId}/for-card/${cardName}`;
+        const url = `http://localhost:5051/api/Games/${gameId}/possible-moves/${playerId}/for-card/${cardName}`;
         fetch(url, {
             method: 'GET',
             mode: 'cors',
@@ -53,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 highlightPossibleMoves(data);
             })
             .catch(error => console.error('Error fetching possible moves:', error));
-    };
 
+    };
     const highlightPossibleMoves = (possibleMoves) => {
         document.querySelectorAll('.cell').forEach(cell => {
             cell.classList.remove('highlight');
@@ -65,32 +70,52 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell.classList.add('highlight');
             }
         });
+
     };
-
-    const updateBoard = () => {
+    const updateBoard = (gameData) => {
+        // Clear the existing pawns from the board
         document.querySelectorAll('.pawn').forEach(pawn => {
-            pawn.remove();
+            //pawn.remove();
         });
-        moves.forEach(move => {
-            const draggable = document.createElement('div');
-            draggable.classList.add('pawn');
-            draggable.id = move.pawnId;
-            draggable.style.backgroundColor = move.color;
-            draggable.setAttribute('draggable', 'true');
 
-            const targetCell = document.getElementById(`cell${move.cellId}`);
-            if (draggable && targetCell) {
-                targetCell.appendChild(draggable);
-            }
+        // Get the players and their pawns
+        const players = gameData.players;
+
+        players.forEach(player => {
+            player.school.allPawns.forEach(pawn => {
+                const pawnElement = document.createElement('div');
+                pawnElement.classList.add('pawn');
+                pawnElement.id = pawn.id;
+                pawnElement.style.backgroundColor = player.color;
+                pawnElement.setAttribute('draggable', 'true');
+
+                const position = pawn.position;
+                const targetCell = document.getElementById(`cell${position.row}-${position.column}`);
+                if (targetCell) {
+                    targetCell.appendChild(pawnElement);
+                }
+            });
         });
+
+        // Add event listeners for drag-and-drop functionality
         addDraggableEventListeners();
     };
+
+// Example call with the fetched game data
+    fetchGameState()
+        .then(gameData => {
+            updateBoard(gameData);
+        })
+        .catch(error => console.error('Error fetching game state:', error));
 
     const addDraggableEventListeners = () => {
         const draggables = document.querySelectorAll('.pawn');
         draggables.forEach(draggable => {
             draggable.addEventListener('click', () => {
-                selectedPawnId = draggable.id;
+                // for (const player of playersColor) {
+                //     console.log(playersColor);
+                // }
+                // selectedPawnId = draggable.id;
                 if (selectedCardName) {
                     fetchPossibleMoves(selectedPawnId, selectedCardName);
                 }
@@ -113,11 +138,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             row: parseInt(cell.dataset.row),
                             column: parseInt(cell.dataset.col)
                         },
-                        cellId: cell.id
+                        //cellId: cell.id
                     };
 
                     const gameId = localStorage.getItem('tableId');
-                    fetch(`${API_URL}/api/Games/${gameId}/move-pawn`, {
+                    fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

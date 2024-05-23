@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 response.json().then(data => {
                     GetMoveCards(data);
                     CreateTableAndPawns(data);
+                    console.log(data)
                 })
             } else if (response.status === 500) { //eerst stond er alleen maar een if maar het ding is
                 //omdat er een if stond en zag dat die status 200 gaf
