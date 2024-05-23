@@ -59,6 +59,35 @@ internal class GameFactory : IGameFactory
 
     public IGame CreateNewForTable(ITable table)
     {
+        //IPlayer[] seatedPlayers = new IPlayer[2];
+        //Color[] colors = new Color[2];
+        //Random random = new Random();
+
+        //for (int i = 0; i < table.SeatedPlayers.Count; i++)
+        //{
+        //    colors[i] = table.SeatedPlayers[i].Color;
+        //    seatedPlayers[i] = table.SeatedPlayers[i];
+
+        //    List<MoveCard> possibleMoveCards = GeneratePossibleMoveCards(); 
+
+        //    for (int j = 0; j < possibleMoveCards.Count - 1; j++)
+        //    {
+        //        int index = random.Next(j, possibleMoveCards.Count);
+        //        MoveCard temp = possibleMoveCards[j];
+        //        possibleMoveCards[j] = possibleMoveCards[index];
+        //        possibleMoveCards[index] = temp;
+        //    }
+        //    for (int k = 0; k < 2; k++)
+        //    {
+        //        MoveCard selectedMoveCard = possibleMoveCards[k];
+        //        table.SeatedPlayers[i].MoveCards.Add(selectedMoveCard);
+        //    }
+        //}
+        //MoveCard extraMoveCard = GeneratePossibleMoveCards()[random.Next(0, 10)]; 
+        //_playMat = new PlayMat(seatedPlayers);
+        //_game = new Game(table.Id, _playMat, seatedPlayers, extraMoveCard); 
+        //_moveCardRepository.LoadSet(table.Preferences.MoveCardSet, colors);
+        //return _game;
         IPlayer[] seatedPlayers = new IPlayer[2];
         Color[] colors = new Color[2];
         Random random = new Random();
@@ -68,7 +97,7 @@ internal class GameFactory : IGameFactory
             colors[i] = table.SeatedPlayers[i].Color;
             seatedPlayers[i] = table.SeatedPlayers[i];
 
-            List<MoveCard> possibleMoveCards = GeneratePossibleMoveCards(); 
+            List<MoveCard> possibleMoveCards = GeneratePossibleMoveCards();
 
             for (int j = 0; j < possibleMoveCards.Count - 1; j++)
             {
@@ -83,10 +112,17 @@ internal class GameFactory : IGameFactory
                 table.SeatedPlayers[i].MoveCards.Add(selectedMoveCard);
             }
         }
-        MoveCard extraMoveCard = GeneratePossibleMoveCards()[random.Next(0, 10)]; 
-        _playMat = new PlayMat(seatedPlayers);
-        _game = new Game(table.Id, _playMat, seatedPlayers, extraMoveCard); 
+
+        // Ensure the extra move card's color matches one of the players' colors
+        Color extraMoveCardColor = colors[random.Next(0, 2)];
+        MoveCard extraMoveCard = new MoveCard("ExtraMoveCard", GenerateRandomGrid(), extraMoveCardColor);
+
+        PlayMat playMat = new PlayMat(seatedPlayers);
+        Game game = new Game(table.Id, playMat, seatedPlayers, extraMoveCard);
         _moveCardRepository.LoadSet(table.Preferences.MoveCardSet, colors);
-        return _game;
+
+        return game;
+
+
     }
 }
