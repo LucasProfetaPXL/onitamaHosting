@@ -15,6 +15,7 @@ body{
     padding: 0;
     margin: 0;
     font-family: manrope, serif;
+    background: url("../Images/Gameboard_walpaper.jpg") center center fixed;
 }
 
 /*Knop start game*/
@@ -28,7 +29,7 @@ body{
     background-color: transparent;
     letter-spacing: 2px;
     font-weight: bold;
-    background: linear-gradient(#07a6d7, #93e0ee);
+    background: linear-gradient(#FFB7C5, #FF69B4);
     border-radius: 2rem;
     color: white;
     padding: 1rem;
@@ -40,7 +41,7 @@ body{
 #startGameButton::before {
     content: '';
     z-index: -1;
-    background: linear-gradient(#0761d7, #93bdee);
+    background: linear-gradient(#FFB7C5, #FF69B4);
     border: 2px solid white;
     border-radius: 2rem;
     width: 110%;
@@ -77,17 +78,48 @@ body{
 }
 
 .leaveButton {
-    background-color: red;
-    padding: 10px;
-    margin: auto;
-    margin-top: 50px;
-    width: 100px;
-    color: white;
-    border-radius: 5px;
-    border: none;
-}
-
-.leaveButton:hover{
+    background: transparent;
+    width: 120px;
+    text-align: center;
+    position: relative;
+    padding: 5px 15px;
+    margin-top: 40px;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
-
+    border: 1px solid rgb(255,0,0);
+    border-radius: 25px;
+    outline: none;
+    overflow: hidden;
+    color: rgb(255,0,0);
+    transition: color 0.3s 0.1s ease-out;
 }
+
+.leaveButton::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    content: '';
+    border-radius: 50%;
+    display: block;
+    width: 20em;
+    height: 20em;
+    text-align: center;
+    transition: box-shadow 0.5s ease-out;
+    z-index: -1;
+}
+
+.leaveButton:hover {
+    color: #fff;
+    border: 1px solid rgb(255,0,0);
+}
+
+.leaveButton:hover::before {
+    box-shadow: inset 0 0 0 10em rgb(255, 0, 0);
+}
+

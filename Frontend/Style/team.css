@@ -22,14 +22,50 @@ body{
     margin-right: auto;
     text-align: center;
     margin-top: -5%;
-    color: black;
+    color: white;
 }
-#goBack{
-    background-color: red;
-    padding: 10px;
+#goBack, #goBackButton {
+    background: transparent;
+    width: 85px;
     margin: auto;
+    text-align: center;
+    position: relative;
+    padding: 5px 15px;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid rgb(255,0,0);
+    border-radius: 25px;
+    outline: none;
+    overflow: hidden;
+    color: rgb(255,0,0);
+    transition: color 0.3s 0.1s ease-out;
+}
 
-    width: 100px;
+#goBack::before, #goBackButton::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    content: '';
+    border-radius: 50%;
+    display: block;
+    width: 20em;
+    height: 20em;
+    text-align: center;
+    transition: box-shadow 0.5s ease-out;
+    z-index: -1;
+}
 
-    border-radius: 5px;
+#goBack:hover, #goBackButton:hover {
+    color: #fff;
+    border: 1px solid rgb(255,0,0);
+}
+
+#goBack:hover::before, #goBackButton:hover::before {
+    box-shadow: inset 0 0 0 10em rgb(255, 0, 0);
 }
