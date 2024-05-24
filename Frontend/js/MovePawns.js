@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const draggable = e.target.closest('.pawn'); // Get the dragged pawn element
         const cell = e.target.closest('.cell'); // Get the cell where the pawn is dropped
 
-        if (draggable && cell && !cell.querySelector('.pawn')) {
+        //if (draggable && cell && !cell.querySelector('.pawn')) {
             const gameId = localStorage.getItem('tableId');
             fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
                 method: 'POST',
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .then(() => fetchGameState())
                 .catch(error => console.error('Error making move:', error));
-        }
+        //}
         //tot hier is de test
 
 
