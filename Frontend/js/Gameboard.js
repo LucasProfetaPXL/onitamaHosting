@@ -89,7 +89,6 @@ function GetMoveCards(data) {
 
     }
 }
-
 function CreateTableAndPawns(data){
     var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
     var boardContainer = document.getElementById('game-boardHTML');
@@ -308,3 +307,29 @@ document.addEventListener('DOMContentLoaded', function() {
 //     .catch(error => {
 //         console.error('Error:', error);
 //     });
+
+
+
+// var clickedCard;
+//
+// clickedcards = document.querySelectorAll('.cardholder');
+// clickedcards.forEach(element => {
+//     element.addEventListener('click', (event) => {
+//         event.preventDefault();
+//         clickedCard = event.target.parentElement.id;
+//         console.log(`Clicked element ID: ${clickedCard}`);
+//         window.alert(clickedCard);
+//     });
+// });
+//
+// const clickedPawns = document.querySelectorAll('.game-boardHTML');
+// clickedPawns.forEach(element => {
+//     //document.getElementsByClassName('pawn');
+//     element.addEventListener('click', (event) => {
+//         event.preventDefault();
+//
+//         window.alert(event.target.parentElement.id); //returns id from pawn (else game-boardHTML)
+//
+//     });
+// });
+

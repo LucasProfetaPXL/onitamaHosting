@@ -2,7 +2,7 @@ const playersColor = localStorage.getItem('PlayerColors')
 console.log(playersColor)
 document.addEventListener('DOMContentLoaded', function() {
     const gameBoard = document.querySelector("#game-boardHTML");
-    let selectedPawnId;
+    //let selectedPawnId;
     gameBoard.addEventListener('dragend', (e) => {
         e.preventDefault();
         // selectedPawnId = e.target.closest('.pawn').id;
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     });
-    let selectedCardName = null;
+    //let selectedCardName = null;
 
     let moves = [];
     const fetchGameState = () => {
@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
             .then(response => {
+
                 if (!response.ok) {
                     return response.json().then(err => { throw new Error(err.message) });
                 }
@@ -108,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 highlightPossibleMoves(data);
             })
             .catch(error => console.error('Error fetching possible moves:', error));
-
     };
     const highlightPossibleMoves = (possibleMoves) => {
         document.querySelectorAll('.cell').forEach(cell => {
@@ -534,3 +534,33 @@ document.addEventListener('DOMContentLoaded', function() {
 //     e.target.parentNode.append(draggedElement)
 //     e.target.appendChild(draggedElement)
 // }
+
+
+
+var clickedCard;
+let selectedPawnId;
+let selectedCardName;
+clickedcards = document.querySelectorAll('.cardholder');
+clickedcards.forEach(element => {
+    element.addEventListener('click', (event) => {
+        event.preventDefault();
+        clickedCard = event.target.src;
+        clickedCard = clickedCard.split("/");
+        selectedCardName = clickedCard[clickedCard.length - 1].split(".")[0];
+        window.alert(selectedCardName);
+    });
+});
+
+const clickedPawns = document.querySelectorAll('.game-boardHTML');
+clickedPawns.forEach(element => {
+    //document.getElementsByClassName('pawn');
+    element.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (event.target.parentElement.id !== "game-boardHTML"){
+            selectedPawnId = event.target.parentElement.id;
+
+            window.alert(event.target.parentElement.id); //returns id from pawn
+        }
+
+    });
+});
