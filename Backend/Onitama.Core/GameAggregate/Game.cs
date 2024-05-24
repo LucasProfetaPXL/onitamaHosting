@@ -65,13 +65,13 @@ internal class Game : IGame
         _currentplayernr = 0; // owner
     }
     public Game(Guid id, IPlayMat playMat, IPlayer[] players, IMoveCard extraMoveCard, int startingPlayerIndex = 0)
-{
+    {
     _id = id;
     _playMat = playMat;
     _players = players;
     _extraMoveCard = extraMoveCard;
     _currentplayernr = startingPlayerIndex; // Set the starting player
-}
+    }
 
     /// <summary>
     /// Creates a game that is a copy of another game.

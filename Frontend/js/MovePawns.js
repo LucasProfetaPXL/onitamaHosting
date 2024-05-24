@@ -7,6 +7,44 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         // selectedPawnId = e.target.closest('.pawn').id;
         console.log(e.target.closest('.pawn').id)
+
+
+        //dit is een test
+        const draggable = e.target.closest('.pawn'); // Get the dragged pawn element
+        const cell = e.target.closest('.cell'); // Get the cell where the pawn is dropped
+
+        if (draggable && cell && !cell.querySelector('.pawn')) {
+            const gameId = localStorage.getItem('tableId');
+            fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    pawnId: draggable.id,
+                    moveCardName: selectedCardName,
+                    to: {
+                        row: parseInt(cell.dataset.row), // Get row from cell dataset
+                        column: parseInt(cell.dataset.col) // Get column from cell dataset
+                    }
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to make move');
+                    }
+                    else{
+                        console.log(response.json())
+                    }
+                    return response.json();
+                })
+                .then(() => fetchGameState())
+                .catch(error => console.error('Error making move:', error));
+        }
+        //tot hier is de test
+
+
+
     });
     let selectedCardName = null;
 
@@ -27,8 +65,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!response.ok) {
                     return response.json().then(err => { throw new Error(err.message) });
                 }
-                return response.json();
-            });
+                else{
+                    return response.json()
+                }
+
+            })
+            .then(data => {
+                console.log(data);
+                return data;
+            })
+            .catch(error => {
+                console.error('Error fetching game state:', error);
+                throw error
+            })
+
     };
 
 // Example usage
@@ -124,35 +174,80 @@ document.addEventListener('DOMContentLoaded', function() {
             draggable.addEventListener('dragstart', () => {
                 draggable.classList.add('dragging');
             });
-
             draggable.addEventListener('dragend', (e) => {
                 draggable.classList.remove('dragging');
-                const cell = document.elementFromPoint(e.clientX, e.clientY).closest('.cell');
-                if (cell && !cell.querySelector('.pawn')) {
-                    cell.appendChild(draggable);
+                const element = document.elementFromPoint(e.clientX, e.clientY);
+                if (element) {
+                    const cell = element.closest('.cell');
+                    if (cell && !cell.querySelector('.pawn')) {
+                        cell.appendChild(draggable);
 
-                    const move = {
-                        pawnId: draggable.id,
-                        moveCardName: selectedCardName,
-                        to: {
-                            row: parseInt(cell.dataset.row),
-                            column: parseInt(cell.dataset.col)
-                        },
-                        //cellId: cell.id
-                    };
+                        // const move = {
+                        //     pawnId: draggable.id,
+                        //     moveCardName: selectedCardName,
+                        //     to: {
+                        //         row: parseInt(cell.dataset.row),
+                        //         column: parseInt(cell.dataset.col)
+                        //     },
+                        // };
+                        // console.log(move.to.row);
+                        // console.log(move.to.column);
+                        console.log(e.target.closest('.pawn').id)
+                        const gameId = localStorage.getItem('tableId');
+                        fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                pawnId: draggable.id,
+                                moveCardName: selectedCardName,
+                                to: {
+                                    row: parseInt(e.target.closest('.pawn').row),
+                                    column: parseInt(e.target.closest('.pawn').col)
+                                }
+                            })
+                        }).then((response) => {
+                            return response.json();
+                        }).then((data) => {
+                            console.log(data);
+                            fetchGameState();
+                        }).catch(error => console.error('Error making move:', error));
 
-                    const gameId = localStorage.getItem('tableId');
-                    fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(move)
-                    }).then(() => {
-                        fetchGameState();
-                    }).catch(error => console.error('Error making move:', error));
+                    }
                 }
             });
+
+            // draggable.addEventListener('dragend', (e) => {
+            //     draggable.classList.remove('dragging');
+            //     const cell = document.elementFromPoint(e.clientX, e.clientY).closest('.cell');
+            //     if (cell && !cell.querySelector('.pawn')) {
+            //         cell.appendChild(draggable);
+            //
+            //         const move = {
+            //             pawnId: draggable.id,
+            //             moveCardName: selectedCardName,
+            //             to: {
+            //                 row: parseInt(cell.dataset.row),
+            //                 column: parseInt(cell.dataset.col)
+            //             },
+            //             //cellId: cell.id
+            //         };
+            //         console.log(cell.dataset.row);
+            //         console.log(cell.dataset.col);
+            //
+            //         const gameId = localStorage.getItem('tableId');
+            //         fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
+            //             method: 'POST',
+            //             headers: {
+            //                 'Content-Type': 'application/json'
+            //             },
+            //             body: JSON.stringify(move)
+            //         }).then(() => {
+            //             fetchGameState();
+            //         }).catch(error => console.error('Error making move:', error));
+            //     }
+            // });
         });
     };
 
