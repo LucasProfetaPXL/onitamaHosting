@@ -544,22 +544,29 @@ clickedcards = document.querySelectorAll('.cardholder');
 clickedcards.forEach(element => {
     element.addEventListener('click', (event) => {
         event.preventDefault();
-        clickedCard = event.target.src;
-        clickedCard = clickedCard.split("/");
-        selectedCardName = clickedCard[clickedCard.length - 1].split(".")[0];
-        window.alert(selectedCardName);
+        if (clickedCard !== undefined){
+            document.getElementById(clickedCard).children[0].style.border = '';
+        }
+        clickedCard = event.target.parentElement.id;
+        document.getElementById(clickedCard).children[0].style.border = '5px solid white';
+        selectedCardName = event.target.src;
+        selectedCardName = selectedCardName.split("/");
+        selectedCardName = selectedCardName[selectedCardName.length - 1].split(".")[0];
+        //window.alert(selectedCardName);
     });
 });
 
 const clickedPawns = document.querySelectorAll('.game-boardHTML');
 clickedPawns.forEach(element => {
-    //document.getElementsByClassName('pawn');
     element.addEventListener('click', (event) => {
         event.preventDefault();
+        if (selectedPawnId !== undefined){
+            document.getElementById(selectedPawnId).style.border = '';
+        }
         if (event.target.parentElement.id !== "game-boardHTML"){
             selectedPawnId = event.target.parentElement.id;
-
-            window.alert(event.target.parentElement.id); //returns id from pawn
+            document.getElementById(selectedPawnId).style.border = '5px solid white';
+            //window.alert(event.target.parentElement.id);
         }
 
     });
