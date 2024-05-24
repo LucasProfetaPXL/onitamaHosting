@@ -141,6 +141,7 @@ function CreateTableAndPawns(data){
                 } else {
                     pawnImage.src = `../Images/apprenticePawn${pawn.style.backgroundColor}.png`;
                 }
+                pawnImage.style.height = "100%";
                 pawn.appendChild(pawnImage);
                 cell.appendChild(pawn);
             }
