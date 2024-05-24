@@ -55,8 +55,19 @@ function flipBoard(boardContainer, playerColors) {
 
 function GetMoveCards(data) {
     const imageArray = ["../Images/spelkaarten/boar.png", "../Images/spelkaarten/cobra.png", "../Images/spelkaarten/crab.png", "../Images/spelkaarten/crane.png", "../Images/spelkaarten/dragon.png", "../Images/spelkaarten/eel.png", "../Images/spelkaarten/elephant.png", "../Images/spelkaarten/frog.png", "../Images/spelkaarten/goose.png", "../Images/spelkaarten/horse.png", "../Images/spelkaarten/mantis.png", "../Images/spelkaarten/monkey.png", "../Images/spelkaarten/ox.png", "../Images/spelkaarten/rabbit.png", "../Images/spelkaarten/rooster.png", "../Images/spelkaarten/tiger.png"];
+    var playcards = [];
+    let firstCardOfFirstPlayer = document.querySelector("#card1");
+    let secondCardOfFirstPlayer = document.querySelector("#card2");
+    let extraCard = document.querySelector("#card5");
+    let firstCardOfSecondPlayer = document.querySelector("#card3");
+    let secondCardOfSecondPlayer = document.querySelector("#card4");
+
+    firstCardOfSecondPlayer.dataset.cardName = data.players[0].moveCards[0].name;
+    secondCardOfSecondPlayer.dataset.cardName = data.players[0].moveCards[1].name;
+    firstCardOfFirstPlayer.dataset.cardName = data.players[1].moveCards[0].name;
+    secondCardOfFirstPlayer.dataset.cardName = data.players[1].moveCards[1].name;
+    extraCard.dataset.cardName = data.extraMoveCard.name;
     if (localStorage.getItem("card1") == null) { //images aanvullen
-        var playcards = [];
         for (var i = 1; i <= 5; i++) {
             var id = "card" + i;
             var randomIndex = Math.floor(Math.random() * imageArray.length);

@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching game state:', error));
 
-    const fetchPossibleMoves = (playerId, cardName) => {
+    const fetchPossibleMoves = (pawnId, cardName) => {
         const gameId = localStorage.getItem('tableId');
-        const url = `http://localhost:5051/api/Games/${gameId}/possible-moves/${playerId}/for-card/${cardName}`;
+        const url = `http://localhost:5051/api/Games/${gameId}/possible-moves/${pawnId}/for-card/${cardName}`;
         fetch(url, {
             method: 'GET',
             mode: 'cors',
