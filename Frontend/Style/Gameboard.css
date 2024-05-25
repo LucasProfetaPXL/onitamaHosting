@@ -100,3 +100,8 @@
     opacity: 0.5;
 }
 
+.cell.highlight {
+    background-color: yellow;
+}
+
+
