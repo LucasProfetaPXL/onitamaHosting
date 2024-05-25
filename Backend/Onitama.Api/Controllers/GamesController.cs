@@ -9,6 +9,7 @@ using Onitama.Core.SchoolAggregate;
 using Onitama.Core.SchoolAggregate.Contracts;
 using Onitama.Core.Util;
 using Onitama.Core.Util.Contracts;
+using System.Text.Json;
 
 namespace Onitama.Api.Controllers
 {
@@ -58,7 +59,7 @@ namespace Onitama.Api.Controllers
         {
             IReadOnlyList<IMove> moves = _gameService.GetPossibleMovesForPawn(id, UserId, pawnId, moveCardName);
             List<MoveModel> models = moves.Select(move => _mapper.Map<MoveModel>(move)).ToList();
-            if (moves.Count == 0)
+            if (models.Count == 0)
             {
                 return BadRequest();
             }
@@ -79,22 +80,36 @@ namespace Onitama.Api.Controllers
         public IActionResult MovePawn(Guid id, [FromBody] MovePawnModel inputModel)
         {
             ICoordinate to = _coordinateFactory.Create(inputModel.To.Row, inputModel.To.Column);
+            IReadOnlyList<IMove> possibleMoves = _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName);
             _gameService.MovePawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName, to);
 
-
-            for (int i = 0; i < _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName).Count; i++)
+            if (possibleMoves != null)
             {
-                ICoordinate coordinate = _coordinateFactory.Create(_gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Row, _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Column);
-
-                if (coordinate == to)
+                for (int i = 0; i < _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName).Count; i++)
                 {
-                    return Ok();
+                    ICoordinate coordinate = _coordinateFactory.Create(_gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Row, _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Column);
+
+                    if (coordinate == to)
+                    {
+                        return Ok();
+                    }
                 }
             }
+            else
+            {
+                return Ok();
+            }
 
+            //foreach (IMove move in _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName))
+            //{
+            //    ICoordinate coordinate = _coordinateFactory.Create(move.To.Row, move.To.Column);
+            //    if (coordinate == to)
+            //    {
+            //        return Ok();
+            //    }
+            //}
 
-
-            return BadRequest();
+            return BadRequest(new ApplicationException("invalid move"));
             return Ok();
         }
 
