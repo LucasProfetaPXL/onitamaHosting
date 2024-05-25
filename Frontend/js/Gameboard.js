@@ -162,6 +162,13 @@ function CreateTableAndPawns(data){
     }
 
     flipBoard(boardContainer, playerColors);
+
+    const cellArray = [];
+    for (let i = 0; i < document.getElementById('game-boardHTML').children.length; i++){
+        cellArray.push(document.getElementById('game-boardHTML').children[i].outerHTML);
+    }
+    localStorage.setItem('gameboard', JSON.stringify(cellArray));
+    //window.alert(cellArray);
 }
 
 
@@ -344,4 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //
 //     });
 // });
+
+
+
 

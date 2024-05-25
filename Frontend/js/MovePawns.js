@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             })
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 localStorage.setItem('playersTurn', data.extraMoveCard.stampColor);
                 return data;
             })
@@ -640,33 +640,39 @@ function checkIfBothSelected() {
     if (selectedPawnId !== undefined && clickedCard !== undefined) {
         //window.alert('Both a pawn and a card have been selected.');
 
+        const cellArray = []; // next 5 lines for syncing gameboard -> place in switch player method
+        for (let i = 0; i < document.getElementById('game-boardHTML').children.length; i++){
+            cellArray.push(document.getElementById('game-boardHTML').children[i].outerHTML);
+        }
+        localStorage.setItem('gameboard', JSON.stringify(cellArray));
+
 
         const gameId = localStorage.getItem('tableId');
         const sessionID = sessionStorage.getItem('sessionID');
 
         // fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${sessionID}/for-card/${selectedCardName}`, {
-        fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${sessionID}/for-card/MoveCard8`, {
-            method: 'GET',
-            //mode: 'cors',
-            headers: {
-                'Accept': 'text/plain',
-                'Authorization': `Bearer ${sessionID}`,
-                'pawnId': selectedPawnId,
-                'moveCardName': 'MoveCard8'
-            }
-        })
-            .then(response => {
-                window.alert(response);
-                if (response.ok){
-                    window.alert("response OK");
-                    showPossibleMoves([]);
-                }
-            })
+        // fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${sessionID}/for-card/MoveCard8`, {
+        //     method: 'GET',
+        //     //mode: 'cors',
+        //     headers: {
+        //         'Accept': 'text/plain',
+        //         'Authorization': `Bearer ${sessionID}`,
+        //         'pawnId': selectedPawnId,
+        //         'moveCardName': 'MoveCard8'
+        //     }
+        // })
+        //     .then(response => {
+        //         window.alert(response);
+        //         if (response.ok){
+        //             window.alert("response OK");
+        //             showPossibleMoves([]);
+        //         }
+        //     })
             // .then(data => {
             //     window.alert(data);
             //
             // })
-            .catch(error => console.error(error));
+            //.catch(error => console.error(error));
     }
 }
 
@@ -676,3 +682,17 @@ function showPossibleMoves(cellid){
     });
 }
 
+window.addEventListener('storage', (event) => {
+    if (event.key === 'gameboard'){
+        syncGameboard();
+    }
+})
+function syncGameboard(){
+    document.getElementById('game-boardHTML').innerHTML = '';
+    const cellArray = JSON.parse(localStorage.getItem('gameboard'));
+    cellArray.forEach(cellHTML => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = cellHTML;
+        document.getElementById('game-boardHTML').appendChild(tempDiv.firstElementChild);
+    });
+}
