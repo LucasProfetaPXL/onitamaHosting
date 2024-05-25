@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             })
             .then(data => {
-                //console.log(data);
+                console.log(data);
+                localStorage.setItem('playersTurn', data.extraMoveCard.stampColor);
                 return data;
             })
             .catch(error => {

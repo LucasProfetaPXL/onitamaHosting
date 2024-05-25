@@ -8,7 +8,6 @@ public class CoordinateModel
 {
     public int Row { get; set; }
     public int Column { get; set; }
-
     private class MappingProfile : Profile
     {
         public MappingProfile()

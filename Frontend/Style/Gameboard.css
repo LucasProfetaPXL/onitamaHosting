@@ -21,6 +21,11 @@
 
 .who{
     color: black;
+    font-size: 22px;
+}
+.who span{
+    font-weight: bold;
+
 }
 
 .leaveButton{
@@ -94,4 +99,9 @@
 .cell.dragging {
     opacity: 0.5;
 }
+
+.cell.highlight {
+    background-color: yellow;
+}
+
 

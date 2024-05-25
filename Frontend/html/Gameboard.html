@@ -11,7 +11,7 @@
 <body>
 <div id="game-board"></div>
 
-<p class="who">It is <span id="player"></span> go.</p>
+<p class="who">It is <span id="player"></span><span id="apo">'s</span> go.</p>
 <p id="info-display"></p>
 <div class="cardholderParent">
     <div class="cardholder" id="card1"></div>
@@ -33,10 +33,12 @@
 </div>
 
 <button class="leaveButton" id="leaveTable">leave</button>
+<script src="../js/whosTurn.js"></script>
 <script src="../js/Gameboard.js"></script>
 <script src="../js/Leave_Table.js"></script>
 <script src="../js/MoveCards.js"></script>
 <script src="../js/MovePawns.js" defer></script>
-
+<!-- dit kan eventueel weg gehaald worden-->
+<script src="../js/fetchPossibleMoves.js"></script>
 </body>
 </html>
