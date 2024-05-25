@@ -100,7 +100,9 @@ function GetMoveCards(data) {
 
     }
 }
+
 function CreateTableAndPawns(data){
+    //window.alert(data);
     var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
     var boardContainer = document.getElementById('game-boardHTML');
     let k = 1;

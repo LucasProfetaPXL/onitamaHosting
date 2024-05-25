@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             })
             .then(data => {
-                //console.log(data);
+                console.log(data);
                 localStorage.setItem('playersTurn', data.extraMoveCard.stampColor);
                 return data;
             })
@@ -324,7 +324,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
     setInterval(fetchGameState, 2000);
 });
 
@@ -638,13 +637,15 @@ clickedPawns.forEach(element => {
 
 function checkIfBothSelected() {
     if (selectedPawnId !== undefined && clickedCard !== undefined) {
-        //window.alert('Both a pawn and a card have been selected.');
+        window.alert('Both a pawn and a card have been selected.');
 
-        const cellArray = []; // next 5 lines for syncing gameboard -> place in switch player method
+        const cellArray = [];
         for (let i = 0; i < document.getElementById('game-boardHTML').children.length; i++){
             cellArray.push(document.getElementById('game-boardHTML').children[i].outerHTML);
         }
         localStorage.setItem('gameboard', JSON.stringify(cellArray));
+
+        updateTable(localStorage.getItem('gameboard'));
 
 
         const gameId = localStorage.getItem('tableId');
@@ -683,16 +684,94 @@ function showPossibleMoves(cellid){
 }
 
 window.addEventListener('storage', (event) => {
-    if (event.key === 'gameboard'){
-        syncGameboard();
-    }
+    //syncGameboard();
+    updateTable(localStorage.getItem('gameboard'));
+
 })
-function syncGameboard(){
-    document.getElementById('game-boardHTML').innerHTML = '';
-    const cellArray = JSON.parse(localStorage.getItem('gameboard'));
-    cellArray.forEach(cellHTML => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = cellHTML;
-        document.getElementById('game-boardHTML').appendChild(tempDiv.firstElementChild);
-    });
+
+// function syncGameboard(){
+//     const cellArray = JSON.parse(localStorage.getItem('gameboard'));
+//     document.getElementById('game-boardHTML').innerHTML = '';
+//
+//     cellArray.forEach(cellHTML => {
+//         //window.alert(cellHTML);
+//         const tempDiv = document.createElement('div');
+//         tempDiv.innerHTML = cellHTML;
+//         document.getElementById('game-boardHTML').appendChild(tempDiv.firstElementChild);
+//     });
+// }
+
+function updateTable(data) {
+    //document.getElementById('game-boardHTML').innerHTML = '';
+    window.alert("empty");
+
+    var playerColors = JSON.parse(localStorage.getItem('PlayerColors'));
+    var boardContainer = document.getElementById('game-boardHTML');
+    let k = 1;
+
+    var rows = 5;
+    var cols = 5;
+    for (var i = 0; i < rows; i++) {
+        for (var j = 0; j < cols; j++) {
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.row = rows - 1 - i; // Починаємо відлік з нижнього лівого кута
+            cell.dataset.col = j;
+            cell.id = `cell${(rows - 1 - i) * cols + (j + 1)}`;
+            // cell.setAttribute('square-id', (i * j));
+
+            cell.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            })
+
+            cell.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const draggable = document.querySelector('.dragging');
+                if (draggable && !cell.querySelector('.pawn')) {
+                    cell.appendChild(draggable);
+                }
+            })
+
+            if (rows - 1 - i === 0 || rows - 1 - i === 4) {
+                let pawn = document.createElement('div')
+                pawn.className = 'pawn';
+                pawn.setAttribute('draggable', "true");
+                var playerId = Object.keys(playerColors)[rows - 1 - i === 0 ? 0 : 1]
+                pawn.style.backgroundColor = playerColors[playerId];
+
+                for (const player of data.players) {
+                    if (player.id === playerId) {
+                        for (const pawnIndex of player.school.allPawns) {
+                            if (pawnIndex.position.row === rows - 1 - i && pawnIndex.position.column === j) {
+                                pawn.id = pawnIndex.id;
+                            }
+                        }
+                    }
+                }
+
+                var pawnImage = document.createElement('img');
+                pawnImage.className = 'pawn-image';
+                if (j === 2) {
+                    pawnImage.src = `../Images/master${pawn.style.backgroundColor}.png`;
+                } else {
+                    pawnImage.src = `../Images/apprenticePawn${pawn.style.backgroundColor}.png`;
+                }
+                pawnImage.style.height = "100%";
+                pawn.appendChild(pawnImage);
+                cell.appendChild(pawn);
+            }
+            k++;
+            boardContainer.appendChild(cell);
+
+
+            flipBoard(boardContainer, playerColors);
+
+            // const cellArray = [];
+            // for (let i = 0; i < document.getElementById('game-boardHTML').children.length; i++) {
+            //     cellArray.push(document.getElementById('game-boardHTML').children[i].outerHTML);
+            // }
+            // localStorage.setItem('gameboard', JSON.stringify(cellArray));
+            //window.alert(cellArray);
+        }
+    }
 }

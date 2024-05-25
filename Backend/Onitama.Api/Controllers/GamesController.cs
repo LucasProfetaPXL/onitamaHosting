@@ -4,6 +4,7 @@ using Onitama.Api.Models;
 using Onitama.Api.Models.Input;
 using Onitama.Api.Models.Output;
 using Onitama.Core.GameAggregate.Contracts;
+using Onitama.Core.PlayMatAggregate.Contracts;
 using Onitama.Core.SchoolAggregate;
 using Onitama.Core.SchoolAggregate.Contracts;
 using Onitama.Core.Util;
@@ -57,6 +58,10 @@ namespace Onitama.Api.Controllers
         {
             IReadOnlyList<IMove> moves = _gameService.GetPossibleMovesForPawn(id, UserId, pawnId, moveCardName);
             List<MoveModel> models = moves.Select(move => _mapper.Map<MoveModel>(move)).ToList();
+            if (moves.Count == 0)
+            {
+                return BadRequest();
+            }
             return Ok(models);
         }
 
@@ -75,6 +80,21 @@ namespace Onitama.Api.Controllers
         {
             ICoordinate to = _coordinateFactory.Create(inputModel.To.Row, inputModel.To.Column);
             _gameService.MovePawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName, to);
+
+
+            for (int i = 0; i < _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName).Count; i++)
+            {
+                ICoordinate coordinate = _coordinateFactory.Create(_gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Row, _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Column);
+
+                if (coordinate == to)
+                {
+                    return Ok();
+                }
+            }
+
+
+
+            return BadRequest();
             return Ok();
         }
 
