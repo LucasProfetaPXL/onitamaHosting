@@ -586,7 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 var clickedCard;
-let selectedPawnId;
+//let selectedPawnId;
 let selectedCardName;
 clickedcards = document.querySelectorAll('.cardholder');
 clickedcards.forEach(element => {
