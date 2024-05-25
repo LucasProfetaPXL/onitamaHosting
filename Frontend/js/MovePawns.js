@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             })
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 return data;
             })
             .catch(error => {
@@ -637,49 +637,41 @@ clickedPawns.forEach(element => {
 
 function checkIfBothSelected() {
     if (selectedPawnId !== undefined && clickedCard !== undefined) {
-        window.alert('Both a pawn and a card have been selected.');
+        //window.alert('Both a pawn and a card have been selected.');
+
 
         const gameId = localStorage.getItem('tableId');
-        const playerId = sessionStorage.getItem('sessionID');
+        const sessionID = sessionStorage.getItem('sessionID');
 
-        fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${playerId}/for-card/${selectedCardName}`, {
+        // fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${sessionID}/for-card/${selectedCardName}`, {
+        fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${sessionID}/for-card/MoveCard8`, {
             method: 'GET',
-            mode: 'cors',
+            //mode: 'cors',
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'text/plain',
+                'Authorization': `Bearer ${sessionID}`,
+                'pawnId': selectedPawnId,
+                'moveCardName': 'MoveCard8'
             }
-        }).then(value => {
-            window.alert(value);
-
         })
-            .catch(error => console.error('Error fetching possible moves:', error));
+            .then(response => {
+                window.alert(response);
+                if (response.ok){
+                    window.alert("response OK");
+                    showPossibleMoves([]);
+                }
+            })
+            // .then(data => {
+            //     window.alert(data);
+            //
+            // })
+            .catch(error => console.error(error));
     }
 }
-//
-//             fetch(url, {
-//             method: 'GET',
-//             mode: 'cors',
-//             headers: {
-//                 'Accept': 'application/json'
-//             }
-//         })
-//             .then(response => {
-//
-//                 if (!response.ok) {
-//                     window.alert("highlightPossibleMoves nOT");
-//                     return response.json().then(err => { throw new Error(err.message) });
-//                 }
-//                 return response.json();
-//             })
-//             .then(data => {
-//                 highlightPossibleMoves(data);
-//                 window.alert("highlightPossibleMoves");
-//             })
-//             .catch(error => console.error('Error fetching possible moves:', error));
-//     };
-//
-// fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
+
+function showPossibleMoves(cellid){
+    cellid.forEach(function (id) {
+        document.getElementById(id).style.border = '3px solid green';
+    });
+}
+
