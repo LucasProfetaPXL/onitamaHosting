@@ -1,6 +1,8 @@
 const playersColor = localStorage.getItem('PlayerColors')
+let selectedPawnId;
 console.log(playersColor)
 document.addEventListener('DOMContentLoaded', function() {
+    const sessionID = sessionStorage.getItem('sessionID');
     const gameBoard = document.querySelector("#game-boardHTML");
     //let selectedPawnId;
     gameBoard.addEventListener('dragend', (e) => {
@@ -88,14 +90,15 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching game state:', error));
 
-    const fetchPossibleMoves = (playerId, cardName) => {
+    const fetchPossibleMoves = (pawnId, cardName) => {
         const gameId = localStorage.getItem('tableId');
-        const url = `http://localhost:5051/api/Games/${gameId}/possible-moves/${playerId}/for-card/${cardName}`;
+        const url = `http://localhost:5051/api/Games/${gameId}/possible-moves/${pawnId}/for-card/${cardName}`;
         fetch(url, {
             method: 'GET',
             mode: 'cors',
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${sessionID}`
             }
         })
             .then(response => {
@@ -162,15 +165,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const addDraggableEventListeners = () => {
         const draggables = document.querySelectorAll('.pawn');
-        draggables.forEach(draggable => {
-            draggable.addEventListener('click', () => {
-                // for (const player of playersColor) {
-                //     console.log(playersColor);
-                // }
-                // selectedPawnId = draggable.id;
+        // const clickedPawns = document.querySelectorAll('.game-boardHTML');
+        // clickedPawns.forEach(element => {
+        //     element.addEventListener('click', (e) => {
+        //         e.preventDefault();
+        //         e.stopPropagation();
+        //         if (selectedPawnId !== undefined){
+        //             document.getElementById(selectedPawnId).style.border = '';
+        //         }
+        //         if (e.target.parentElement.id !== "game-boardHTML"){
+        //             selectedPawnId = e.target.parentElement.id;
+        //             document.getElementById(selectedPawnId).style.border = '5px solid white';
+        //             //window.alert(event.target.parentElement.id);
+        //         }
+        //         if (selectedCardName) {
+        //             console.log(selectedPawnId);
+        //             fetchPossibleMoves(selectedPawnId, selectedCardName);
+        //         }
+        //     });
+        // });
+        const gameBoard = document.querySelector('.game-boardHTML');
+
+        if (!gameBoard.dataset.listenerAdded) {
+            gameBoard.addEventListener('click', (e) => {
+                e.preventDefault();
+                let pawn = e.target;
+                while (pawn && !pawn.classList.contains('pawn')) {
+                    pawn = pawn.parentElement;
+                }
+                if (!pawn) {
+                    return;
+                }
+                if (selectedPawnId !== undefined) {
+                    const prevSelectedPawn = document.getElementById(selectedPawnId);
+                    if (prevSelectedPawn) {
+                        prevSelectedPawn.style.border = '';
+                    }
+                }
+
+                selectedPawnId = pawn.id;
+                pawn.style.border = '5px solid white';
+
                 if (selectedCardName) {
+                    console.log(selectedPawnId);
                     fetchPossibleMoves(selectedPawnId, selectedCardName);
                 }
+            });
+
+            gameBoard.dataset.listenerAdded = "true";
+        }
+        draggables.forEach(draggable => {
+            draggable.addEventListener('click', () => {
+
             });
 
             draggable.addEventListener('dragstart', () => {
@@ -194,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // };
                         // console.log(move.to.row);
                         // console.log(move.to.column);
-                        console.log(e.target.closest('.pawn').id)
+                        // console.log(e.target.closest('.pawn').id)
                         const gameId = localStorage.getItem('tableId');
                         fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
                             method: 'POST',

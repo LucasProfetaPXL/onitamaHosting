@@ -30,7 +30,7 @@ internal class GameService : IGameService
         {
             throw new ArgumentException("game id not found");
         }
-        var possibleMoves = game.GetAllPossibleMovesFor(pawnId);
+        var possibleMoves = game.GetPossibleMovesForPawn(playerId, pawnId, moveCardName);
         return possibleMoves;
         
 
