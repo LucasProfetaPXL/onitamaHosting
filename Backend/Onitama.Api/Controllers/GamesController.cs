@@ -87,30 +87,23 @@ namespace Onitama.Api.Controllers
             {
                 for (int i = 0; i < _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName).Count; i++)
                 {
-                    ICoordinate coordinate = _coordinateFactory.Create(_gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Row, _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName)[i].To.Column);
+                    ICoordinate coordinate = _coordinateFactory.Create(possibleMoves[i].To.Row, possibleMoves[i].To.Column);
 
-                    if (coordinate == to)
+                    if (coordinate == inputModel.To)
                     {
                         return Ok();
                     }
                 }
-            }
-            else
-            {
-                return Ok();
+                
+                return BadRequest(new ApplicationException("invalid move"));
+
             }
 
-            //foreach (IMove move in _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName))
-            //{
-            //    ICoordinate coordinate = _coordinateFactory.Create(move.To.Row, move.To.Column);
-            //    if (coordinate == to)
-            //    {
-            //        return Ok();
-            //    }
-            //}
+             return Ok();
+            
+            //return BadRequest(new ApplicationException("invalid move"));
 
-            return BadRequest(new ApplicationException("invalid move"));
-            return Ok();
+            //return Ok();
         }
 
         /// <summary>

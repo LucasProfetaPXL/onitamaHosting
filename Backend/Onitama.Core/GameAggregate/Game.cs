@@ -26,6 +26,7 @@ internal class Game : IGame
     private Guid _winnerPlayerId;
     private string _winnerMethod;
     private bool _gameOver = false;
+    private Guid _playToPlayId;
 
     public Guid Id => _id;
 
@@ -35,9 +36,10 @@ internal class Game : IGame
 
     public IPlayer[] Players => _players;
 
-    public Guid PlayerToPlayId => _players[_currentplayernr].Id;
+    //public Guid PlayerToPlayId => _players[_currentplayernr].Id;
+    public Guid PlayerToPlayId => _playToPlayId;
 
-    public Guid WinnerPlayerId => _players[_currentplayernr].Id;
+    public Guid WinnerPlayerId => _winnerPlayerId;
 
     public string WinnerMethod => _winnerMethod;
 
@@ -63,6 +65,8 @@ internal class Game : IGame
         _players = players;
         _extraMoveCard = extraMoveCard;
         _currentplayernr = 0; // owner
+        _winnerPlayerId = Guid.Empty;
+        _playToPlayId = players[0].Id;
     }
     public Game(Guid id, IPlayMat playMat, IPlayer[] players, IMoveCard extraMoveCard, int startingPlayerIndex = 0)
     {
@@ -96,7 +100,7 @@ internal class Game : IGame
         bool inPossession = false;
         IPawn currentPawn = null;
         IMoveCard currentcard = null;
-        if (PlayerToPlayId != playerId)
+        if (_playToPlayId != playerId)
         {
             throw new InvalidOperationException("it's not your player turn ");
         }
@@ -205,7 +209,7 @@ internal class Game : IGame
             throw new ApplicationException("The game is already over!");
         }
 
-        if (playerId != _players[_currentplayernr].Id)
+        if (playerId != _playToPlayId)
         {
             throw new ApplicationException("It's not your turn!");
         }
@@ -253,14 +257,14 @@ internal class Game : IGame
                 if (opponent.School.Master.Id == capturedPawn.Id)
                 {
                     _winnerPlayerId = playerId;
-                    _winnerMethod = "Way Of The Stone";
+                    _winnerMethod = "Way Of The Stone"; //capture master pawn from opponent
                     EndGame(new GameResult { WinnerPlayerId = _winnerPlayerId, WinningMethod = _winnerMethod });
                     return;
                 }
             }
         }
 
-        // Controleer of de master pawn op de tempelpositie staat (WinningMoveByWayOfTheWind)
+        // Controleer of de master pawn op de tempelpositie staat (WinningMoveByWayOfTheWind) --> stream
         foreach (var opponent in _players.Where(p => p.Id != playerId))
         {
             if (pawn.Id == currentPlayer.School.Master.Id && to.Equals(opponent.School.TempleArchPosition))
@@ -273,8 +277,10 @@ internal class Game : IGame
         }
 
         // Wissel van speler
+        _currentplayernr++;
+        _currentplayernr = _currentplayernr % _players.Length;
+        _playToPlayId = GetNextOpponent(PlayerToPlayId).Id;
 
-        _currentplayernr = (_currentplayernr + 1) % _players.Length;
     }
 
     private void EndGame(GameResult result)
@@ -305,7 +311,7 @@ internal class Game : IGame
 
     public void SkipMovementAndExchangeCard(Guid playerId, string moveCardName)
     {
-        if (!(_players[_currentplayernr].Id == playerId))
+        if (_playToPlayId != playerId)
         {
             throw new ApplicationException("turn");
         }
@@ -330,11 +336,15 @@ internal class Game : IGame
                 {
                     if (_players[i].MoveCards[j].Name == moveCardName)
                     {
-                        (_extraMoveCard, _players[_currentplayernr].MoveCards[j]) = (_players[_currentplayernr].MoveCards[j], _extraMoveCard);
+                        (_extraMoveCard, _players[i].MoveCards[j]) = (_players[i].MoveCards[j], _extraMoveCard);
 
                         //_players[i].MoveCards.RemoveAt(j);
                         //_players[i].MoveCards.Insert(j, _extraMoveCard);
-                        _currentplayernr = (_currentplayernr + 1) % _players.Length;
+
+
+                        _currentplayernr++;
+                        _currentplayernr = _currentplayernr % _players.Length;
+                        _playToPlayId = GetNextOpponent(PlayerToPlayId).Id;
                         return;
                     }
                 }
@@ -348,9 +358,9 @@ internal class Game : IGame
     {
         for (int i = 0; i < _players.Length; i++)
         {
-            if (_players[i].Id == playerId)
+            if (_players[i].Id == PlayerToPlayId)
             {
-                return _players[(i + 1) % 2];
+                return _players[(i + 1) % _players.Length];
             }
         }
 
