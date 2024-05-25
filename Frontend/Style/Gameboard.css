@@ -21,6 +21,11 @@
 
 .who{
     color: black;
+    font-size: 22px;
+}
+.who span{
+    font-weight: bold;
+
 }
 
 .leaveButton{

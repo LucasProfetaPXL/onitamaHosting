@@ -98,7 +98,7 @@ internal class Game : IGame
         IMoveCard currentcard = null;
         if (PlayerToPlayId != playerId)
         {
-            throw new InvalidOperationException("player");
+            throw new InvalidOperationException("it's not your player turn ");
         }
 
 
