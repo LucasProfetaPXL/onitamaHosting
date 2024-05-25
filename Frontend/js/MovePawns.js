@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             })
             .then(data => {
-                //console.log(data);
-                localStorage.setItem('playersTurn', data.extraMoveCard.stampColor);
+                console.log(data);
+                localStorage.setItem('playersTurn', data.playerToPlayId);
                 return data;
             })
             .catch(error => {
@@ -682,17 +682,17 @@ function showPossibleMoves(cellid){
     });
 }
 
-window.addEventListener('storage', (event) => {
-    if (event.key === 'gameboard'){
-        syncGameboard();
-    }
-})
-function syncGameboard(){
-    document.getElementById('game-boardHTML').innerHTML = '';
-    const cellArray = JSON.parse(localStorage.getItem('gameboard'));
-    cellArray.forEach(cellHTML => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = cellHTML;
-        document.getElementById('game-boardHTML').appendChild(tempDiv.firstElementChild);
-    });
-}
+// window.addEventListener('storage', (event) => {
+//     if (event.key === 'gameboard'){
+//         syncGameboard();
+//     }
+// })
+// function syncGameboard(){
+//     document.getElementById('game-boardHTML').innerHTML = '';
+//     const cellArray = JSON.parse(localStorage.getItem('gameboard'));
+//     cellArray.forEach(cellHTML => {
+//         const tempDiv = document.createElement('div');
+//         tempDiv.innerHTML = cellHTML;
+//         document.getElementById('game-boardHTML').appendChild(tempDiv.firstElementChild);
+//     });
+// }
