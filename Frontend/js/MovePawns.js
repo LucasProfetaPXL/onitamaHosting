@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let moves = [];
     const fetchGameState = () => {
         const tabled = localStorage.getItem('tableId');
+        const sessionID = sessionStorage.getItem('sessionID');
 
         return fetch(`https://localhost:5051/api/Games/${tabled}`, {
             method: 'GET',
@@ -104,12 +105,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => {
 
                 if (!response.ok) {
+                    window.alert("highlightPossibleMoves nOT");
                     return response.json().then(err => { throw new Error(err.message) });
                 }
                 return response.json();
             })
             .then(data => {
                 highlightPossibleMoves(data);
+                window.alert("highlightPossibleMoves");
             })
             .catch(error => console.error('Error fetching possible moves:', error));
     };
@@ -584,6 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 var clickedCard;
+//let selectedPawnId;
 let selectedCardName;
 clickedcards = document.querySelectorAll('.cardholder');
 clickedcards.forEach(element => {
@@ -598,6 +602,85 @@ clickedcards.forEach(element => {
         selectedCardName = selectedCardName.split("/");
         selectedCardName = selectedCardName[selectedCardName.length - 1].split(".")[0];
         //window.alert(selectedCardName);
+        checkIfBothSelected();
     });
 });
 
+const clickedPawns = document.querySelectorAll('.game-boardHTML');
+clickedPawns.forEach(element => {
+    element.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (selectedPawnId !== undefined){
+            document.getElementById(selectedPawnId).style.border = '';
+        }
+        if (event.target.parentElement.id !== "game-boardHTML"){
+            selectedPawnId = event.target.parentElement.id;
+
+
+            document.getElementById(selectedPawnId).style.border = '5px solid white';
+
+            //document.getElementById(selectedPawnId).style.borderColor = 'lightgray black gray';
+            // document.getElementById(selectedPawnId).style.backgroundImage = "linear-gradient(bottom, lightgray, black) 1";
+            // document.getElementById(selectedPawnId).style.borderWidth = "4px";
+            // document.getElementById(selectedPawnId).style.borderStyle = 'solid';
+            // document.getElementById(selectedPawnId).style.borderRadius = '50%';
+            //document.getElementById(selectedPawnId).style.boxShadow = '0 0 0 2px white';
+            // document.getElementById(selectedPawnId).style.position = 'relative';
+            // document.getElementById(selectedPawnId).style.paddingTop = '-5px';
+            // document.getElementById(selectedPawnId).style.paddingLeft = '-5px';
+
+
+
+        }
+        checkIfBothSelected();
+    });
+});
+
+function checkIfBothSelected() {
+    if (selectedPawnId !== undefined && clickedCard !== undefined) {
+        window.alert('Both a pawn and a card have been selected.');
+
+        const gameId = localStorage.getItem('tableId');
+        const playerId = sessionStorage.getItem('sessionID');
+
+        fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${playerId}/for-card/${selectedCardName}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(value => {
+            window.alert(value);
+
+        })
+            .catch(error => console.error('Error fetching possible moves:', error));
+    }
+}
+//
+//             fetch(url, {
+//             method: 'GET',
+//             mode: 'cors',
+//             headers: {
+//                 'Accept': 'application/json'
+//             }
+//         })
+//             .then(response => {
+//
+//                 if (!response.ok) {
+//                     window.alert("highlightPossibleMoves nOT");
+//                     return response.json().then(err => { throw new Error(err.message) });
+//                 }
+//                 return response.json();
+//             })
+//             .then(data => {
+//                 highlightPossibleMoves(data);
+//                 window.alert("highlightPossibleMoves");
+//             })
+//             .catch(error => console.error('Error fetching possible moves:', error));
+//     };
+//
+// fetch(`http://localhost:5051/api/Games/${gameId}/move-pawn`, {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
