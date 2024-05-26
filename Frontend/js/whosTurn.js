@@ -19,3 +19,16 @@ function WhosTurn(){
     playerElement.style.color = playerColor;
     apo.style.color = playerColor;
 }
+window.onload = function() {
+    if(!sessionStorage.getItem("reload")) {
+        sessionStorage.setItem("reload", "true");
+        setTimeout(function(){
+            location.reload();
+        }, 2);
+    } else {
+        sessionStorage.removeItem("reload");
+    }
+}
+
+
+
