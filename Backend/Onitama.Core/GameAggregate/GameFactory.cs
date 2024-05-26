@@ -115,6 +115,15 @@ internal class GameFactory : IGameFactory
 
         // Ensure the extra move card's color matches one of the players' colors
         Color extraMoveCardColor = colors[random.Next(0, 2)];
+
+        for (int i = 0; i < table.SeatedPlayers.Count; i++)
+        {
+            if (table.SeatedPlayers[i].Id == table.OwnerPlayerId)
+            {
+                extraMoveCardColor = table.SeatedPlayers[i].Color;
+            }
+        }
+
         MoveCard extraMoveCard = new MoveCard("ExtraMoveCard", GenerateRandomGrid(), extraMoveCardColor);
 
         PlayMat playMat = new PlayMat(seatedPlayers);
