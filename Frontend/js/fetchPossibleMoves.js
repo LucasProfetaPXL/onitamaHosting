@@ -64,7 +64,7 @@ cards.forEach(card => {
         handleCardSelection(card.dataset.cardName);
     })
 })
-let oke = 0;
+
 
 // let selectPawnId;
 // let selectCardName;
