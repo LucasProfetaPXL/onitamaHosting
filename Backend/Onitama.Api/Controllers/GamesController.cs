@@ -102,7 +102,27 @@ namespace Onitama.Api.Controllers
                 }
 
             }
-                //_gameService.GetGame(id).GetNextOpponent(_gameService.GetGame(id).PlayerToPlayId);
+            //_gameService.GetGame(id).GetNextOpponent(_gameService.GetGame(id).PlayerToPlayId);
+            //_gameService.GetGame(id).ExtraMoveCard.Name
+            //inputModel.MoveCardName
+            //for (int i = 0; i < _gameService.GetGame(id).Players.Length; i++)
+            //{
+            //    if (_gameService.GetGame(id).Players[i].Id == _gameService.GetGame(id).PlayerToPlayId)
+            //    {
+            //        for (int j = 0; j < _gameService.GetGame(id).Players[j].MoveCards.Count -1; j++)
+            //        {
+            //            if (_gameService.GetGame(id).Players[i].MoveCards[j].Name == inputModel.MoveCardName)
+            //            {
+            //                //switch movecard met extramovecard
+            //                var tmp = _gameService.GetGame(id).Players[i].MoveCards[j];
+            //                _gameService.GetGame(id).Players[i].MoveCards[j] = _gameService.GetGame(id).ExtraMoveCard;
+            //                _gameService.GetGame(id).ExtraMoveCard = tmp;
+            //                (_gameService.GetGame(id).Players[i].MoveCards[j], _gameService.GetGame(id).ExtraMoveCard = _gameService.GetGame(id).ExtraMoveCard, _gameService.GetGame(id).Players[i].MoveCards[j]);
+            //            }
+            //        }
+            //    }
+            //}
+            
 
             return Ok();
 
