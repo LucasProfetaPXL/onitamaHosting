@@ -22,6 +22,15 @@ public class GameModel
         public MappingProfile()
         {
             CreateMap<IGame, GameModel>();
+            //CreateMap<IGame, GameModel>()
+            //       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            //       .ForMember(dest => dest.PlayMat, opt => opt.MapFrom(src => src.PlayMat))
+            //       .ForMember(dest => dest.ExtraMoveCard, opt => opt.MapFrom(src => src.ExtraMoveCard))
+            //       .ForMember(dest => dest.Players, opt => opt.MapFrom(src => src.Players.ToArray()))
+            //       .ForMember(dest => dest.PlayerToPlayId, opt => opt.MapFrom(src => src.PlayerToPlayId))
+            //       .ForMember(dest => dest.WinnerPlayerId, opt => opt.MapFrom(src => src.WinnerPlayerId))
+            //       .ForMember(dest => dest.WinnerMethod, opt => opt.MapFrom(src => src.WinnerMethod));
+
         }
     }
 }

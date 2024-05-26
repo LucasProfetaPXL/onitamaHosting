@@ -86,20 +86,33 @@ namespace Onitama.Api.Controllers
 
             if (possibleMoves != null)
             {
-                for (int i = 0; i < _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName).Count; i++)
+                //for (int i = 0; i < _gameService.GetPossibleMovesForPawn(id, UserId, inputModel.PawnId, inputModel.MoveCardName).Count; i++)
+                //{
+                //    ICoordinate coordinate = _coordinateFactory.Create(possibleMoves[i].To.Row, possibleMoves[i].To.Column);
+
+                //    if (coordinate == inputModel.To || coordinate == to)
+                //    {
+                //        _gameService.GetGame(id).GetNextOpponent(_gameService.GetGame(id).PlayerToPlayId);
+
+                //        return Ok();
+                //    }
+
+                //    return BadRequest(new ApplicationException("invalid move"));
+
+                //}
+                foreach (var possibleMove in possibleMoves)
                 {
-                    ICoordinate coordinate = _coordinateFactory.Create(possibleMoves[i].To.Row, possibleMoves[i].To.Column);
+                    ICoordinate coordinate = _coordinateFactory.Create(possibleMove.To.Row, possibleMove.To.Column);
 
                     if (coordinate == inputModel.To || coordinate == to)
                     {
                         _gameService.GetGame(id).GetNextOpponent(_gameService.GetGame(id).PlayerToPlayId);
-
                         return Ok();
                     }
-
-                    return BadRequest(new ApplicationException("invalid move"));
-
                 }
+
+                return BadRequest(new ApplicationException("invalid move"));
+
 
             }
             //_gameService.GetGame(id).GetNextOpponent(_gameService.GetGame(id).PlayerToPlayId);
@@ -122,15 +135,15 @@ namespace Onitama.Api.Controllers
             //        }
             //    }
             //}
-            
+
 
             return Ok();
 
-                //return BadRequest(new ApplicationException("invalid move"));
+            //return BadRequest(new ApplicationException("invalid move"));
 
-                //return Ok();
-            
+            //return Ok();
         }
+
         /// <summary>
         /// States that the player associated with the authenticated user wants to skip their movement and only exchange a card.
         /// </summary>
@@ -145,7 +158,6 @@ namespace Onitama.Api.Controllers
         public IActionResult SkipMovement(Guid id, [FromBody] SkipMovementModel inputModel)
         {
             _gameService.SkipMovementAndExchangeCard(id, UserId, inputModel.MoveCardName);
-
             return Ok();
         }
     }

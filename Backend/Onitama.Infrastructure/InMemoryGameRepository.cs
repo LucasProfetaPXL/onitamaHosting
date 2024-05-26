@@ -29,7 +29,7 @@ namespace Onitama.Infrastructure
                 throw new DataNotFoundException();
             }
 
-            //
+            
         }
     }
 }
