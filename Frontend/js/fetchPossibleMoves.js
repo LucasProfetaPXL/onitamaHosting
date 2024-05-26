@@ -7,7 +7,7 @@ const fetchPossibleMoves = (pawnId, cardName) => {
     }
     const sessionID = sessionStorage.getItem('sessionID')
     const gameId = localStorage.getItem('tableId');
-    const url = `http://localhost:5051/api/Games/${gameId}/possible-moves/${pawnId}/for-card/${cardName}`;
+    const url = `http://localhost:5051/api/Games/${gameId}/possible-moves-of/${pawnId}/for-card/${cardName}`;
     fetch(url, {
         method: 'GET',
         mode: 'cors',
@@ -52,6 +52,36 @@ pawns.forEach(pawn => {
     })
 })
 
+// const gameBoardPawns = document.querySelector('.game-boardHTML');
+//
+// if (!gameBoardPawns.dataset.listenerAdded) {
+//     gameBoardPawns.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         let pawn = e.target;
+//         while (pawn && !pawn.classList.contains('pawn')) {
+//             pawn = pawn.parentElement;
+//         }
+//         if (!pawn) {
+//             return;
+//         }
+//         if (selectedPawnId !== undefined) {
+//             const prevSelectedPawn = document.getElementById(selectedPawnId);
+//             if (prevSelectedPawn) {
+//                 prevSelectedPawn.style.border = '';
+//             }
+//         }
+//
+//         selectedPawnId = pawn.id;
+//         pawn.style.border = '5px solid white';
+//
+//         if (selectedCardName) {
+//             // console.log(selectedPawnId);
+//             fetchPossibleMoves(selectedPawnId, selectedCardName);
+//         }
+//     });
+//
+//     gameBoardPawns.dataset.listenerAdded = "true";
+// }
 const cards = document.querySelectorAll('.cardholder');
 cards.forEach(card => {
     card.addEventListener('click', () => {
