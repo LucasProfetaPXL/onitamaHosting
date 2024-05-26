@@ -1,211 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Onitama</title>
-    <link rel="stylesheet" href="../Style/stylesheet.css">
-      <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
-      <script src="../js/register.js"></script>
-  </head>
-  <body id="centerMainPage">
-  <script>localStorage.removeItem('gameStarted');</script>
-  <script>localStorage.removeItem('card1');</script>
-  <script>localStorage.removeItem('card2');</script>
-  <script>localStorage.removeItem('card3');</script>
-  <script>localStorage.removeItem('card4');</script>
-  <script>localStorage.removeItem('card5');</script>
-  <script>localStorage.removeItem('playersTurn');</script>
+    <link rel="stylesheet" href="/Frontend/Style/stylesheet.css">
+    <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+    <script src="/Frontend/js/register.js" type="module"></script>
+</head>
+<body id="centerMainPage">
+<script>localStorage.removeItem('gameStarted');</script>
+<script>localStorage.removeItem('card1');</script>
+<script>localStorage.removeItem('card2');</script>
+<script>localStorage.removeItem('card3');</script>
+<script>localStorage.removeItem('card4');</script>
+<script>localStorage.removeItem('card5');</script>
+<script>localStorage.removeItem('playersTurn');</script>
 
-  <h1 class="title">Onitama</h1>
+<h1 class="title">Onitama</h1>
 
-  <button class="modal_btn homePageButtons" type="button">
-      <div class="wrapper">
-          <p class="text">Login</p>
-
-          <div class="flower flower1">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower2">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower3">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower4">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower5">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower6">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-      </div>
-  </button>
-
-  <button class="modal_btn homePageButtons" type="button">
-      <div class="wrapper">
-          <p class="text">Register</p>
-
-          <div class="flower flower1">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower2">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower3">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower4">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower5">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower6">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-      </div>
-  </button>
-
-  <button class="homePageButtons" type="button">
-      <div class="wrapper">
-          <p class="text"><a href="team.html">Team</a></p>
-
-          <div class="flower flower1">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower2">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower3">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower4">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower5">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-          <div class="flower flower6">
-              <div class="petal one"></div>
-              <div class="petal two"></div>
-              <div class="petal three"></div>
-              <div class="petal four"></div>
-          </div>
-      </div>
-  </button>
-
-
-  <div class="modal_backdrop" id="login_backdrop">
-      <div class="modal" id="login_modal">
-          <button id="login_close" class="close_button">X</button>
-          <form action="" method="post" id="loginForm">
-              <h2 class="login_title">Login</h2>
-              <div class="flex_container">
-                  <label class="label_mail" for="emailInput">Email</label>
-                  <input required class="input_mail" type="email" name="email" id="emailInput" >
-
-                  <label class="label_password" for="passwordInput">Password</label>
-                  <input required class="input_password" type="password" name="password" id="passwordInput" >
-              </div>
-
-              <button class="submit_btn" id="submitButton" type="submit">Login</button>
-            </form>
-            <div id="error-code-handler-login">
-
-            </div>
-            <p class="account_title">Don't have an account?</p>
-            <button class="register_button_login" type="button">Register</button>
-      </div>
-    </div>
-
-    <div class="modal_backdrop" id="register_backdrop">
-      <div class="modal" id="register_modal">
-          <button id="register_close" class="close_button">X</button>
-          <form id="form-register" action="" method="post">
-            <h2 class="register_title">Register</h2>
-
-            <div class="flex_container">
-              <label for="username">Username</label>
-              <input type="text" name="email" id="username" required>
-
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" required>
-
-              <label for="password">Password</label>
-              <input type="password" name="password" id="password" required>
-
-              <label for="Repeat_Password">Repeat Password</label>
-              <input type="password" name="Repeat_Password" id="repeat_Password" required>
-            </div>
-
-              <button id="button-register" type="submit" class="submit_btn">Register</button>
-              <div id="error-code-handler-register">
-
-              </div>
-              <p class="account_title">Already have an account?</p>
-              <button class="login_button_register" type="button">Login</button>
-          </form>
+<button class="modal_btn homePageButtons" type="button">
+    <div class="wrapper">
+        <p class="text">Login</p>
+        <div class="flower flower1">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower2">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower3">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower4">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower5">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower6">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
         </div>
     </div>
+</button>
 
-  <div id="toast">Some text some message..</div>
+<button class="modal_btn homePageButtons" type="button">
+    <div class="wrapper">
+        <p class="text">Register</p>
+        <div class="flower flower1">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower2">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower3">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower4">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower5">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower6">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+    </div>
+</button>
 
-  <script src="../js/includes.js" type="module"></script>
-  <script src="../js/modal.js" type="module"></script>
-  <script src="../js/login.js" type="module"></script>
-  <script src="../js/toast.js" type="module"></script>
-  </body>
+<button class="homePageButtons" type="button">
+    <div class="wrapper">
+        <p class="text"><a href="team.html">Team</a></p>
+        <div class="flower flower1">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower2">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower3">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower4">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower5">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+        <div class="flower flower6">
+            <div class="petal one"></div>
+            <div class="petal two"></div>
+            <div class="petal three"></div>
+            <div class="petal four"></div>
+        </div>
+    </div>
+</button>
+
+<div class="modal_backdrop" id="login_backdrop">
+    <div class="modal" id="login_modal">
+        <button id="login_close" class="close_button">X</button>
+        <form action="" method="post" id="loginForm">
+            <h2 class="login_title">Login</h2>
+            <div class="flex_container">
+                <label class="label_mail" for="emailInput">Email</label>
+                <input required class="input_mail" type="email" name="email" id="emailInput">
+
+                <label class="label_password" for="passwordInput">Password</label>
+                <input required class="input_password" type="password" name="password" id="passwordInput">
+            </div>
+            <button class="submit_btn" id="submitButton" type="submit">Login</button>
+        </form>
+        <div id="error-code-handler-login"></div>
+        <p class="account_title">Don't have an account?</p>
+        <button class="register_button_login" type="button">Register</button>
+    </div>
+</div>
+
+<div class="modal_backdrop" id="register_backdrop">
+    <div class="modal" id="register_modal">
+        <button id="register_close" class="close_button">X</button>
+        <form id="form-register" action="" method="post">
+            <h2 class="register_title">Register</h2>
+            <div class="flex_container">
+                <label for="username">Username</label>
+                <input type="text" name="email" id="username" required>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+
+                <label for="Repeat_Password">Repeat Password</label>
+                <input type="password" name="Repeat_Password" id="repeat_Password" required>
+            </div>
+            <button id="button-register" type="submit" class="submit_btn">Register</button>
+            <div id="error-code-handler-register"></div>
+            <p class="account_title">Already have an account?</p>
+            <button class="login_button_register" type="button">Login</button>
+        </form>
+    </div>
+</div>
+
+<div id="toast">Some text some message..</div>
+
+<script src="/Frontend/js/includes.js" type="module"></script>
+<script src="/Frontend/js/modal.js" type="module"></script>
+<script src="/Frontend/js/login.js" type="module"></script>
+<script src="/Frontend/js/toast.js" type="module"></script>
+</body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Onitama</title>-->
+<!--    <link rel="stylesheet" href="../Style/stylesheet.css">-->
+<!--      <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>-->
+<!--      <script src="../js/register.js"></script>-->
+<!--  </head>-->
+<!--  <body id="centerMainPage">-->
+<!--  <script>localStorage.removeItem('gameStarted');</script>-->
+<!--  <script>localStorage.removeItem('card1');</script>-->
+<!--  <script>localStorage.removeItem('card2');</script>-->
+<!--  <script>localStorage.removeItem('card3');</script>-->
+<!--  <script>localStorage.removeItem('card4');</script>-->
+<!--  <script>localStorage.removeItem('card5');</script>-->
+<!--  <script>localStorage.removeItem('playersTurn');</script>-->
+
+<!--  <h1 class="title">Onitama</h1>-->
+
+<!--  <button class="modal_btn homePageButtons" type="button">-->
+<!--      <div class="wrapper">-->
+<!--          <p class="text">Login</p>-->
+
+<!--          <div class="flower flower1">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower2">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower3">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower4">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower5">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower6">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--  </button>-->
+
+<!--  <button class="modal_btn homePageButtons" type="button">-->
+<!--      <div class="wrapper">-->
+<!--          <p class="text">Register</p>-->
+
+<!--          <div class="flower flower1">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower2">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower3">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower4">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower5">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower6">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--  </button>-->
+
+<!--  <button class="homePageButtons" type="button">-->
+<!--      <div class="wrapper">-->
+<!--          <p class="text"><a href="team.html">Team</a></p>-->
+
+<!--          <div class="flower flower1">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower2">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower3">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower4">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower5">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--          <div class="flower flower6">-->
+<!--              <div class="petal one"></div>-->
+<!--              <div class="petal two"></div>-->
+<!--              <div class="petal three"></div>-->
+<!--              <div class="petal four"></div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--  </button>-->
+
+
+<!--  <div class="modal_backdrop" id="login_backdrop">-->
+<!--      <div class="modal" id="login_modal">-->
+<!--          <button id="login_close" class="close_button">X</button>-->
+<!--          <form action="" method="post" id="loginForm">-->
+<!--              <h2 class="login_title">Login</h2>-->
+<!--              <div class="flex_container">-->
+<!--                  <label class="label_mail" for="emailInput">Email</label>-->
+<!--                  <input required class="input_mail" type="email" name="email" id="emailInput" >-->
+
+<!--                  <label class="label_password" for="passwordInput">Password</label>-->
+<!--                  <input required class="input_password" type="password" name="password" id="passwordInput" >-->
+<!--              </div>-->
+
+<!--              <button class="submit_btn" id="submitButton" type="submit">Login</button>-->
+<!--            </form>-->
+<!--            <div id="error-code-handler-login">-->
+
+<!--            </div>-->
+<!--            <p class="account_title">Don't have an account?</p>-->
+<!--            <button class="register_button_login" type="button">Register</button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="modal_backdrop" id="register_backdrop">-->
+<!--      <div class="modal" id="register_modal">-->
+<!--          <button id="register_close" class="close_button">X</button>-->
+<!--          <form id="form-register" action="" method="post">-->
+<!--            <h2 class="register_title">Register</h2>-->
+
+<!--            <div class="flex_container">-->
+<!--              <label for="username">Username</label>-->
+<!--              <input type="text" name="email" id="username" required>-->
+
+<!--              <label for="email">Email</label>-->
+<!--              <input type="email" name="email" id="email" required>-->
+
+<!--              <label for="password">Password</label>-->
+<!--              <input type="password" name="password" id="password" required>-->
+
+<!--              <label for="Repeat_Password">Repeat Password</label>-->
+<!--              <input type="password" name="Repeat_Password" id="repeat_Password" required>-->
+<!--            </div>-->
+
+<!--              <button id="button-register" type="submit" class="submit_btn">Register</button>-->
+<!--              <div id="error-code-handler-register">-->
+
+<!--              </div>-->
+<!--              <p class="account_title">Already have an account?</p>-->
+<!--              <button class="login_button_register" type="button">Login</button>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--  <div id="toast">Some text some message..</div>-->
+
+<!--  <script src="../js/includes.js" type="module"></script>-->
+<!--  <script src="../js/modal.js" type="module"></script>-->
+<!--  <script src="../js/login.js" type="module"></script>-->
+<!--  <script src="../js/toast.js" type="module"></script>-->
+<!--  </body>-->
+<!--</html>-->
