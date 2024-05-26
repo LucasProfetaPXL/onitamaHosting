@@ -358,8 +358,9 @@ internal class Game : IGame
     {
         for (int i = 0; i < _players.Length; i++)
         {
-            if (_players[i].Id == PlayerToPlayId)
+            if (_players[i].Id == playerId)
             {
+                _playToPlayId = _players[(i + 1) % _players.Length].Id;
                 return _players[(i + 1) % _players.Length];
             }
         }
