@@ -104,7 +104,12 @@ namespace Onitama.Api.Controllers
                 {
                     ICoordinate coordinate = _coordinateFactory.Create(possibleMove.To.Row, possibleMove.To.Column);
 
-                    if (coordinate == inputModel.To || coordinate == to)
+                    //if (coordinate == inputModel.To || coordinate == to)
+                    //{
+                    //    _gameService.GetGame(id).GetNextOpponent(_gameService.GetGame(id).PlayerToPlayId);
+                    //    return Ok();
+                    //}
+                    if (coordinate.Row == inputModel.To.Row && coordinate.Column == inputModel.To.Column)
                     {
                         _gameService.GetGame(id).GetNextOpponent(_gameService.GetGame(id).PlayerToPlayId);
                         return Ok();
