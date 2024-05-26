@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`https://localhost:5051/api/Games/${gameId}/move-pawn`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionID}`
                 },
                 body: JSON.stringify({
                     pawnId: draggable.id,
@@ -121,12 +122,18 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching possible moves:', error));
     };
     const highlightPossibleMoves = (possibleMoves) => {
-        document.querySelectorAll('.cell').forEach(cell => {
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach(cell => {
             cell.classList.remove('highlight');
         });
-        possibleMoves.forEach(move => {
-            
+        cells.forEach(cell => {
+            possibleMoves.forEach(move => {
+                if (parseInt(cell.dataset.row) === move.to.row && parseInt(cell.dataset.col) === move.to.column) {
+                    cell.classList.add('highlight');
+                }
+            });
         });
+
 
     };
     const updateBoard = (gameData) => {
@@ -247,7 +254,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         fetch(`https://localhost:5051/api/Games/${gameId}/move-pawn`, {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${sessionID}`
                             },
                             body: JSON.stringify({
                                 pawnId: draggable.id,
