@@ -10,6 +10,10 @@
     margin: 8%;
 }
 
+.Achtergrond_Gameboard{
+    background: url("../Images/AchtergrondGameboard.jpeg") center center fixed;
+}
+
 .cell{
     border: 2px solid black;
     cursor: move;
