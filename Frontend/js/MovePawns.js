@@ -71,9 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     return response.json()
                 }
 
+
             })
             .then(data => {
                 console.log(data);
+                var stringdata = JSON.stringify(data);
+                //window.alert(stringdata.split(",").at(stringdata.split(",").length - 3));
+                //playerToPlayIdd = stringdata.split(",").at(stringdata.split(",").length - 3)
+                //window.alert(playerToPlayId);
                 localStorage.setItem('playersTurn', data.playerToPlayId);
                 return data;
             })
@@ -645,10 +650,10 @@ function checkIfBothSelected() {
             cellArray.push(document.getElementById('game-boardHTML').children[i].outerHTML);
         }
         localStorage.setItem('gameboard', JSON.stringify(cellArray));
-
-
-        const gameId = localStorage.getItem('tableId');
-        const sessionID = sessionStorage.getItem('sessionID');
+        //
+        //
+        // const gameId = localStorage.getItem('tableId');
+        // const sessionID = sessionStorage.getItem('sessionID');
 
         // fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${sessionID}/for-card/${selectedCardName}`, {
         // fetch(`http://localhost:5051/api/Games/${gameId}/possible-moves/${sessionID}/for-card/MoveCard8`, {
